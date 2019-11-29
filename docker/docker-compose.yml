@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  camunda:
+    build:
+      context: .
+      dockerfile: camunda.dockerfile
+    image: camunda:latest
+    ports:
+      - 8000:8000
+      - 8080:8080
+      - 9990:9990
+    
+  activemq:
+    image: rmohr/activemq:latest
+    ports:
+      - 61616:61616
+      - 8161:8161
