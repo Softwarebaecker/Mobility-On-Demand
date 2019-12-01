@@ -18,7 +18,8 @@ on Windows:
 ```docker-compose -f "docker\docker-compose.yml" up -d --build```
 
 on Mac:
-docker-compose -f docker/docker-compose.yml up -d --build
+
+```docker-compose -f docker/docker-compose.yml up -d --build```
 
 <aside class="notice">
 The containers will not save datas.
