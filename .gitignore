@@ -28,3 +28,6 @@ target/
 *.iml
 .idea/
 .eclipse
+.classpath
+.project
+.settings
