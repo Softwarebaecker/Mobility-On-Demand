@@ -86,7 +86,9 @@
       <bpmn:intermediateCatchEvent id="IntermediateCatchEvent_0rddzo0">
         <bpmn:incoming>SequenceFlow_0l6wt4r</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_034or0c</bpmn:outgoing>
-        <bpmn:timerEventDefinition />
+        <bpmn:timerEventDefinition>
+          <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">10</bpmn:timeDuration>
+        </bpmn:timerEventDefinition>
       </bpmn:intermediateCatchEvent>
       <bpmn:sequenceFlow id="SequenceFlow_0l6wt4r" sourceRef="ExclusiveGateway_1jf7zo9" targetRef="IntermediateCatchEvent_0rddzo0" />
       <bpmn:sequenceFlow id="SequenceFlow_034or0c" sourceRef="IntermediateCatchEvent_0rddzo0" targetRef="EndEvent_0zhq49w" />
