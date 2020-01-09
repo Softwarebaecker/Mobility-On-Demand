@@ -7,7 +7,13 @@ set -m
 ./camunda.sh &
 
 # wait wile camunda is starting
-sleep 10
+
+url="http://localhost:8080/engine-rest/version"
+
+until curl --output /dev/null --silent --head --fail "$url"; do
+  sleep 1
+done
+
 # setup camunda user structure
 # creat group
 curl --request POST \

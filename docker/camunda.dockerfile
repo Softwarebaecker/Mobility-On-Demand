@@ -7,5 +7,7 @@ RUN apk add curl
 # remove Windows line endings
 RUN sed -i -e 's/\r$//' /camunda/camundaSetupScript.sh
 
+RUN /camunda/bin/add-user.sh -p admin -u admin -s
+
 USER camunda
 CMD [ "./camundaSetupScript.sh" ]
