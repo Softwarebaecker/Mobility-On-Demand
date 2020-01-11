@@ -30,7 +30,7 @@
       </bpmn:sendTask>
       <bpmn:dataObjectReference id="DataObjectReference_085lgbk" name="Route data" dataObjectRef="DataObject_0d68wli" />
       <bpmn:dataObject id="DataObject_0d68wli" />
-      <bpmn:serviceTask id="ServiceTask_1v3e6jp" name="Store Order in DB" camunda:class="edu.thi.mobilityondemand.servicetask.AddOrderToSystem">
+      <bpmn:serviceTask id="ServiceTask_1v3e6jp" name="Store Order in DB" camunda:class="${tripDataService.updateTrip(execution)}">
         <bpmn:incoming>SequenceFlow_00olrli</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_0h1ewbb</bpmn:outgoing>
         <bpmn:property id="Property_0ur08sg" name="__targetRef_placeholder" />
