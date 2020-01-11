@@ -63,7 +63,7 @@
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0gk7bbz" sourceRef="ExclusiveGateway_15fgdhn" targetRef="EndEvent_0xgmau2" />
     <bpmn:sequenceFlow id="SequenceFlow_0684qlh" sourceRef="Task_105r601" targetRef="BusinessRuleTask_1agxc7i" />
-    <bpmn:serviceTask id="Task_105r601" name="Store Rating in DB">
+    <bpmn:serviceTask id="Task_105r601" name="Store Rating in DB" camunda:class="edu.thi.mobilityondemand.servicetask.StoreRatingInDataBase">
       <bpmn:incoming>SequenceFlow_1iufs1m</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0684qlh</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_0sjj46j">
@@ -76,7 +76,7 @@
       <bpmn:messageEventDefinition id="MessageEventDefinition_0vuo7ed" messageRef="Message_0tvtuog" />
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0f0gz01" sourceRef="UserTask_0mgvgn7" targetRef="ExclusiveGateway_15fgdhn" />
-    <bpmn:sendTask id="UserTask_0mgvgn7" name="Send to rating aggregator">
+    <bpmn:sendTask id="UserTask_0mgvgn7" name="Send to rating aggregator" camunda:class="edu.thi.mobilityondemand.servicetask.SendRatingToAggregator">
       <bpmn:incoming>SequenceFlow_1xuxwhx</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0f0gz01</bpmn:outgoing>
     </bpmn:sendTask>
@@ -94,7 +94,7 @@
     </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_1ep5b7h" sourceRef="StartEvent_0bljmno" targetRef="ExclusiveGateway_0uilrak" />
     <bpmn:sequenceFlow id="SequenceFlow_1maciw8" sourceRef="ExclusiveGateway_0uilrak" targetRef="Task_08g9py6" />
-    <bpmn:serviceTask id="Task_08g9py6" name="Add rating to list and remove too old ratings">
+    <bpmn:serviceTask id="Task_08g9py6" name="Add rating to list and remove too old ratings" camunda:class="edu.thi.mobilityondemand.servicetask.AddNewBadRating">
       <bpmn:incoming>SequenceFlow_1maciw8</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1k8rcpr</bpmn:outgoing>
     </bpmn:serviceTask>
