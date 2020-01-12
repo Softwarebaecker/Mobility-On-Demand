@@ -29,7 +29,7 @@ public class TripDataService implements  TripDataServiceLocal{
         tripData.setEndpoint(endpoint);
         tripData.setCustomerid(customerid);
         tripData.setAborted(false);
-        tripData.setKilometers(Long.valueOf(0));
+        tripData.setKilometers(Double.valueOf(0));
         tripDataService.create(tripData);
         execution.setVariable("tripDataId", tripData.getTripid());
     }
@@ -56,7 +56,7 @@ public class TripDataService implements  TripDataServiceLocal{
         Long tripDataId = (Long) execution.getVariable("tripDataId");
         String startingPoint = (String) execution.getVariable("startingpoint");
         String endpoint = (String) execution.getVariable("endpoint");
-        Long kilometers = (Long) execution.getVariable("kilometers");
+        Double kilometers = (Double) execution.getVariable("kilometers");
 
         TripData tripData = tripDataService.read(tripDataId);
 

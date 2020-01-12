@@ -25,7 +25,7 @@ public class TripData implements Serializable {
     private String startingpoint;
     private String endpoint;
     private Long customerid;
-    private Long kilometers;
+    private Double kilometers;
     private boolean aborted;
 
 
@@ -73,11 +73,11 @@ public class TripData implements Serializable {
         this.startDate = startDate;
     }
 
-    public Long getKilometers() {
+    public Double getKilometers() {
         return kilometers;
     }
 
-    public void setKilometers(Long kilometers) {
+    public void setKilometers(Double kilometers) {
         this.kilometers = kilometers;
     }
 }
