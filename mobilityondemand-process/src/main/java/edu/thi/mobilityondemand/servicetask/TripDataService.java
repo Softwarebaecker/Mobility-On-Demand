@@ -65,4 +65,21 @@ public class TripDataService implements  TripDataServiceLocal{
         tripData.setKilometers(kilometers);
         execution.setVariable("tripData", tripData);
     }
+    
+    // Daniel S
+    public void setPrice(DelegateExecution execution) {
+    	Double price = (Double) execution.getVariable("price");
+     	Long tripDataId = (Long) execution.getVariable("tripDataId");
+     	TripData tripData = tripDataService.read(tripDataId);
+     	tripData.setPrice(price);
+     	execution.setVariable("tripData", tripData);    	
+    }
+ 
+    // Daniel S
+    public void markTripPayed(DelegateExecution execution) {
+     	Long tripDataId = (Long) execution.getVariable("tripDataId");
+    	TripData tripData = tripDataService.read(tripDataId);
+        tripData.setPayed(true);
+        
+    }
 }

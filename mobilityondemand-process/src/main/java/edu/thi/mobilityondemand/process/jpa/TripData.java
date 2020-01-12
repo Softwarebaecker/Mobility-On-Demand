@@ -26,7 +26,9 @@ public class TripData implements Serializable {
     private String endpoint;
     private Long customerid;
     private Double kilometers;
+    private Double price;
     private boolean aborted;
+    private boolean payed;
 
 
     public Long getTripid() {
@@ -79,6 +81,26 @@ public class TripData implements Serializable {
 
     public void setKilometers(Double kilometers) {
         this.kilometers = kilometers;
+    }
+    
+    // Daniel S
+    public boolean isPayed() {
+    	return payed;
+    }
+    
+    // Daniel S
+    public void setPayed(boolean payed) {
+    	this.payed = payed;
+    }
+    
+    // Daniel S
+    public Double getPrice() {
+    	return price;
+    }
+    
+    // Daniel S
+    public void setPrice(Double price) {
+    	this.price = price;
     }
 }
 

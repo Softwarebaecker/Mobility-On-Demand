@@ -22,26 +22,9 @@ import edu.thi.mobilityondemand.process.beans.Invoice;
 public class SendInvoiceToCustomer implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-    	
-        //Date date = new Date();
-        
-        //Invoice invoice = new Invoice(date, "München", "Nürnberg", 180, 56.3);
         
     	Invoice invoice = (Invoice) execution.getVariable("Invoice");
-    	
-    	/*
-    	String text = "";
-    	text += "### Invoice: " + invoice.getProduct() + " ###";
-    	text += " Date: " + invoice.getDate().toString();
-    	text += " # From - To: " + invoice.getDeparture() + " - " + invoice.getDestination();
-    	text += " # Bill amount (€): " + invoice.getAmount();
-    	
-    	MessageQueue mq = new MessageQueue();
-    	TextMessage tm = mq.createSession().createTextMessage();
-    	tm.setText(text);
-    	mq.sendMessageToQueue("InvoicePrintingQueue", tm);
-        */
-    	
+    	    	
     	JAXBContext jc = JAXBContext.newInstance(Invoice.class);
         Marshaller marshaller = jc.createMarshaller();
         StringWriter stringWriter = new StringWriter();

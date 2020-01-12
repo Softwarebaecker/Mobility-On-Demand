@@ -395,7 +395,7 @@ Kunde ist eingestiegen</bpmn:text>
     </bpmn:callActivity>
     <bpmn:dataObjectReference id="DataObjectReference_15w39s9" name="Trip data" dataObjectRef="DataObject_1wcz5gk" />
     <bpmn:dataObject id="DataObject_1wcz5gk" />
-    <bpmn:callActivity id="Task_0uuqleu" name="Payment">
+    <bpmn:callActivity id="Task_0uuqleu" name="Payment" calledElement="payment">
       <bpmn:extensionElements>
         <camunda:in variables="all" />
       </bpmn:extensionElements>
