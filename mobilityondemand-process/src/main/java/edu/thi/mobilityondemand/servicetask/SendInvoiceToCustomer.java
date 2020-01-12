@@ -9,7 +9,6 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import java.util.Date;
-import edu.thi.mobilityondemand.beans.*;
 import edu.thi.mobilityondemand.process.beans.Invoice;
 
 public class SendInvoiceToCustomer implements JavaDelegate {

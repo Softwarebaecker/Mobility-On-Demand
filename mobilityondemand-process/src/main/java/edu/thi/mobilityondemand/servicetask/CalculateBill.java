@@ -7,7 +7,6 @@ package edu.thi.mobilityondemand.servicetask;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
-import edu.thi.mobilityondemand.beans.*;
 import edu.thi.mobilityondemand.process.beans.Invoice;
 
 import java.util.Date;
