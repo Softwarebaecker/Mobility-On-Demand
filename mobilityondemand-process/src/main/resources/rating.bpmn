@@ -94,15 +94,14 @@
   <bpmn:message id="Message_1omutnt" name="new_rating" />
   <bpmn:process id="Analyse_bad_ratings" name="Analyse bad ratings" isExecutable="true">
     <bpmn:startEvent id="StartEvent_0bljmno" name="New bad rating">
-      <bpmn:outgoing>SequenceFlow_053odl1</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1ssngrf</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0iyt3q8" messageRef="Message_0k8objb" />
     </bpmn:startEvent>
     <bpmn:exclusiveGateway id="ExclusiveGateway_0uilrak">
-      <bpmn:incoming>SequenceFlow_1ep5b7h</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_0vdmrjl</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1ssngrf</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1maciw8</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="SequenceFlow_1ep5b7h" sourceRef="Task_0y2yrlh" targetRef="ExclusiveGateway_0uilrak" />
     <bpmn:sequenceFlow id="SequenceFlow_1maciw8" sourceRef="ExclusiveGateway_0uilrak" targetRef="Task_08g9py6" />
     <bpmn:serviceTask id="Task_08g9py6" name="Add rating to list and remove too old ratings" camunda:expression="${addNewBadRating.execute(execution)}">
       <bpmn:incoming>SequenceFlow_1maciw8</bpmn:incoming>
@@ -139,11 +138,7 @@
       <bpmn:incoming>SequenceFlow_1k8rcpr</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1fv1mtg</bpmn:outgoing>
     </bpmn:businessRuleTask>
-    <bpmn:sequenceFlow id="SequenceFlow_053odl1" sourceRef="StartEvent_0bljmno" targetRef="Task_0y2yrlh" />
-    <bpmn:userTask id="Task_0y2yrlh" name="Check">
-      <bpmn:incoming>SequenceFlow_053odl1</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1ep5b7h</bpmn:outgoing>
-    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1ssngrf" sourceRef="StartEvent_0bljmno" targetRef="ExclusiveGateway_0uilrak" />
   </bpmn:process>
   <bpmn:message id="Message_0tvtuog" name="trip_finished" />
   <bpmn:message id="Message_0k8objb" name="new_bad_rating" />
@@ -280,12 +275,6 @@
       <bpmndi:BPMNShape id="ExclusiveGateway_0uilrak_di" bpmnElement="ExclusiveGateway_0uilrak" isMarkerVisible="true">
         <dc:Bounds x="305" y="625" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_1ep5b7h_di" bpmnElement="SequenceFlow_1ep5b7h">
-        <di:waypoint x="360" y="720" />
-        <di:waypoint x="360" y="700" />
-        <di:waypoint x="330" y="700" />
-        <di:waypoint x="330" y="675" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1maciw8_di" bpmnElement="SequenceFlow_1maciw8">
         <di:waypoint x="355" y="650" />
         <di:waypoint x="420" y="650" />
@@ -369,15 +358,10 @@
         <di:waypoint x="730" y="333" />
         <di:waypoint x="939" y="340" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_053odl1_di" bpmnElement="SequenceFlow_053odl1">
+      <bpmndi:BPMNEdge id="SequenceFlow_1ssngrf_di" bpmnElement="SequenceFlow_1ssngrf">
         <di:waypoint x="248" y="650" />
-        <di:waypoint x="280" y="650" />
-        <di:waypoint x="280" y="760" />
-        <di:waypoint x="310" y="760" />
+        <di:waypoint x="305" y="650" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="UserTask_0r40pr9_di" bpmnElement="Task_0y2yrlh">
-        <dc:Bounds x="310" y="720" width="100" height="80" />
-      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
