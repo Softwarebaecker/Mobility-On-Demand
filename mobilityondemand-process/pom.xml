@@ -158,6 +158,13 @@
       <version>1.7.25</version>
       <scope>test</scope>
     </dependency>
+    
+    <dependency>
+        <groupId>org.apache.activemq</groupId>
+        <artifactId>activemq-all</artifactId>
+        <version>5.14.1</version>
+        <scope>compile</scope>
+    </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.geonames/geonames-ws-client -->
     <dependency>
