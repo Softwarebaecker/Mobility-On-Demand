@@ -116,7 +116,7 @@
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>SequenceFlow_1ahv268</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:serviceTask id="ServiceTask_1q7sdy4" name="Detect available taxi" camunda:class="edu.thi.mobilityondemand.servicetask.FindNextTaxi">
+    <bpmn:serviceTask id="ServiceTask_1q7sdy4" name="Detect available taxi" camunda:class="edu.thi.mobilityondemand.servicetask.DetectAvailableTaxi">
       <bpmn:incoming>SequenceFlow_0vl8plg</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0omn8bf</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -124,7 +124,7 @@
       <bpmn:incoming>SequenceFlow_1ahv268</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0vl8plg</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_029w17k">
-        <bpmn:timeDate xsi:type="bpmn:tFormalExpression">${startTime}</bpmn:timeDate>
+        <bpmn:timeDate xsi:type="bpmn:tFormalExpression">${startDate}</bpmn:timeDate>
       </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
     <bpmn:sendTask id="Task_0pl7kic" name="Send Route Data to Taxi" camunda:class="edu.thi.mobilityondemand.servicetask.SendRouteDataToTaxi">

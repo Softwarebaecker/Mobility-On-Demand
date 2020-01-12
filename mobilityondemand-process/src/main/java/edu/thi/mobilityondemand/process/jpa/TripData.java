@@ -21,11 +21,13 @@ public class TripData implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tripid;
+    private Date startDate;
     private String startingpoint;
     private String endpoint;
     private Long customerid;
+    private Long kilometers;
     private boolean aborted;
-    private Date date;
+
 
     public Long getTripid() {
         return tripid;
@@ -63,12 +65,20 @@ public class TripData implements Serializable {
         this.aborted = aborted;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Long getKilometers() {
+        return kilometers;
+    }
+
+    public void setKilometers(Long kilometers) {
+        this.kilometers = kilometers;
     }
 }
 
