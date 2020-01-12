@@ -1,19 +1,12 @@
 package edu.thi.mobilityondemand.message;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.io.StringWriter;
 import java.util.Date;
 
-@XmlRootElement(name = "TripDataMessage")
-public class TripDataMessage implements Serializable {
+public abstract class TripDataMessage implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Long taxiId;
     private Long tripId;
     private String startingpoint;
     private String endpoint;
@@ -22,35 +15,20 @@ public class TripDataMessage implements Serializable {
     private Date startDate;
     private String text;
 
-    public TripDataMessage(Long taxiId, Long tripId, String startingpoint, String endpoint, Double kilometers, Long customerId, Date startDate, String text) {
-        this.taxiId = taxiId;
+    public TripDataMessage(Long tripId, String startingpoint, String endpoint, Double kilometers, Long customerId, Date startDate) {
         this.tripId = tripId;
         this.startingpoint = startingpoint;
         this.endpoint = endpoint;
         this.kilometers = kilometers;
         this.customerId = customerId;
         this.startDate = startDate;
-        this.text = text;
+        this.text = "";
     }
 
-    public String toXml() throws JAXBException {
-        JAXBContext jc = JAXBContext.newInstance(this.getClass());
-        Marshaller marshaller = jc.createMarshaller();
-        StringWriter stringWriter = new StringWriter();
-        marshaller.marshal(this, stringWriter);
-        return stringWriter.toString();
-    }
+    public TripDataMessage() {}
 
-    @XmlElement
-    public Long getTaxiId() {
-        return taxiId;
-    }
+    public abstract String toXml() throws JAXBException;
 
-    public void setTaxiId(Long taxiId) {
-        this.taxiId = taxiId;
-    }
-
-    @XmlElement
     public Long getTripId() {
         return tripId;
     }
@@ -59,7 +37,6 @@ public class TripDataMessage implements Serializable {
         this.tripId = tripId;
     }
 
-    @XmlElement
     public String getStartingpoint() {
         return startingpoint;
     }
@@ -68,7 +45,6 @@ public class TripDataMessage implements Serializable {
         this.startingpoint = startingpoint;
     }
 
-    @XmlElement
     public String getEndpoint() {
         return endpoint;
     }
@@ -77,7 +53,6 @@ public class TripDataMessage implements Serializable {
         this.endpoint = endpoint;
     }
 
-    @XmlElement
     public Double getKilometers() {
         return kilometers;
     }
@@ -86,7 +61,6 @@ public class TripDataMessage implements Serializable {
         this.kilometers = kilometers;
     }
 
-    @XmlElement
     public Long getCustomerId() {
         return customerId;
     }
