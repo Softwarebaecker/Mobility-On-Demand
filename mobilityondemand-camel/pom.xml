@@ -98,6 +98,12 @@
         </exclusion>
       </exclusions>
     </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-http</artifactId>
+      <version>3.0.0</version>
+      <!-- use the same version as your Camel core version -->
+    </dependency>
 
   </dependencies>
 
