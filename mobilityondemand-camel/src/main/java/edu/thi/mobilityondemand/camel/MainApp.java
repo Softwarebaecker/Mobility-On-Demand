@@ -1,6 +1,7 @@
 package edu.thi.mobilityondemand.camel;
 
 import edu.thi.mobilityondemand.camel.routes.RouteBuilderCamundaToCustomer;
+import edu.thi.mobilityondemand.camel.routes.RouteBuilderSendTripToDrone;
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.camel.component.jms.JmsComponent;
@@ -11,7 +12,7 @@ import javax.jms.ConnectionFactory;
 /**
  * A Camel Application
  */
-public class MainApp extends Main{
+public class MainApp extends Main {
 
     /**
      * A main() so we can easily run these routing rules in our IDE
@@ -33,7 +34,9 @@ public class MainApp extends Main{
     }
 
     private void createRouteBuilder() {
+
         addRouteBuilder(new RouteBuilderCamundaToCustomer());
+        addRouteBuilder(new RouteBuilderSendTripToDrone());
     }
 
 }

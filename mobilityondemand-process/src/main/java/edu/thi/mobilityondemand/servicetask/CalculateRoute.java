@@ -14,12 +14,14 @@ public class CalculateRoute implements JavaDelegate {
         String startingposition = (String) delegateExecution.getVariable("startingpoint");
         String endposition = (String) delegateExecution.getVariable("endpoint");
 
-        GeoPosition geoStartingposition = GeoPosition.getPosition(startingposition);
+        /*GeoPosition geoStartingposition = GeoPosition.getPosition(startingposition);
         GeoPosition geoEndposition = GeoPosition.getPosition(endposition);
         double distance = GeoPosition.distFrom(geoStartingposition, geoEndposition);
 
+        delegateExecution.setVariable("kilometers", distance);*/
 
-        delegateExecution.setVariable("kilometers", distance);
+        delegateExecution.setVariable("kilometers", Double.valueOf(200));
+
     }
 
     public static class GeoPosition {
@@ -32,7 +34,7 @@ public class CalculateRoute implements JavaDelegate {
             /**
              * mostly copied from https://www.geonames.org/source-code/
              */
-            WebService.setUserName("Demo");
+            WebService.setUserName("MonD");
             ToponymSearchCriteria searchCriteria = new ToponymSearchCriteria();
             searchCriteria.setQ(cityName);
             try {

@@ -15,7 +15,7 @@
   </bpmn:collaboration>
   <bpmn:process id="Performe_Trip" name="Performe Trip" isExecutable="true" camunda:isStartableInTasklist="false">
     <bpmn:dataStoreReference id="DataStoreReference_0vlhvyr" name="Trip Data DB" />
-    <bpmn:subProcess id="Task_19how13" triggeredByEvent="true">
+    <bpmn:subProcess id="ReconfigerTrip_19how13" name="Reconfiger Trip" triggeredByEvent="true">
       <bpmn:endEvent id="EndEvent_14h1zjy" name="Accepted">
         <bpmn:incoming>SequenceFlow_1ieezty</bpmn:incoming>
       </bpmn:endEvent>
@@ -75,7 +75,7 @@
       </bpmn:endEvent>
       <bpmn:sequenceFlow id="SequenceFlow_1lb7k6e" sourceRef="BoundaryEvent_1aqm16m" targetRef="EndEvent_1wbsvif" />
     </bpmn:subProcess>
-    <bpmn:subProcess id="SubProcess_0snu971" triggeredByEvent="true">
+    <bpmn:subProcess id="WeatherAlertProcess_0snu971" name="Weather Alert" triggeredByEvent="true">
       <bpmn:property id="Property_0yk9g31" name="__targetRef_placeholder" />
       <bpmn:endEvent id="EndEvent_046geg9">
         <bpmn:incoming>SequenceFlow_1s0lh2k</bpmn:incoming>
@@ -99,6 +99,20 @@
         <bpmn:messageEventDefinition id="MessageEventDefinition_0bndlnj" messageRef="Message_06eeaon" />
       </bpmn:startEvent>
       <bpmn:userTask id="ServiceTask_08cqn85" name="Insert route">
+        <bpmn:extensionElements>
+          <camunda:formData>
+            <camunda:formField id="startingpoint" label="Start Point" type="string" defaultValue="${startingpoint}">
+              <camunda:validation>
+                <camunda:constraint name="required" />
+              </camunda:validation>
+            </camunda:formField>
+            <camunda:formField id="endpoint" label="End Point" type="string" defaultValue="${endpoint}">
+              <camunda:validation>
+                <camunda:constraint name="required" />
+              </camunda:validation>
+            </camunda:formField>
+          </camunda:formData>
+        </bpmn:extensionElements>
         <bpmn:incoming>SequenceFlow_0wgljn7</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_1qomf7k</bpmn:outgoing>
         <bpmn:property id="Property_16dhbk4" name="__targetRef_placeholder" />
@@ -254,7 +268,7 @@
           <dc:Bounds x="1006" y="953" width="63" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="SubProcess_016rr7p_di" bpmnElement="Task_19how13" isExpanded="true">
+      <bpmndi:BPMNShape id="SubProcess_016rr7p_di" bpmnElement="ReconfigerTrip_19how13" isExpanded="true">
         <dc:Bounds x="720" y="375" width="560" height="265" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_14h1zjy_di" bpmnElement="EndEvent_14h1zjy">
@@ -267,9 +281,9 @@
         <dc:Bounds x="1085" y="486" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="DataObjectReference_085lgbk_di" bpmnElement="DataObjectReference_085lgbk">
-        <dc:Bounds x="1052" y="395" width="36" height="50" />
+        <dc:Bounds x="1072" y="425" width="36" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1043" y="371" width="54" height="14" />
+          <dc:Bounds x="1063" y="401" width="54" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ServiceTask_1v3e6jp_di" bpmnElement="ServiceTask_1v3e6jp">
@@ -286,8 +300,8 @@
         <di:waypoint x="1220" y="526" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataInputAssociation_09421qj_di" bpmnElement="DataInputAssociation_09421qj">
-        <di:waypoint x="1088" y="420" />
-        <di:waypoint x="1122" y="420" />
+        <di:waypoint x="1108" y="450" />
+        <di:waypoint x="1122" y="450" />
         <di:waypoint x="1122" y="486" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_001yo7l_di" bpmnElement="DataOutputAssociation_001yo7l">
@@ -309,19 +323,19 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="DataObjectReference_08klujv_di" bpmnElement="DataObjectReference_08klujv">
-        <dc:Bounds x="981" y="395" width="36" height="50" />
+        <dc:Bounds x="897" y="415" width="36" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="962" y="358" width="74" height="27" />
+          <dc:Bounds x="878" y="378" width="74" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="DataInputAssociation_0nmklss_di" bpmnElement="DataInputAssociation_0nmklss">
-        <di:waypoint x="999" y="445" />
-        <di:waypoint x="999" y="486" />
+        <di:waypoint x="933" y="458" />
+        <di:waypoint x="960" y="486" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_1rgag6u_di" bpmnElement="EndEvent_18kbs8l">
         <dc:Bounds x="796" y="319" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="SubProcess_0snu971_di" bpmnElement="SubProcess_0snu971" isExpanded="true">
+      <bpmndi:BPMNShape id="SubProcess_0snu971_di" bpmnElement="WeatherAlertProcess_0snu971" isExpanded="true">
         <dc:Bounds x="200" y="400" width="430" height="240" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_046geg9_di" bpmnElement="EndEvent_046geg9">
@@ -396,7 +410,7 @@
         <di:waypoint x="865" y="486" />
         <di:waypoint x="865" y="470" />
         <di:waypoint x="1072" y="470" />
-        <di:waypoint x="1072" y="445" />
+        <di:waypoint x="1072" y="470" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ServiceTask_1q7sdy4_di" bpmnElement="ServiceTask_1q7sdy4">
         <dc:Bounds x="348" y="297" width="100" height="80" />
