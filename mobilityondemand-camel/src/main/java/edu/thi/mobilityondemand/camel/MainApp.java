@@ -3,6 +3,7 @@ package edu.thi.mobilityondemand.camel;
 import edu.thi.mobilityondemand.camel.routes.RouteBuilderCamundaToCustomer;
 import edu.thi.mobilityondemand.camel.routes.RouteBuilderCamundaToInvoicePrinter;
 import edu.thi.mobilityondemand.camel.routes.RouteBuilderSendTripToDrone;
+import edu.thi.mobilityondemand.camel.routes.RouteBuilderTaxiToCamunda;
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.camel.component.jms.JmsComponent;
@@ -38,6 +39,7 @@ public class MainApp extends Main {
 
         addRouteBuilder(new RouteBuilderCamundaToCustomer());
         addRouteBuilder(new RouteBuilderSendTripToDrone());
+        addRouteBuilder(new RouteBuilderTaxiToCamunda());
         addRouteBuilder(new RouteBuilderCamundaToInvoicePrinter());
     }
 

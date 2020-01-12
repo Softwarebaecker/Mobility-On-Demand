@@ -1,30 +1,34 @@
 package edu.thi.mobilityondemand.message;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.JAXBException;
 import java.io.Serializable;
+import java.util.Date;
 
-@XmlRootElement(name = "TripDataToTaxiMessage")
-public class TripDataToTaxiMessage implements Serializable {
+public abstract class TripDataMessage implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Long taxiId;
     private Long tripId;
     private String startingpoint;
     private String endpoint;
     private Double kilometers;
     private Long customerId;
+    private Date startDate;
+    private String text;
 
-    @XmlElement
-    public Long getTaxiId() {
-        return taxiId;
+    public TripDataMessage(Long tripId, String startingpoint, String endpoint, Double kilometers, Long customerId, Date startDate) {
+        this.tripId = tripId;
+        this.startingpoint = startingpoint;
+        this.endpoint = endpoint;
+        this.kilometers = kilometers;
+        this.customerId = customerId;
+        this.startDate = startDate;
+        this.text = "";
     }
 
-    public void setTaxiId(Long taxiId) {
-        this.taxiId = taxiId;
-    }
+    public TripDataMessage() {}
 
-    @XmlElement
+    public abstract String toXml() throws JAXBException;
+
     public Long getTripId() {
         return tripId;
     }
@@ -33,7 +37,6 @@ public class TripDataToTaxiMessage implements Serializable {
         this.tripId = tripId;
     }
 
-    @XmlElement
     public String getStartingpoint() {
         return startingpoint;
     }
@@ -42,7 +45,6 @@ public class TripDataToTaxiMessage implements Serializable {
         this.startingpoint = startingpoint;
     }
 
-    @XmlElement
     public String getEndpoint() {
         return endpoint;
     }
@@ -51,7 +53,6 @@ public class TripDataToTaxiMessage implements Serializable {
         this.endpoint = endpoint;
     }
 
-    @XmlElement
     public Double getKilometers() {
         return kilometers;
     }
@@ -60,12 +61,27 @@ public class TripDataToTaxiMessage implements Serializable {
         this.kilometers = kilometers;
     }
 
-    @XmlElement
     public Long getCustomerId() {
         return customerId;
     }
 
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }
