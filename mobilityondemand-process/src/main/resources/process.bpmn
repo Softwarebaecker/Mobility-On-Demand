@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1rw2s84" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1rw2s84" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.4.1">
   <bpmn:collaboration id="Collaboration_03e96t9">
     <bpmn:extensionElements>
       <camunda:properties>
@@ -336,15 +336,6 @@ Kunde ist eingestiegen</bpmn:text>
         <bpmn:targetRef>DataStoreReference_1wf7f6e</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:serviceTask>
-    <bpmn:subProcess id="Task_0uuqleu" name="Payment">
-      <bpmn:incoming>SequenceFlow_0u8qoiu</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0yclayf</bpmn:outgoing>
-      <bpmn:property id="Property_1h6bv5k" name="__targetRef_placeholder" />
-      <bpmn:dataInputAssociation id="DataInputAssociation_0urnhqn">
-        <bpmn:sourceRef>DataObjectReference_15w39s9</bpmn:sourceRef>
-        <bpmn:targetRef>Property_1h6bv5k</bpmn:targetRef>
-      </bpmn:dataInputAssociation>
-    </bpmn:subProcess>
     <bpmn:sendTask id="Task_1v65ro1" name="Notify Customer" camunda:class="edu.thi.mobilityondemand.servicetask.SendConfirmationToCustomer">
       <bpmn:incoming>SequenceFlow_0l5ocea</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_119sp5l</bpmn:outgoing>
@@ -404,6 +395,18 @@ Kunde ist eingestiegen</bpmn:text>
     </bpmn:callActivity>
     <bpmn:dataObjectReference id="DataObjectReference_15w39s9" name="Trip data" dataObjectRef="DataObject_1wcz5gk" />
     <bpmn:dataObject id="DataObject_1wcz5gk" />
+    <bpmn:callActivity id="Task_0uuqleu" name="Payment">
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0u8qoiu</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0yclayf</bpmn:outgoing>
+      <bpmn:property id="Property_13fw6bh" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_0urnhqn">
+        <bpmn:sourceRef>DataObjectReference_15w39s9</bpmn:sourceRef>
+        <bpmn:targetRef>Property_13fw6bh</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+    </bpmn:callActivity>
   </bpmn:process>
   <bpmn:message id="Message_1tnjbsk" name="trip_finished" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -887,9 +890,6 @@ Kunde ist eingestiegen</bpmn:text>
         <di:waypoint x="1090" y="2305" />
         <di:waypoint x="1115" y="2305" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="SubProcess_0m8e6io_di" bpmnElement="Task_0uuqleu">
-        <dc:Bounds x="1115" y="2265" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0yclayf_di" bpmnElement="SequenceFlow_0yclayf">
         <di:waypoint x="1215" y="2305" />
         <di:waypoint x="1397" y="2305" />
@@ -989,7 +989,7 @@ Kunde ist eingestiegen</bpmn:text>
       <bpmndi:BPMNEdge id="DataInputAssociation_0urnhqn_di" bpmnElement="DataInputAssociation_0urnhqn">
         <di:waypoint x="655" y="2216" />
         <di:waypoint x="655" y="2280" />
-        <di:waypoint x="1110" y="2280" />
+        <di:waypoint x="1115" y="2280" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataInputAssociation_18hc39o_di" bpmnElement="DataInputAssociation_18hc39o">
         <di:waypoint x="670" y="2216" />
@@ -997,6 +997,9 @@ Kunde ist eingestiegen</bpmn:text>
         <di:waypoint x="1010" y="2380" />
         <di:waypoint x="1010" y="2426" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="CallActivity_1vg8cax_di" bpmnElement="Task_0uuqleu">
+        <dc:Bounds x="1115" y="2265" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
