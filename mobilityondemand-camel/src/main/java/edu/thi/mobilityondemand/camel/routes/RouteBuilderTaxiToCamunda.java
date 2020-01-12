@@ -11,7 +11,7 @@ public class RouteBuilderTaxiToCamunda  extends RouteBuilder {
         restConfiguration().host("localhost:8080/engine-rest");
 
         Endpoint source = endpoint("jms:queue:fromTaxi");
-        //Endpoint destination = endpoint("rest::post/message/");
+        Endpoint destination = endpoint("http://localhost:8080/engine-rest/message");
 
         /**
          * Taxi send direct JSON :D
@@ -20,7 +20,7 @@ public class RouteBuilderTaxiToCamunda  extends RouteBuilder {
             .setHeader(Exchange.HTTP_METHOD, simple("POST"))
             .setHeader(Exchange.CONTENT_TYPE, constant("application/json"))
             .log("new Taxi message send to camunda")
-            .to("http://localhost:8080/engine-rest/message");
+            .to(destination);
 
     }
 }
