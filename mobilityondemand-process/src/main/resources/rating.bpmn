@@ -9,7 +9,7 @@
   </bpmn:collaboration>
   <bpmn:process id="Rating" name="Rating" isExecutable="true">
     <bpmn:laneSet id="LaneSet_1nb3su4" />
-    <bpmn:sendTask id="SendTask_1mgc4cy" name="Send rating request" camunda:class="edu.thi.mobilityondemand.servicetask.AskCustumerForRating">
+    <bpmn:sendTask id="SendTask_1mgc4cy" name="Send rating request" camunda:class="edu.thi.mobilityondemand.servicetask.SendRatingRequest">
       <bpmn:incoming>SequenceFlow_03d2gh1</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_11u0lr9</bpmn:outgoing>
     </bpmn:sendTask>
