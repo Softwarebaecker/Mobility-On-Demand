@@ -38,9 +38,7 @@
     <bpmn:dataObject id="DataObject_0tmyizs" />
     <bpmn:callActivity id="Task_0z8w4cq" name="Create invoice" calledElement="Process_create_invoice">
       <bpmn:extensionElements>
-        <camunda:inputOutput>
-          <camunda:outputParameter name="Invoice">${Invoice}</camunda:outputParameter>
-        </camunda:inputOutput>
+        <camunda:out source="Invoice" target="Invoice" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0ufmyau</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1lyz2x8</bpmn:outgoing>
@@ -328,7 +326,7 @@
         <di:waypoint x="473" y="467" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Participant_040c45r_di" bpmnElement="Participant_040c45r" isHorizontal="true">
-        <dc:Bounds x="140" y="690" width="1288" height="70" />
+        <dc:Bounds x="140" y="690" width="1410" height="70" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_18tbgra_di" bpmnElement="SequenceFlow_18tbgra">
         <di:waypoint x="720" y="430" />
@@ -396,7 +394,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Participant_03pn58p_di" bpmnElement="Participant_03pn58p" isHorizontal="true">
-        <dc:Bounds x="140" y="820" width="1288" height="290" />
+        <dc:Bounds x="140" y="830" width="1410" height="280" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Participant_0qv5o1x_di" bpmnElement="Participant_0qv5o1x" isHorizontal="true">
         <dc:Bounds x="140" y="1270" width="1288" height="260" />

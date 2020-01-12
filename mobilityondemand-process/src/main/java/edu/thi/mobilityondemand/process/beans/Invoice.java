@@ -14,6 +14,7 @@ import java.io.Serializable;
 
 
 @LocalBean
+@XmlRootElement(name = "Invoice")
 public class Invoice implements Serializable {
 	private static final long serialVersionUID = 1L;
 	

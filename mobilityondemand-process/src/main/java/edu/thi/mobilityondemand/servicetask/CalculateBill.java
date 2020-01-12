@@ -22,7 +22,7 @@ public class CalculateBill implements JavaDelegate {
     Date date = new Date();
     
     double amount = (basicTravelFee + (travelDistance * pricePerKilometre)) * discountPercent / 100.;
-    Invoice invoice = new Invoice(date, "München", "Nürnberg", 180, amount);
+    Invoice invoice = new Invoice(date, "Berlin", "Salzburg", 600, amount);
     
     System.out.println("Invoic debug:" + invoice.getDeparture() + invoice.getComment());
         
