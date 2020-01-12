@@ -1,11 +1,16 @@
 package edu.thi.mobilityondemand.message;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.io.StringWriter;
+import java.util.Date;
 
-@XmlRootElement(name = "TripDataToTaxiMessage")
-public class TripDataToTaxiMessage implements Serializable {
+@XmlRootElement(name = "TripDataMessage")
+public class TripDataMessage implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long taxiId;
@@ -14,6 +19,27 @@ public class TripDataToTaxiMessage implements Serializable {
     private String endpoint;
     private Double kilometers;
     private Long customerId;
+    private Date startDate;
+    private String text;
+
+    public TripDataMessage(Long taxiId, Long tripId, String startingpoint, String endpoint, Double kilometers, Long customerId, Date startDate, String text) {
+        this.taxiId = taxiId;
+        this.tripId = tripId;
+        this.startingpoint = startingpoint;
+        this.endpoint = endpoint;
+        this.kilometers = kilometers;
+        this.customerId = customerId;
+        this.startDate = startDate;
+        this.text = text;
+    }
+
+    public String toXml() throws JAXBException {
+        JAXBContext jc = JAXBContext.newInstance(this.getClass());
+        Marshaller marshaller = jc.createMarshaller();
+        StringWriter stringWriter = new StringWriter();
+        marshaller.marshal(this, stringWriter);
+        return stringWriter.toString();
+    }
 
     @XmlElement
     public Long getTaxiId() {
@@ -67,5 +93,21 @@ public class TripDataToTaxiMessage implements Serializable {
 
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

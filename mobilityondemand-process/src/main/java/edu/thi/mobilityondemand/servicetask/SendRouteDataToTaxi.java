@@ -1,8 +1,7 @@
 package edu.thi.mobilityondemand.servicetask;
 
-import edu.thi.mobilityondemand.message.TripDataToTaxiMessage;
+import edu.thi.mobilityondemand.message.TripDataMessage;
 import edu.thi.mobilityondemand.process.queue.MessageQueue;
-import org.apache.camel.model.dataformat.JacksonXMLDataFormat;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
@@ -21,21 +20,17 @@ public class SendRouteDataToTaxi implements JavaDelegate {
         String endpoint = (String) delegateExecution.getVariable("endpoint");
         Double kilometers = (Double) delegateExecution.getVariable("kilometers");
 
-        TripDataToTaxiMessage messageObject = new TripDataToTaxiMessage();
+        TripDataMessage messageObject = new TripDataMessage();
         messageObject.setTripId(tripId);
         messageObject.setTaxiId(taxiId);
         messageObject.setCustomerId(customerId);
         messageObject.setStartingpoint(startingpoint);
         messageObject.setEndpoint(endpoint);
         messageObject.setKilometers(kilometers);
-
-        JAXBContext jc = JAXBContext.newInstance(TripDataToTaxiMessage.class);
-        Marshaller marshaller = jc.createMarshaller();
-        StringWriter stringWriter = new StringWriter();
-        marshaller.marshal(messageObject, stringWriter);
+        messageObject.setText("newRouteData");
 
         MessageQueue mq = new MessageQueue();
-        Message message = mq.createSession().createTextMessage(stringWriter.toString());
+        Message message = mq.createSession().createTextMessage(messageObject.toXml());
         mq.sendMessageToQueue("toTaxi", message);
     }
 }
