@@ -31,9 +31,9 @@ public class StormyWeatherEventSubscriber {
             Connection connection = connectionFactory.createConnection();
             connection.start();
             Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            Destination destination = session.createQueue("StormyWeatherEventQueue");
+            Destination destination = session.createTopic("StormyWeatherEventTopic");
             MessageProducer producer = session.createProducer(destination);
-            TextMessage message = session.createTextMessage();
+            Message message = session.createMessage();
             message.setStringProperty("location", event.getLocation());
             message.setStringProperty("weather", event.getWeather().toString());
 
