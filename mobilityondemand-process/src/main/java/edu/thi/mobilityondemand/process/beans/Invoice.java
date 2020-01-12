@@ -7,8 +7,13 @@ package edu.thi.mobilityondemand.process.beans;
 
 import java.util.Date;
 
+import javax.ejb.LocalBean;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import java.io.Serializable;
 
+
+@LocalBean
 public class Invoice implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
