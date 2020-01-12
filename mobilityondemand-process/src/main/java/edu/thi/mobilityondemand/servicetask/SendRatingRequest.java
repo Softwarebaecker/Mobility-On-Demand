@@ -1,3 +1,5 @@
+// Sandro Käppner
+
 package edu.thi.mobilityondemand.servicetask;
 
 import edu.thi.mobilityondemand.process.queue.MessageQueue;
@@ -5,6 +7,7 @@ import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
 import javax.jms.Message;
+import javax.jms.TextMessage;
 
 public class SendRatingRequest implements JavaDelegate {
     @Override
