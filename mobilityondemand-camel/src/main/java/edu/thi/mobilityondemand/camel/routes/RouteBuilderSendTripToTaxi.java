@@ -4,11 +4,11 @@ import org.apache.camel.Endpoint;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jackson.JacksonDataFormat;
 
-public class RouteBuilderSendTripToDrone extends RouteBuilder {
+public class RouteBuilderSendTripToTaxi extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         Endpoint source = endpoint("jms:queue:toTaxi");
-        Endpoint destination = endpoint("file:./CamundaToDrone");
+        Endpoint destination = endpoint("file:./CamundaToTaxi");
 
         //JacksonXMLDataFormat xmlFormater = new JacksonXMLDataFormat();
         JacksonDataFormat json = new JacksonDataFormat();
