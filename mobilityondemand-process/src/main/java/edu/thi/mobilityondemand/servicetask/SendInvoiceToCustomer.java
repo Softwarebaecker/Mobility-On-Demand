@@ -6,6 +6,7 @@
 package edu.thi.mobilityondemand.servicetask;
 
 
+import edu.thi.mobilityondemand.process.message.InvoiceMessage;
 import edu.thi.mobilityondemand.process.queue.MessageQueue;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
@@ -17,15 +18,14 @@ import javax.xml.bind.Marshaller;
 
 import java.io.StringWriter;
 import java.util.Date;
-import edu.thi.mobilityondemand.process.beans.Invoice;
 
 public class SendInvoiceToCustomer implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) throws Exception {
         
-    	Invoice invoice = (Invoice) execution.getVariable("Invoice");
+    	InvoiceMessage invoice = (InvoiceMessage) execution.getVariable("Invoice");
     	    	
-    	JAXBContext jc = JAXBContext.newInstance(Invoice.class);
+    	JAXBContext jc = JAXBContext.newInstance(InvoiceMessage.class);
         Marshaller marshaller = jc.createMarshaller();
         StringWriter stringWriter = new StringWriter();
         marshaller.marshal(invoice, stringWriter);

@@ -7,7 +7,7 @@ package edu.thi.mobilityondemand.servicetask;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
-import edu.thi.mobilityondemand.process.beans.Invoice;
+import edu.thi.mobilityondemand.process.message.InvoiceMessage;
 
 import java.util.Date;
 
@@ -28,7 +28,7 @@ public class CalculateBill implements JavaDelegate {
 	    Long tripid = (Long) execution.getVariable("tripDataId");
 	    
 	    Double amount = (basicTravelFee + (distance * pricePerKilometre)) * discountPercent / 100.;
-	    Invoice invoice = new Invoice(tripid, date, departure, destination, distance, amount);
+	    InvoiceMessage invoice = new InvoiceMessage(tripid, date, departure, destination, distance, amount);
 	    
 	    System.out.println("Invoic debug:" + invoice.getDeparture() + invoice.getComment());
 	        
