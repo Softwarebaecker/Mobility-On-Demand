@@ -1,10 +1,8 @@
 package edu.thi.mobilityondemand.process.message;
 
-import javax.xml.bind.JAXBException;
-import java.io.Serializable;
 import java.util.Date;
 
-public abstract class TripDataMessage implements Serializable {
+public abstract class TripDataMessage extends Message {
     private static final long serialVersionUID = 1L;
 
     private Long tripId;
@@ -13,7 +11,6 @@ public abstract class TripDataMessage implements Serializable {
     private Double kilometers;
     private Long customerId;
     private Date startDate;
-    private String text;
 
     public TripDataMessage(Long tripId, String startingpoint, String endpoint, Double kilometers, Long customerId, Date startDate) {
         this.tripId = tripId;
@@ -22,12 +19,11 @@ public abstract class TripDataMessage implements Serializable {
         this.kilometers = kilometers;
         this.customerId = customerId;
         this.startDate = startDate;
-        this.text = "";
+        super.setText("");
     }
 
-    public TripDataMessage() {}
-
-    public abstract String toXml() throws JAXBException;
+    public TripDataMessage() {
+    }
 
     public Long getTripId() {
         return tripId;
@@ -75,13 +71,5 @@ public abstract class TripDataMessage implements Serializable {
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 }

@@ -1,3 +1,5 @@
+// Sandro Käppner
+
 package edu.thi.mobilityondemand.servicetask;
 
 import edu.thi.mobilityondemand.process.message.TripDataMessage;

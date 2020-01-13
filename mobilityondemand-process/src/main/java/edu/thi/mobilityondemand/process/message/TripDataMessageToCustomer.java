@@ -1,10 +1,8 @@
+// Sandro Käppner
+
 package edu.thi.mobilityondemand.process.message;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.StringWriter;
 import java.util.Date;
 
 @XmlRootElement(name = "tripDataMessageToCustomer")
@@ -16,12 +14,4 @@ public class TripDataMessageToCustomer extends TripDataMessage {
     }
 
     public TripDataMessageToCustomer() {}
-
-    public String toXml() throws JAXBException {
-        JAXBContext jc = JAXBContext.newInstance(this.getClass());
-        Marshaller marshaller = jc.createMarshaller();
-        StringWriter stringWriter = new StringWriter();
-        marshaller.marshal(this, stringWriter);
-        return stringWriter.toString();
-    }
 }
