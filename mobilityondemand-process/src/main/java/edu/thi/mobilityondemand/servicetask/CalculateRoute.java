@@ -14,13 +14,13 @@ public class CalculateRoute implements JavaDelegate {
         String startingposition = (String) delegateExecution.getVariable("startingpoint");
         String endposition = (String) delegateExecution.getVariable("endpoint");
 
-        /*GeoPosition geoStartingposition = GeoPosition.getPosition(startingposition);
+        GeoPosition geoStartingposition = GeoPosition.getPosition(startingposition);
         GeoPosition geoEndposition = GeoPosition.getPosition(endposition);
         double distance = GeoPosition.distFrom(geoStartingposition, geoEndposition);
 
-        delegateExecution.setVariable("kilometers", distance);*/
+        delegateExecution.setVariable("kilometers", distance);
 
-        delegateExecution.setVariable("kilometers", Double.valueOf(200));
+//        delegateExecution.setVariable("kilometers", Double.valueOf(200));
 
     }
 
