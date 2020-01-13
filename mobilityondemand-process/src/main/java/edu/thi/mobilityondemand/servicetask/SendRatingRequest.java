@@ -20,6 +20,6 @@ public class SendRatingRequest implements JavaDelegate {
 
         MessageQueue mq = new MessageQueue();
         Message message = mq.createSession().createTextMessage(messageObject.toXml());
-        mq.sendMessageToQueue("RequestRatingQueue", message);
+        mq.sendMessageToQueue("toCustomer", message);
     }
 }
