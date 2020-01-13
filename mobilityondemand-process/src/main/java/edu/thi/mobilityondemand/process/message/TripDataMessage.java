@@ -1,4 +1,4 @@
-package edu.thi.mobilityondemand.message;
+package edu.thi.mobilityondemand.process.message;
 
 import javax.xml.bind.JAXBException;
 import java.io.Serializable;

@@ -1,7 +1,7 @@
 package edu.thi.mobilityondemand.servicetask;
 
-import edu.thi.mobilityondemand.message.TripDataMessage;
-import edu.thi.mobilityondemand.message.TripDataMessageToTaxi;
+import edu.thi.mobilityondemand.process.message.TripDataMessage;
+import edu.thi.mobilityondemand.process.message.TripDataMessageToTaxi;
 import edu.thi.mobilityondemand.process.queue.MessageQueue;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
