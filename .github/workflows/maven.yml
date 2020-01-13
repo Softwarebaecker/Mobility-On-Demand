@@ -17,3 +17,4 @@ jobs:
       run: |
         mvn -B install --file mobilityondemand-process/pom.xml
         mvn -B install --file mobilityondemand-camel/pom.xml
+        mvn -B install --file mobilityondemand-weatherobserver/pom.xml
