@@ -18,6 +18,7 @@ public class RouteBuilderCamundaToCustomer extends RouteBuilder {
         from(source)
                 .unmarshal().jacksonxml()     //convert from xml to Java Object
                 .marshal(json)
+                .log("New message to customer.")
                 .to(destination);
 
     }

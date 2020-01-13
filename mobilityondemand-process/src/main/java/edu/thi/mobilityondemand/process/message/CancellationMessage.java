@@ -15,6 +15,10 @@ public class CancellationMessage extends Message {
         super.setText("We are sorry to inform you that your trip was cancelled.");
     }
 
+    public CancellationMessage() {
+
+    }
+
     public Long getCustomerId() {
         return customerId;
     }
