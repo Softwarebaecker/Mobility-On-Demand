@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" id="Definitions_1prxqfp" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
+  <decision id="checkNumberOfBadRatings" name="Check number of bad ratings">
+    <decisionTable id="decisionTable_1">
+      <input id="input_1" label="Number of bad ratings">
+        <inputExpression id="inputExpression_1" typeRef="integer">
+          <text>numberOfBadRatings</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Too many bad ratings" name="tooManyBadRatings" typeRef="boolean" />
+      <rule id="DecisionRule_184j3f6">
+        <inputEntry id="UnaryTests_0qz38ap">
+          <text>&lt; 2</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1vse6rf">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1lgw9q6">
+        <inputEntry id="UnaryTests_0h7f5qa">
+          <text>&gt;= 2</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0aqqulf">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
