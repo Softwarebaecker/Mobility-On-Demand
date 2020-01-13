@@ -4,7 +4,7 @@ package edu.thi.mobilityondemand.process.message;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+@XmlRootElement(name = "cancellationMessage")
 public class CancellationMessage extends Message {
     private static final long serialVersionUID = 1L;
 
