@@ -1,7 +1,9 @@
 package edu.thi.mobilityondemand.servicetask;
 
+import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.camunda.bpm.model.bpmn.instance.Error;
 import org.geonames.Toponym;
 import org.geonames.ToponymSearchCriteria;
 import org.geonames.ToponymSearchResult;
@@ -18,9 +20,12 @@ public class CalculateRoute implements JavaDelegate {
         GeoPosition geoEndposition = GeoPosition.getPosition(endposition);
         double distance = GeoPosition.distFrom(geoStartingposition, geoEndposition);
 
-        delegateExecution.setVariable("kilometers", distance);
-
-//        delegateExecution.setVariable("kilometers", Double.valueOf(200));
+        if(distance > 1000) {
+            throw new BpmnError("NO_ROUTE_FOUND");
+        }
+        else {
+            delegateExecution.setVariable("kilometers", distance);
+        }
 
     }
 
