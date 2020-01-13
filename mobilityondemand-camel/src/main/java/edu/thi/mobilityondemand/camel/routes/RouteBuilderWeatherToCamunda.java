@@ -10,7 +10,7 @@ public class RouteBuilderWeatherToCamunda extends RouteBuilder {
     public void configure() throws Exception {
         restConfiguration().host("localhost:8080/engine-rest");
 
-        Endpoint source = endpoint("jms:topic:StormyWeatherEventTopic");
+        Endpoint source = endpoint("jms:queue:StormyWeatherEventQueue");
         Endpoint destination = endpoint("http://localhost:8080/engine-rest/signal");
 
         /**

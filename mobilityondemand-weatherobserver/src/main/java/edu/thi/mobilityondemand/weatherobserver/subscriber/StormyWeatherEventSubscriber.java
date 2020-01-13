@@ -10,7 +10,8 @@ import java.util.Map;
 public class StormyWeatherEventSubscriber {
 
     public String getStatement() {
-        String stormyWeatherEventExpression = "select * " +
+        String stormyWeatherEventExpression =
+                "select * " +
                 "from WeatherEvent " +
                 "match_recognize (" +
                 "   partition by location" +
@@ -31,7 +32,7 @@ public class StormyWeatherEventSubscriber {
             Connection connection = connectionFactory.createConnection();
             connection.start();
             Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            Destination destination = session.createTopic("StormyWeatherEventTopic");
+            Destination destination = session.createQueue("StormyWeatherEventQueue");
             MessageProducer producer = session.createProducer(destination);
             Message message = session.createMessage();
             message.setStringProperty("location", event.getLocation());
