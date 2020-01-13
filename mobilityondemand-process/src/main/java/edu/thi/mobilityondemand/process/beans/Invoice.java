@@ -18,30 +18,27 @@ import java.io.Serializable;
 public class Invoice implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private int invoiceId;
+	private String invoiceId;
 	private String product;
 	private String departure;
 	private String destination;
-	private int distance;
-	private double amount;
+	private Double distance;
+	private Double amount;
 	private String comment;
 	private Date date;
-	private static int currentId = 0;
 	
 	public Invoice() {
-		this.invoiceId = 0;
 		this.product = "Mobility on Demand";
 		this.departure = null;
 		this.destination = null;
-		this.distance = 0;
+		this.distance = 0.0;
 		this.amount = 0.0;
 		this.comment = "Thanks for flying with us! See you soon.";
 	}
 	
-	public Invoice(Date date, String departure, String destination, int distance, double amount) {
+	public Invoice(Long tripid, Date date, String departure, String destination, Double distance, Double amount) {
 		//this.invoiceId = (int) Math.ceil(Math.random()*10000);
-		currentId += 1;
-		this.invoiceId = currentId;
+		this.invoiceId = "MOD_" + tripid.toString();
 		this.product = "Mobility on Demand";
 		this.comment = "Thanks for flying with us! See you soon.";
 		this.setDate(date);
@@ -52,10 +49,10 @@ public class Invoice implements Serializable {
 	}
 	
 	
-	public int getInvoiceId() {
+	public String getInvoiceId() {
 		return invoiceId;
 	}
-	public void setInvoiceId(int invoiceId) {
+	public void setInvoiceId(String invoiceId) {
 		this.invoiceId = invoiceId;
 	}
 	public String getProduct() {
@@ -76,16 +73,16 @@ public class Invoice implements Serializable {
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
-	public int getDistance() {
+	public Double getDistance() {
 		return distance;
 	}
-	public void setDistance(int distance) {
+	public void setDistance(Double distance) {
 		this.distance = distance;
 	}
 	public double getAmount() {
 		return amount;
 	}
-	public void setAmount(double amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 	public String getComment() {

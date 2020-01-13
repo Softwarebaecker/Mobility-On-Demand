@@ -17,9 +17,10 @@
     <bpmn:callActivity id="Task_0z8w4cq" name="Create invoice" calledElement="Process_create_invoice">
       <bpmn:extensionElements>
         <camunda:out source="Invoice" target="Invoice" />
+        <camunda:in variables="all" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0ufmyau</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1lyz2x8</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0fsd2jr</bpmn:outgoing>
       <bpmn:property id="Property_1wllnda" name="__targetRef_placeholder" />
       <bpmn:dataInputAssociation id="DataInputAssociation_1xtixxl">
         <bpmn:sourceRef>DataObjectReference_028f2ph</bpmn:sourceRef>
@@ -30,7 +31,7 @@
       </bpmn:dataOutputAssociation>
     </bpmn:callActivity>
     <bpmn:sendTask id="Task_1nb22bb" name="Submit invoice" camunda:class="edu.thi.mobilityondemand.servicetask.SendInvoiceToCustomer">
-      <bpmn:incoming>SequenceFlow_1hodwqb</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0fsd2jr</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_074mlou</bpmn:outgoing>
       <bpmn:property id="Property_0od7m6f" name="__targetRef_placeholder" />
       <bpmn:dataInputAssociation id="DataInputAssociation_10cp9ai">
@@ -46,6 +47,10 @@
       <bpmn:outgoing>SequenceFlow_1s72p9a</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:receiveTask id="Task_0cmmbl0" name="Wait for invoice settlement" messageRef="Message_1afcpis">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${execution.setVariable(&#34;invoiceid&#34;, execution.getVariable(&#34;Invoice&#34;).getInvoiceId())}" event="start" />
+        <camunda:executionListener expression="${execution.setVariable(&#34;price&#34;, execution.getVariable(&#34;Invoice&#34;).getAmount())}" event="start" />
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1gzgqce</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0m8a94g</bpmn:outgoing>
     </bpmn:receiveTask>
@@ -74,10 +79,6 @@
       <bpmn:incoming>SequenceFlow_074mlou</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_18tbgra</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Task_1id57cr" name="haltepunkt2">
-      <bpmn:incoming>SequenceFlow_1lyz2x8</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1hodwqb</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:boundaryEvent id="IntermediateThrowEvent_1w69vrt" name="Payment &#10;promt failed" attachedToRef="Task_1xrt7y0">
       <bpmn:outgoing>SequenceFlow_0pp5ces</bpmn:outgoing>
       <bpmn:escalationEventDefinition />
@@ -85,11 +86,9 @@
     <bpmn:boundaryEvent id="IntermediateThrowEvent_0arasyg" name="Wait for 2 weeks" cancelActivity="false" attachedToRef="Task_0cmmbl0">
       <bpmn:outgoing>SequenceFlow_145czz0</bpmn:outgoing>
       <bpmn:timerEventDefinition>
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">20</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT2M</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_1hodwqb" sourceRef="Task_1id57cr" targetRef="Task_1nb22bb" />
-    <bpmn:sequenceFlow id="SequenceFlow_1lyz2x8" sourceRef="Task_0z8w4cq" targetRef="Task_1id57cr" />
     <bpmn:sequenceFlow id="SequenceFlow_0pp5ces" sourceRef="IntermediateThrowEvent_1w69vrt" targetRef="ExclusiveGateway_158r3nh" />
     <bpmn:sequenceFlow id="SequenceFlow_0ufmyau" sourceRef="StartEvent_15kijmy" targetRef="Task_0z8w4cq" />
     <bpmn:sequenceFlow id="SequenceFlow_074mlou" sourceRef="Task_1nb22bb" targetRef="Task_13927mj" />
@@ -123,6 +122,7 @@
     <bpmn:dataObjectReference id="DataObjectReference_1mwco0n" name="Invoice" dataObjectRef="DataObject_0tmyizs" />
     <bpmn:dataObject id="DataObject_0tmyizs" />
     <bpmn:dataStoreReference id="DataStoreReference_0rkny7d" name="Trip Data DB" />
+    <bpmn:sequenceFlow id="SequenceFlow_0fsd2jr" sourceRef="Task_0z8w4cq" targetRef="Task_1nb22bb" />
     <bpmn:textAnnotation id="TextAnnotation_0vz24uu">
       <bpmn:text>&gt;&gt; Postman (REST) to ActiveMQ (https://activemq.apache.org/rest)
 &gt;&gt;Camelroute (REST) auf MessageID
@@ -139,7 +139,7 @@ https://docs.camunda.org/manual/7.9/reference/rest/message/post-message/</bpmn:t
     <bpmn:textAnnotation id="TextAnnotation_1ganymz">
       <bpmn:text>&gt;&gt; toXML -done
 &gt;&gt; toActiveMQ - done
-&gt;&gt; Camelroute parse XML - open
+&gt;&gt; Camelroute parse XML - done
 &gt;&gt; processor pretty print XML as ASCII to file (vgl. Camel route order)</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:textAnnotation id="TextAnnotation_1tf55df">
@@ -163,7 +163,7 @@ https://docs.camunda.org/manual/7.9/reference/rest/message/post-message/</bpmn:t
   </bpmn:process>
   <bpmn:escalation id="Escalation_11ll969" name="Escalation_1mblr63" escalationCode="12345" />
   <bpmn:message id="Message_1knewtr" />
-  <bpmn:message id="Message_1afcpis" name="newTransactionForInvoiceId" />
+  <bpmn:message id="Message_1afcpis" name="IncomingBankTransaction" />
   <bpmn:process id="Process_create_invoice" isExecutable="true">
     <bpmn:startEvent id="StartEvent_07o0ec9">
       <bpmn:outgoing>SequenceFlow_1qucml3</bpmn:outgoing>
@@ -196,25 +196,20 @@ https://docs.camunda.org/manual/7.9/reference/rest/message/post-message/</bpmn:t
     <bpmn:endEvent id="EndEvent_1xuxpsv" name="Invoice created">
       <bpmn:incoming>SequenceFlow_11ckx0p</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="Task_0r043oi" name="haltepunkt1">
-      <bpmn:incoming>SequenceFlow_0s398h3</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_15j14f2</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:serviceTask id="Task_1w6r59w" name="Add bill to ejb tripdata in DB" camunda:expression="${tripDataService.setPrice(execution)}">
       <bpmn:extensionElements>
         <camunda:executionListener expression="${execution.setVariableLocal(&#34;price&#34;, execution.getVariable(&#34;Invoice&#34;).getAmount())}" event="start" />
       </bpmn:extensionElements>
-      <bpmn:incoming>SequenceFlow_15j14f2</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0s398h3</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_11ckx0p</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_1hveijd">
         <bpmn:targetRef>DataStoreReference_0rkny7d</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="SequenceFlow_0s398h3" sourceRef="ServiceTask_1jrpiya" targetRef="Task_0r043oi" />
+    <bpmn:sequenceFlow id="SequenceFlow_0s398h3" sourceRef="ServiceTask_1jrpiya" targetRef="Task_1w6r59w" />
     <bpmn:sequenceFlow id="SequenceFlow_1qucml3" sourceRef="StartEvent_07o0ec9" targetRef="ServiceTask_0yz7kln" />
     <bpmn:sequenceFlow id="SequenceFlow_1cja9um" sourceRef="ServiceTask_0yz7kln" targetRef="BusinessRuleTask_1ibxdtu" />
     <bpmn:sequenceFlow id="SequenceFlow_0eobkm5" sourceRef="BusinessRuleTask_1ibxdtu" targetRef="ServiceTask_1jrpiya" />
-    <bpmn:sequenceFlow id="SequenceFlow_15j14f2" sourceRef="Task_0r043oi" targetRef="Task_1w6r59w" />
     <bpmn:sequenceFlow id="SequenceFlow_11ckx0p" sourceRef="Task_1w6r59w" targetRef="EndEvent_1xuxpsv" />
     <bpmn:textAnnotation id="TextAnnotation_16ikvrs">
       <bpmn:text>externe DB
@@ -515,26 +510,8 @@ https://docs.camunda.org/manual/7.9/reference/rest/message/post-message/</bpmn:t
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0s398h3_di" bpmnElement="SequenceFlow_0s398h3">
         <di:waypoint x="848" y="1240" />
-        <di:waypoint x="930" y="1240" />
+        <di:waypoint x="1100" y="1240" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="UserTask_0hfzkm9_di" bpmnElement="Task_0r043oi">
-        <dc:Bounds x="930" y="1200" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_1lyz2x8_di" bpmnElement="SequenceFlow_1lyz2x8">
-        <di:waypoint x="360" y="350" />
-        <di:waypoint x="360" y="340" />
-        <di:waypoint x="410" y="340" />
-        <di:waypoint x="410" y="320" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1hodwqb_di" bpmnElement="SequenceFlow_1hodwqb">
-        <di:waypoint x="410" y="320" />
-        <di:waypoint x="410" y="340" />
-        <di:waypoint x="490" y="340" />
-        <di:waypoint x="490" y="350" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="UserTask_0zzp1ex_di" bpmnElement="Task_1id57cr">
-        <dc:Bounds x="360" y="240" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_0ohfwcd_di" bpmnElement="TextAnnotation_0ohfwcd">
         <dc:Bounds x="1370" y="531" width="100" height="30" />
       </bpmndi:BPMNShape>
@@ -560,10 +537,6 @@ https://docs.camunda.org/manual/7.9/reference/rest/message/post-message/</bpmn:t
         <di:waypoint x="1417" y="340" />
         <di:waypoint x="1437" y="370" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_15j14f2_di" bpmnElement="SequenceFlow_15j14f2">
-        <di:waypoint x="1030" y="1240" />
-        <di:waypoint x="1100" y="1240" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_11ckx0p_di" bpmnElement="SequenceFlow_11ckx0p">
         <di:waypoint x="1200" y="1240" />
         <di:waypoint x="1262" y="1240" />
@@ -584,6 +557,10 @@ https://docs.camunda.org/manual/7.9/reference/rest/message/post-message/</bpmn:t
       <bpmndi:BPMNEdge id="DataOutputAssociation_0txhx9d_di" bpmnElement="DataOutputAssociation_0txhx9d">
         <di:waypoint x="1380" y="340" />
         <di:waypoint x="1230" y="965" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0fsd2jr_di" bpmnElement="SequenceFlow_0fsd2jr">
+        <di:waypoint x="410" y="390" />
+        <di:waypoint x="470" y="390" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

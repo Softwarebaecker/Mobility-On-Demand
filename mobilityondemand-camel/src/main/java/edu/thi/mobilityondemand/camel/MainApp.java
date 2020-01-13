@@ -1,5 +1,6 @@
 package edu.thi.mobilityondemand.camel;
 
+import edu.thi.mobilityondemand.camel.routes.RouteBuilderBankToCamunda;
 import edu.thi.mobilityondemand.camel.routes.RouteBuilderCamundaToCustomer;
 import edu.thi.mobilityondemand.camel.routes.RouteBuilderCamundaToInvoicePrinter;
 import edu.thi.mobilityondemand.camel.routes.RouteBuilderSendTripToTaxi;
@@ -43,6 +44,7 @@ public class MainApp extends Main {
         addRouteBuilder(new RouteBuilderTaxiToCamunda());
         addRouteBuilder(new RouteBuilderWeatherToCamunda());
         addRouteBuilder(new RouteBuilderCamundaToInvoicePrinter());
+        addRouteBuilder(new RouteBuilderBankToCamunda());
     }
 
 }
