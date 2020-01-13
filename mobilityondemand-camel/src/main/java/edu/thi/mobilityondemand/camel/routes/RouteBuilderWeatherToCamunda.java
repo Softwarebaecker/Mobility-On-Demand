@@ -26,7 +26,6 @@ public class RouteBuilderWeatherToCamunda extends RouteBuilder {
                 public void process(Exchange exchange) throws Exception {
                     String body = "{ \"name\" : \"weather_alert\" }";
                     exchange.getOut().setHeader(Exchange.CONTENT_TYPE, "application/json");
-                    exchange.getOut().setHeader(Exchange.HTTP_METHOD, "POST");
                     exchange.getOut().setBody(body);
                 }
             })

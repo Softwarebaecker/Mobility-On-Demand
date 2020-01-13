@@ -10,7 +10,6 @@
     <bpmn:messageFlow id="MessageFlow_1qopfpi" name="Acnollage Exit" sourceRef="Participant_0p8obin" targetRef="IntermediateThrowEvent_0catw8n" />
     <bpmn:messageFlow id="MessageFlow_0b6ia7s" name="Route data" sourceRef="SendTask_168tz83" targetRef="Participant_0p8obin" />
     <bpmn:messageFlow id="MessageFlow_1ruztf5" name="New Trip data" sourceRef="Participant_0e0gdme" targetRef="StartEvent_0mi2djn" />
-    <bpmn:messageFlow id="MessageFlow_1tmaiji" name="Weather Alert" sourceRef="Participant_1ezpazz" targetRef="StartEvent_1v2lt4r" />
     <bpmn:messageFlow id="MessageFlow_05kbb3k" name="Route data" sourceRef="SendTask_0uajjmk" targetRef="Participant_0p8obin" />
   </bpmn:collaboration>
   <bpmn:process id="Performe_Trip" name="Performe Trip" isExecutable="true" camunda:isStartableInTasklist="false">
@@ -94,10 +93,6 @@
       <bpmn:sequenceFlow id="SequenceFlow_1s0lh2k" sourceRef="SendTask_0uajjmk" targetRef="EndEvent_046geg9" />
       <bpmn:sequenceFlow id="SequenceFlow_0wgljn7" sourceRef="StartEvent_1v2lt4r" targetRef="ServiceTask_08cqn85" />
       <bpmn:sequenceFlow id="SequenceFlow_1qomf7k" sourceRef="ServiceTask_08cqn85" targetRef="SendTask_0uajjmk" />
-      <bpmn:startEvent id="StartEvent_1v2lt4r" name="Weather Alert" isInterrupting="false">
-        <bpmn:outgoing>SequenceFlow_0wgljn7</bpmn:outgoing>
-        <bpmn:messageEventDefinition id="MessageEventDefinition_0bndlnj" messageRef="Message_06eeaon" />
-      </bpmn:startEvent>
       <bpmn:userTask id="ServiceTask_08cqn85" name="Insert route">
         <bpmn:extensionElements>
           <camunda:formData>
@@ -126,6 +121,10 @@
       </bpmn:userTask>
       <bpmn:dataObjectReference id="DataObjectReference_1o0m3ir" name="Trip data" dataObjectRef="DataObject_1c4rxwh" />
       <bpmn:dataObject id="DataObject_1c4rxwh" />
+      <bpmn:startEvent id="StartEvent_1v2lt4r" name="Weather Alert" isInterrupting="false">
+        <bpmn:outgoing>SequenceFlow_0wgljn7</bpmn:outgoing>
+        <bpmn:signalEventDefinition id="SignalEventDefinition_00m7bk5" signalRef="Signal_0savath" />
+      </bpmn:startEvent>
     </bpmn:subProcess>
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>SequenceFlow_1ahv268</bpmn:outgoing>
@@ -176,7 +175,7 @@
   <bpmn:message id="Message_0s19zb9" name="taxi_starts" />
   <bpmn:message id="Message_0rzmb00" name="taxi_finished" />
   <bpmn:message id="Message_1z0bvf0" name="new_target" />
-  <bpmn:message id="Message_06eeaon" name="weather_alert" />
+  <bpmn:signal id="Signal_0savath" name="weather_alert" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_005yfjx">
       <bpmndi:BPMNShape id="Participant_0p9737v_di" bpmnElement="Participant_0p9737v" isHorizontal="true">
@@ -368,13 +367,6 @@
       <bpmndi:BPMNShape id="Participant_08ukeuo_di" bpmnElement="Participant_1ezpazz" isHorizontal="true">
         <dc:Bounds x="160" y="805" width="1140" height="62" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="MessageFlow_1tmaiji_di" bpmnElement="MessageFlow_1tmaiji">
-        <di:waypoint x="240" y="805" />
-        <di:waypoint x="240" y="573" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="249" y="682" width="67" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0wgljn7_di" bpmnElement="SequenceFlow_0wgljn7">
         <di:waypoint x="258" y="555" />
         <di:waypoint x="292" y="555" />
@@ -423,12 +415,6 @@
         <di:waypoint x="448" y="337" />
         <di:waypoint x="480" y="337" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="StartEvent_06kfsab_di" bpmnElement="StartEvent_1v2lt4r">
-        <dc:Bounds x="222" y="537" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="208" y="513" width="67" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_1im85bs_di" bpmnElement="StartEvent_0mi2djn">
         <dc:Bounds x="746" y="508" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -468,6 +454,12 @@
         <di:waypoint x="915" y="602" />
         <di:waypoint x="1220" y="602" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="StartEvent_1422ghp_di" bpmnElement="StartEvent_1v2lt4r">
+        <dc:Bounds x="222" y="537" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="208" y="513" width="67" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
