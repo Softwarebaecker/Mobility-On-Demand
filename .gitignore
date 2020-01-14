@@ -36,3 +36,9 @@ target/
 mobilityondemand-camel/CamundaToCustomersMessages/
 mobilityondemand-camel/CamundaToDrone/
 mobilityondemand-camel/InvoicesPrinted/
+
+CamundaToTaxi/
+
+CamundaToCustomersMessages/
+
+InvoicesPrinted/

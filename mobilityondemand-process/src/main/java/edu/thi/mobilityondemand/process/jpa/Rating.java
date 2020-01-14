@@ -18,6 +18,7 @@ public class Rating implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ratingId;
+    private Long tripId;
     private Long customerId;
     private int numberOfStars;
     private String comment;
@@ -57,5 +58,13 @@ public class Rating implements Serializable {
 
     public void setSubmitTime(Date submitTime) {
         this.submitTime = submitTime;
+    }
+
+    public Long getTripId() {
+        return tripId;
+    }
+
+    public void setTripId(Long tripId) {
+        this.tripId = tripId;
     }
 }
