@@ -68,9 +68,6 @@
       <bpmn:outgoing>SequenceFlow_0vbuxc9</bpmn:outgoing>
     </bpmn:sendTask>
     <bpmn:startEvent id="StartEvent_189kevz" name="Receiving Order">
-      <bpmn:extensionElements>
-        <camunda:executionListener expression="${initialCustomerDBSetup.createCustomer()}" event="start" />
-      </bpmn:extensionElements>
       <bpmn:outgoing>SequenceFlow_06zwlts</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_1xqh2cl" />
     </bpmn:startEvent>
