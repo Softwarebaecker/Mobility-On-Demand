@@ -68,21 +68,26 @@ curl --request PUT \
 
 ## generate Project specific User Groups
 
-# route_guidance / Kaspar Riese
+#  --data '{"id": "normal","name": "Normal User","type": "WORKFLOW"}'
+
+# routeGuidance / Kaspar Riese
 # creat group
+echo "create groupe  routeGuidance"
 curl --request POST \
   --url http://localhost:8080/engine-rest/group/create \
   --header 'Accept: */*' \
   --header 'Cache-Control: no-cache' \
   --header 'Content-Type: application/json' \
-  --data '{"id": "route_guidance","name": "Route Guidance","type": "WORKFLOW"}'
+  --data '{"id": "routeGuidance","name": "Route Guidance","type": "WORKFLOW"}'
+  echo "create groupe  routeGuidance authorization"
   # create authorization
 curl --request POST \
   --url http://localhost:8080/engine-rest/authorization/create \
   --header 'Accept: */*' \
   --header 'Cache-Control: no-cache' \
   --header 'Content-Type: application/json' \
-  --data '{"type": 1,"permissions": ["ALL"],"userId": null,"groupId": "route_guidance","resourceType": 0,"resourceId": "tasklist"}'
+  --data '{"type": 1,"permissions": ["ALL"],"userId": null,"groupId": "routeGuidance","resourceType": 0,"resourceId": "tasklist"}'
+  echo "create User Kasper"
 # create User Kaspar
 curl --request POST \
   --url http://localhost:8080/engine-rest/user/create \
@@ -90,9 +95,10 @@ curl --request POST \
   --header 'Cache-Control: no-cache' \
   --header 'Content-Type: application/json' \
   --data '{"profile": {"id": "kaspar","firstName": "Kaspar","lastName": "Riese","email": "riese@mod.org"},"credentials": {"password": "kaspar"}}'
+echo "Add Kaspar to groupe routeGuidance"
 # add Kaspar to groupe Normal
 curl --request PUT \
-  --url http://localhost:8080/engine-rest/group/route_guidance/members/kaspar \
+  --url http://localhost:8080/engine-rest/group/routeGuidance/members/kaspar \
   --header 'Accept: */*' \
   --header 'Cache-Control: no-cache' \
   --header 'Host: localhost:8080'
@@ -100,6 +106,7 @@ curl --request PUT \
 
 # finance / Corinna Pfaff
 # creat group
+echo "create groupe  finance"
 curl --request POST \
   --url http://localhost:8080/engine-rest/group/create \
   --header 'Accept: */*' \
@@ -107,6 +114,7 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{"id": "finance","name": "Finance","type": "WORKFLOW"}'
 # create authorization
+echo "create groupe  finance authorization"
 curl --request POST \
   --url http://localhost:8080/engine-rest/authorization/create \
   --header 'Accept: */*' \
@@ -114,6 +122,7 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{"type": 1,"permissions": ["ALL"],"userId": null,"groupId": "finance","resourceType": 0,"resourceId": "tasklist"}'
   # create User Corinna
+    echo "create User Corinna"
 curl --request POST \
   --url http://localhost:8080/engine-rest/user/create \
   --header 'Accept: */*' \
@@ -121,6 +130,7 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{"profile": {"id": "corinna","firstName": "Corinna","lastName": "Pfaff","email": "pfaff@mod.org"},"credentials": {"password": "corinna"}}'
 # add Corinna to groupe finance
+echo "Add Pfaff to groupe finance"
 curl --request PUT \
   --url http://localhost:8080/engine-rest/group/finance/members/corinna \
   --header 'Accept: */*' \
@@ -128,31 +138,35 @@ curl --request PUT \
   --header 'Host: localhost:8080'
 
 
-#customer_service / Leonie Hirsch
+#customerService / Leonie Hirsch
 # creat group
+echo "create groupe customerService"
 curl --request POST \
   --url http://localhost:8080/engine-rest/group/create \
   --header 'Accept: */*' \
   --header 'Cache-Control: no-cache' \
   --header 'Content-Type: application/json' \
-  --data '{"id": "customer_service","name": "Customer Service","type": "WORKFLOW"}'
+  --data '{"id": "customerService","name": "Customer Service","type": "WORKFLOW"}'
 # create authorization
+echo "create groupe  customerService authorization"
 curl --request POST \
   --url http://localhost:8080/engine-rest/authorization/create \
   --header 'Accept: */*' \
   --header 'Cache-Control: no-cache' \
   --header 'Content-Type: application/json' \
-  --data '{"type": 1,"permissions": ["ALL"],"userId": null,"groupId": "customer_service","resourceType": 0,"resourceId": "tasklist"}'
+  --data '{"type": 1,"permissions": ["ALL"],"userId": null,"groupId": "customerService","resourceType": 0,"resourceId": "tasklist"}'
   # create User Leonie
+    echo "create User Leonie"
 curl --request POST \
   --url http://localhost:8080/engine-rest/user/create \
   --header 'Accept: */*' \
   --header 'Cache-Control: no-cache' \
   --header 'Content-Type: application/json' \
   --data '{"profile": {"id": "leonie","firstName": "Leonie","lastName": "Hirsch","email": "hirsch@mod.org"},"credentials": {"password": "leonie"}}'
-# add Leonie to groupe customer_service
+# add Leonie to groupe customerService
+echo "add Leonie to groupe customerService"
 curl --request PUT \
-  --url http://localhost:8080/engine-rest/group/customer_service/members/leonie \
+  --url http://localhost:8080/engine-rest/group/customerService/members/leonie \
   --header 'Accept: */*' \
   --header 'Cache-Control: no-cache' \
   --header 'Host: localhost:8080'
