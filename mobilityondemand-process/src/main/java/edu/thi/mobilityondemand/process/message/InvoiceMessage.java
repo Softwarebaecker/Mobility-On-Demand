@@ -20,26 +20,17 @@ public class InvoiceMessage implements Serializable {
 	private Double amount;
 	private String comment;
 	private Date date;
-
+	private String postalAdress;
+	private int discount;
+	
 	public InvoiceMessage() {
-		this.product = "Mobility on Demand";
-		this.departure = null;
-		this.destination = null;
-		this.distance = 0.0;
-		this.amount = 0.0;
-		this.comment = "Thanks for flying with us! See you soon.";
+		//Default Constructor
 	}
 
-	public InvoiceMessage(Long tripid, Date date, String departure, String destination, Double distance,
-			Double amount) {
+	public InvoiceMessage(Long tripid) {
 		this.invoiceId = "MOD_" + tripid.toString();
 		this.product = "Mobility on Demand";
 		this.comment = "Thanks for flying with us! See you soon.";
-		this.setDate(date);
-		this.departure = departure;
-		this.destination = destination;
-		this.distance = distance;
-		this.amount = amount;
 	}
 
 	public String getInvoiceId() {
@@ -82,7 +73,7 @@ public class InvoiceMessage implements Serializable {
 		this.distance = distance;
 	}
 
-	public double getAmount() {
+	public Double getAmount() {
 		return amount;
 	}
 
@@ -104,6 +95,27 @@ public class InvoiceMessage implements Serializable {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public int getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(int discount) {
+		this.discount = discount;
+	}
+
+	public String getPostalAdress() {
+		return postalAdress;
+	}
+	
+	// default Setter necessary for XML conversion
+	public void setPostalAdress(String postalAdress) {
+		this.postalAdress = postalAdress;
+	}
+
+	public void setPostalAdress(String firstname, String lastname, String adress) {
+		this.postalAdress = firstname + " " + lastname + ", " + adress;
 	}
 
 }
