@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5d662a06-b9ff-4132-9eb1-038b2f556ac6",
+		"_postman_id": "52fecd25-75c6-4bba-9290-3a18fa76d1bd",
 		"name": "MoD",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -45,7 +45,7 @@
 								},
 								{
 									"key": "invoiceid",
-									"value": "MOD_3",
+									"value": "MOD_{{tripId}}",
 									"type": "text"
 								},
 								{
@@ -356,7 +356,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"messageName\" : \"taxi_starts\",\r\n  \"correlationKeys\" : {\r\n    \"tripDataId\" : {\"value\" : 18, \"type\": \"Long\"}\r\n  }\r\n}",
+							"raw": "{\r\n  \"messageName\" : \"taxi_starts\",\r\n  \"correlationKeys\" : {\r\n    \"tripDataId\" : {\"value\" : {{tripId}}, \"type\": \"Long\"}\r\n  }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -402,7 +402,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"variables\": {\n\t\t\"customerId\" : {\n\t\t\t\"value\" : 3,\n\t\t\t\"type\": \"Long\"\n\t\t},\n\t\t\"startingpoint\" : {\n\t\t\t\"value\" : \"Ingolstadt\",\n\t\t\t\"type\": \"String\"\n\t\t},\n\t\t\"endpoint\" : {\n\t\t\t\"value\" : \"Berlin\",\n\t\t\t\"type\": \"String\"\n\t\t},\n\t\t\"startDate\" : {\n\t\t\t\"value\" : \"2020-01-11T23:43:00.165+0100\",\n\t\t\t\"type\": \"Date\"\n\t\t}\n\t}\n}",
+							"raw": "{\n\t\"variables\": {\n\t\t\"customerId\" : {\n\t\t\t\"value\" : {{customerId}},\n\t\t\t\"type\": \"Long\"\n\t\t},\n\t\t\"startingpoint\" : {\n\t\t\t\"value\" : \"Ingolstadt\",\n\t\t\t\"type\": \"String\"\n\t\t},\n\t\t\"endpoint\" : {\n\t\t\t\"value\" : \"Berlin\",\n\t\t\t\"type\": \"String\"\n\t\t},\n\t\t\"startDate\" : {\n\t\t\t\"value\" : \"2020-01-11T23:43:00.165+0100\",\n\t\t\t\"type\": \"Date\"\n\t\t}\n\t}\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -464,114 +464,82 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "sendInvoice",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
-						"type": "text"
-					},
-					{
-						"key": "purposeH",
-						"value": "spako"
-					},
-					{
-						"key": "Authorization",
-						"value": "Basic YWRtaW46YWRtaW4="
-					},
-					{
-						"key": "invoiceid",
-						"value": "MOD_2",
-						"type": "text",
-						"disabled": true
-					},
-					{
-						"key": "value",
-						"value": "20",
-						"type": "text",
-						"disabled": true
-					}
-				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "value",
-							"value": "20.00",
-							"type": "text"
+			"name": "Rationg",
+			"item": [
+				{
+					"name": "sendMessageNewRating",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"messageName\" : \"new_rating\",\n  \"correlationKeys\" : {\n    \"customerId\" : {\"value\" : {{customerId}}, \"type\" : \"Long\"},\n    \"tripId\" : {\"value\" : {{tripId}}, \"type\" : \"Long\"}\n  },\n  \"processVariables\" : {\n    \"numberOfStars\" : {\"value\" : 3, \"type\" : \"Integer\"},\n    \"comment\" : {\"value\" : \"adsfasdf\", \"type\" : \"String\"}\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
-						{
-							"key": "invoiceid",
-							"value": "MOD_{{tripId}}",
-							"type": "text"
-						},
-						{
-							"key": "body",
-							"value": "-",
-							"type": "text"
+						"url": {
+							"raw": "{{camunda}}/message",
+							"host": [
+								"{{camunda}}"
+							],
+							"path": [
+								"message"
+							]
 						}
-					]
-				},
-				"url": {
-					"raw": "admin:admin@localhost:8161/api/message/IncomingBankTransaction?type=queue",
-					"host": [
-						"localhost"
-					],
-					"auth": {
-						"user": "admin",
-						"password": "admin"
 					},
-					"port": "8161",
-					"path": [
-						"api",
-						"message",
-						"IncomingBankTransaction"
-					],
-					"query": [
-						{
-							"key": "type",
-							"value": "queue"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "sendMessageNewRating",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"messageName\" : \"new_rating\",\n  \"correlationKeys\" : {\n    \"customerId\" : {\"value\" : {{customerId}}, \"type\" : \"Long\"},\n    \"tripId\" : {\"value\" : {{tripId}}, \"type\" : \"Long\"}\n  },\n  \"processVariables\" : {\n    \"numberOfStars\" : {\"value\" : 3, \"type\" : \"Integer\"},\n    \"comment\" : {\"value\" : \"adsfasdf\", \"type\" : \"String\"}\n  }\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					"response": []
 				},
-				"url": {
-					"raw": "{{camunda}}/message",
-					"host": [
-						"{{camunda}}"
-					],
-					"path": [
-						"message"
-					]
+				{
+					"name": "sendMessageNewRating (ActiveMQ))",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWRtaW46YWRtaW4="
+							}
+						],
+						"url": {
+							"raw": "admin:admin@localhost:8161/api/message/fromCustomer?type=queue",
+							"host": [
+								"localhost"
+							],
+							"auth": {
+								"user": "admin",
+								"password": "admin"
+							},
+							"port": "8161",
+							"path": [
+								"api",
+								"message",
+								"fromCustomer"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "queue"
+								}
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "sendMessageWeatherAlert",
@@ -648,6 +616,60 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "callGeoName",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"totalResultsCount\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "admin:admin@localhost:8161/api/message/cityToPositionRequest?type=queue&location=Ingolstadt&tripId=1",
+					"host": [
+						"localhost"
+					],
+					"auth": {
+						"user": "admin",
+						"password": "admin"
+					},
+					"port": "8161",
+					"path": [
+						"api",
+						"message",
+						"cityToPositionRequest"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "queue"
+						},
+						{
+							"key": "location",
+							"value": "Ingolstadt"
+						},
+						{
+							"key": "tripId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -674,31 +696,31 @@
 	],
 	"variable": [
 		{
-			"id": "953d744c-6c34-4e64-b645-44fa933fddc5",
+			"id": "d04c774c-8cfc-4d88-b9f3-4e906d1d7cea",
 			"key": "camunda",
 			"value": "localhost:8080/engine-rest",
 			"type": "string"
 		},
 		{
-			"id": "0cfc93b7-46a6-410d-bdc7-da1f638d7c85",
+			"id": "031e2259-9e47-4919-b6e5-ad5fe894bc49",
 			"key": "activemq",
 			"value": "admin:admin@localhost:8161/api",
 			"type": "string"
 		},
 		{
-			"id": "307a120d-4aba-47dd-aff4-24ebd24019aa",
+			"id": "b699ec8c-3290-44e1-b821-3e96a3159391",
 			"key": "tripId",
 			"value": "3",
 			"type": "string"
 		},
 		{
-			"id": "4e2a043b-4595-4f43-bfd1-91cc39f48074",
+			"id": "a9a346e7-9a03-4707-9607-e3301c7b9e04",
 			"key": "customerId",
-			"value": "10",
+			"value": "2",
 			"type": "string"
 		},
 		{
-			"id": "27350556-68b3-4adb-af2b-a2ac6f524acc",
+			"id": "9ec5ec21-adb9-42f1-b8cb-7192d91f13d6",
 			"key": "customerREST",
 			"value": "http://localhost:8080",
 			"type": "string"
