@@ -22,7 +22,7 @@ public class StormyWeatherEventSubscriber {
         return stormyWeatherEventExpression;
     }
 
-    public void update(Map<String, WeatherEvent> map) throws JMSException {
+    public void update(Map<String, WeatherEvent> map)  {
         WeatherEvent event = map.get("weatherevent");
         System.out.println("===============");
         System.out.println(event);

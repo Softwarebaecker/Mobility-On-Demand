@@ -7,8 +7,8 @@ import java.util.Date;
 import java.util.Random;
 
 public class RandomWeatherEventSender implements Runnable {
-    private EPRuntime epRuntime;
-    private String location;
+    private final EPRuntime epRuntime;
+    private final String location;
 
     public RandomWeatherEventSender(String location, EPRuntime epRuntime) {
         this.epRuntime = epRuntime;

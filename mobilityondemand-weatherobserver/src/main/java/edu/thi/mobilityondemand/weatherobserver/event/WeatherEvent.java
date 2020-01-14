@@ -5,9 +5,9 @@ import java.util.Date;
 public class WeatherEvent {
     public enum WeatherType { SUNNY, CLOUDY, RAINY, STORMY}
 
-    private WeatherType weather;
-    private String location;
-    private Date time;
+    private final WeatherType weather;
+    private final String location;
+    private final Date time;
 
     public WeatherType getWeather() {
         return weather;
