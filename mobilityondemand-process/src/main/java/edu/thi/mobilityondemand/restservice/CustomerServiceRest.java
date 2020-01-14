@@ -17,10 +17,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import edu.thi.mobilityondemand.process.beans.CustomerServiceBean;
 import edu.thi.mobilityondemand.process.jpa.Customer;
 import edu.thi.mobilityondemand.restservice.exceptions.BadRequestException;
-
+import edu.thi.mobilityondemand.process.beans.CustomerServiceBean;
 
 /**
  * Wrapper-Klasse um EJB CustomerServiceBean.
