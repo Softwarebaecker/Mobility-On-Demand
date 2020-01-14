@@ -25,6 +25,7 @@ public class Customer implements Serializable {
     private String email;
     private Integer yearOfBirth;
     private String adress;
+    private String discountGroup;
 
 	public Customer() {
 		super();
@@ -73,5 +74,19 @@ public class Customer implements Serializable {
 	public Long getCustomerid() {
 		return customerid;
 	}
+
+	public String getDiscountGroup() {
+		return discountGroup;
+	}
+
+	public void setDiscountGroup(String discountGroup) {
+		this.discountGroup = discountGroup;
+	}
    
+	@Override
+    public String toString() {
+        return "Id: " + customerid + "; Firstname: " + firstname + "; Lastname: " + lastname 
+        		+ "; Email: " + email + "; Year of Birth: " + yearOfBirth
+        		+ "; Adress: " + adress + "; Discount Group: " + discountGroup;
+    }
 }

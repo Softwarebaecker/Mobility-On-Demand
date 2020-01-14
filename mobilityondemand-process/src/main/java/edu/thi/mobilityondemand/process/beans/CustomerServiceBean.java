@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -14,6 +15,7 @@ import edu.thi.mobilityondemand.process.jpa.Customer;
  * Session Bean implementation class CustomerServiceBean
  */
 @Stateless
+@Named
 @LocalBean
 public class CustomerServiceBean implements CustomerServiceBeanRemote, CustomerServiceBeanLocal {
 
@@ -27,6 +29,10 @@ public class CustomerServiceBean implements CustomerServiceBeanRemote, CustomerS
 
 	public Customer read(Long id) {
 		return this.em.find(Customer.class, id);
+	}
+	
+	public String getDicountGroup(Long id) {
+		return this.read(id).getDiscountGroup();
 	}
 
 	public Customer[] search(String email) {

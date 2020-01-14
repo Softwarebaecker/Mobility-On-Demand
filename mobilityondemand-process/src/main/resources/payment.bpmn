@@ -90,7 +90,7 @@
   <bpmn:message id="Message_1afcpis" name="IncomingBankTransaction" />
   <bpmn:process id="Process_create_invoice" isExecutable="true">
     <bpmn:startEvent id="StartEvent_07o0ec9">
-      <bpmn:outgoing>SequenceFlow_1qucml3</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0my88z3</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:serviceTask id="ServiceTask_1jrpiya" name="Calculate bill" camunda:class="edu.thi.mobilityondemand.servicetask.CalculateBill">
       <bpmn:incoming>SequenceFlow_0eobkm5</bpmn:incoming>
@@ -104,9 +104,12 @@
         <bpmn:targetRef>DataObjectReference_19f93d9</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="ServiceTask_0yz7kln" name="Get customer discount group" camunda:class="edu.thi.mobilityondemand.servicetask.RetrieveCustomerGroup">
-      <bpmn:incoming>SequenceFlow_1qucml3</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1cja9um</bpmn:outgoing>
+    <bpmn:serviceTask id="ServiceTask_0yz7kln" name="Customer discount group and adress" camunda:expression="${execution.setVariable(&#34;customer_obj&#34;, customerServiceBean.read(customerId))}">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${execution.setVariable(&#34;discountGroup&#34;, customer_obj.getDiscountGroup())}" event="end" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0my88z3</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0vd9xzh</bpmn:outgoing>
       <bpmn:property id="Property_171pdib" name="__targetRef_placeholder" />
       <bpmn:dataInputAssociation id="DataInputAssociation_10yn8ww">
         <bpmn:sourceRef>DataStoreReference_04nexyp</bpmn:sourceRef>
@@ -118,7 +121,7 @@
     <bpmn:dataObjectReference id="DataObjectReference_0f51dvn" name="Route data" dataObjectRef="DataObject_1b0zxhe" />
     <bpmn:dataObject id="DataObject_1b0zxhe" />
     <bpmn:businessRuleTask id="BusinessRuleTask_1ibxdtu" name="Calculate discount" camunda:resultVariable="discountPercent" camunda:decisionRef="discountTable" camunda:mapDecisionResult="singleEntry">
-      <bpmn:incoming>SequenceFlow_1cja9um</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0vd9xzh</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0eobkm5</bpmn:outgoing>
     </bpmn:businessRuleTask>
     <bpmn:serviceTask id="Task_1w6r59w" name="Add calculated price to trip" camunda:expression="${tripDataService.setPrice(execution)}">
@@ -136,9 +139,9 @@
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_11ckx0p" sourceRef="Task_1w6r59w" targetRef="EndEvent_1xuxpsv" />
     <bpmn:sequenceFlow id="SequenceFlow_0eobkm5" sourceRef="BusinessRuleTask_1ibxdtu" targetRef="ServiceTask_1jrpiya" />
-    <bpmn:sequenceFlow id="SequenceFlow_1cja9um" sourceRef="ServiceTask_0yz7kln" targetRef="BusinessRuleTask_1ibxdtu" />
-    <bpmn:sequenceFlow id="SequenceFlow_1qucml3" sourceRef="StartEvent_07o0ec9" targetRef="ServiceTask_0yz7kln" />
     <bpmn:sequenceFlow id="SequenceFlow_0s398h3" sourceRef="ServiceTask_1jrpiya" targetRef="Task_1w6r59w" />
+    <bpmn:sequenceFlow id="SequenceFlow_0my88z3" sourceRef="StartEvent_07o0ec9" targetRef="ServiceTask_0yz7kln" />
+    <bpmn:sequenceFlow id="SequenceFlow_0vd9xzh" sourceRef="ServiceTask_0yz7kln" targetRef="BusinessRuleTask_1ibxdtu" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1eltm52">
@@ -269,14 +272,6 @@
         <di:waypoint x="670" y="1010" />
         <di:waypoint x="798" y="1010" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1cja9um_di" bpmnElement="SequenceFlow_1cja9um">
-        <di:waypoint x="480" y="1010" />
-        <di:waypoint x="570" y="1010" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1qucml3_di" bpmnElement="SequenceFlow_1qucml3">
-        <di:waypoint x="286" y="1010" />
-        <di:waypoint x="380" y="1010" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataInputAssociation_0rmsn0i_di" bpmnElement="DataInputAssociation_0rmsn0i">
         <di:waypoint x="758" y="890" />
         <di:waypoint x="820" y="890" />
@@ -346,6 +341,14 @@
       <bpmndi:BPMNEdge id="Association_0regimn_di" bpmnElement="Association_0regimn">
         <di:waypoint x="295" y="755" />
         <di:waypoint x="250" y="745" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0my88z3_di" bpmnElement="SequenceFlow_0my88z3">
+        <di:waypoint x="286" y="1010" />
+        <di:waypoint x="380" y="1010" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0vd9xzh_di" bpmnElement="SequenceFlow_0vd9xzh">
+        <di:waypoint x="480" y="1010" />
+        <di:waypoint x="570" y="1010" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

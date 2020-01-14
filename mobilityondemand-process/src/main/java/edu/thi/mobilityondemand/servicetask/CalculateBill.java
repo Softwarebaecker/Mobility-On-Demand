@@ -7,6 +7,7 @@ package edu.thi.mobilityondemand.servicetask;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
+import edu.thi.mobilityondemand.process.jpa.Customer;
 import edu.thi.mobilityondemand.process.message.InvoiceMessage;
 
 import java.util.Date;
@@ -20,17 +21,21 @@ public class CalculateBill implements JavaDelegate {
 	    Long basicTravelFee = 5L;			// TODO Camunda Variable
 	    
 	    // get trip details from execution
+	    Customer c = (Customer) execution.getVariable("customer_obj");
+	    
 	    Double distance = (Double) execution.getVariable("kilometers");
 	    int discountPercent = (int) execution.getVariable("discountPercent");
-	    Date date = (Date) execution.getVariable("startDate");
-	    String departure = (String) execution.getVariable("startingpoint");
-	    String destination = (String) execution.getVariable("endpoint");
 	    Long tripid = (Long) execution.getVariable("tripDataId");
-	    
 	    Double amount = (basicTravelFee + (distance * pricePerKilometre)) * discountPercent / 100.;
-	    InvoiceMessage invoice = new InvoiceMessage(tripid, date, departure, destination, distance, amount);
 	    
-	    System.out.println("Invoic debug:" + invoice.getDeparture() + invoice.getComment());
+	    InvoiceMessage invoice = new InvoiceMessage(tripid);
+	    invoice.setPostalAdress(c.getFirstname(), c.getLastname(), c.getAdress());
+	    invoice.setDiscount(discountPercent);
+	    invoice.setAmount(amount);
+	    invoice.setDeparture((String) execution.getVariable("startingpoint"));
+	    invoice.setDestination((String) execution.getVariable("endpoint"));
+	    invoice.setDate((Date) execution.getVariable("startDate"));
+	    invoice.setDistance(distance);
 	        
 	    execution.setVariable("Invoice", invoice);
 	    
