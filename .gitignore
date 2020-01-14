@@ -31,9 +31,13 @@ target/
 .classpath
 .project
 .settings
+.DS_Store
 
 # Mobility On Deman processed files
 mobilityondemand-camel/CamundaToCustomersMessages/
 mobilityondemand-camel/CamundaToDrone/
 mobilityondemand-camel/InvoicesPrinted/
 mobilityondemand-camel/CamundaToTaxi/
+CamundaToTaxi/
+CamundaToCustomersMessages/
+InvoicesPrinted/

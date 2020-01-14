@@ -10,10 +10,6 @@
   </bpmn:collaboration>
   <bpmn:process id="Rating" name="Rating" isExecutable="true">
     <bpmn:laneSet id="LaneSet_1nb3su4" />
-    <bpmn:sendTask id="SendTask_1mgc4cy" name="Send rating request" camunda:class="edu.thi.mobilityondemand.servicetask.SendRatingRequest">
-      <bpmn:incoming>SequenceFlow_03d2gh1</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_11u0lr9</bpmn:outgoing>
-    </bpmn:sendTask>
     <bpmn:eventBasedGateway id="EventBasedGateway_1gc9pas">
       <bpmn:incoming>SequenceFlow_11u0lr9</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1t1rkvv</bpmn:outgoing>
@@ -31,7 +27,6 @@
       <bpmn:outgoing>SequenceFlow_1iufs1m</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_1mepz7a" messageRef="Message_1omutnt" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_03d2gh1" sourceRef="startRating" targetRef="SendTask_1mgc4cy" />
     <bpmn:sequenceFlow id="SequenceFlow_11u0lr9" sourceRef="SendTask_1mgc4cy" targetRef="EventBasedGateway_1gc9pas" />
     <bpmn:sequenceFlow id="SequenceFlow_1t1rkvv" sourceRef="EventBasedGateway_1gc9pas" targetRef="IntermediateCatchEvent_0911a1s" />
     <bpmn:sequenceFlow id="SequenceFlow_0owonf2" sourceRef="EventBasedGateway_1gc9pas" targetRef="IntermediateCatchEvent_05qka15" />
@@ -76,7 +71,7 @@
     </bpmn:serviceTask>
     <bpmn:dataStoreReference id="DataStoreReference_0t8k0iz" name="Rating DB" />
     <bpmn:startEvent id="startRating" name="Trip finished">
-      <bpmn:outgoing>SequenceFlow_03d2gh1</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0xamz0l</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0vuo7ed" messageRef="Message_0tvtuog" />
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0f0gz01" sourceRef="UserTask_0mgvgn7" targetRef="ExclusiveGateway_15fgdhn" />
@@ -91,6 +86,11 @@
     </bpmn:sendTask>
     <bpmn:dataObjectReference id="DataObjectReference_0eva02z" name="Rating ID" dataObjectRef="DataObject_0eafisy" />
     <bpmn:dataObject id="DataObject_0eafisy" />
+    <bpmn:sequenceFlow id="SequenceFlow_0xamz0l" sourceRef="startRating" targetRef="SendTask_1mgc4cy" />
+    <bpmn:sendTask id="SendTask_1mgc4cy" name="Send rating request" camunda:class="edu.thi.mobilityondemand.servicetask.SendRatingRequest">
+      <bpmn:incoming>SequenceFlow_0xamz0l</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_11u0lr9</bpmn:outgoing>
+    </bpmn:sendTask>
   </bpmn:process>
   <bpmn:message id="Message_1omutnt" name="new_rating" />
   <bpmn:process id="Analyse_bad_ratings" name="Analyse bad ratings" isExecutable="true">
@@ -149,7 +149,7 @@
         <dc:Bounds x="152" y="180" width="1036" height="230" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="SendTask_1mgc4cy_di" bpmnElement="SendTask_1mgc4cy">
-        <dc:Bounds x="285" y="210" width="100" height="80" />
+        <dc:Bounds x="289" y="210" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EventBasedGateway_1gc9pas_di" bpmnElement="EventBasedGateway_1gc9pas">
         <dc:Bounds x="410" y="225" width="50" height="50" />
@@ -178,12 +178,8 @@
       <bpmndi:BPMNShape id="EndEvent_0xgmau2_di" bpmnElement="EndEvent_0xgmau2">
         <dc:Bounds x="1112" y="232" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_03d2gh1_di" bpmnElement="SequenceFlow_03d2gh1">
-        <di:waypoint x="251" y="250" />
-        <di:waypoint x="285" y="250" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_11u0lr9_di" bpmnElement="SequenceFlow_11u0lr9">
-        <di:waypoint x="385" y="250" />
+        <di:waypoint x="389" y="250" />
         <di:waypoint x="410" y="250" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1t1rkvv_di" bpmnElement="SequenceFlow_1t1rkvv">
@@ -231,10 +227,10 @@
         <di:waypoint x="515" y="232" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="MessageFlow_1f1qv3q_di" bpmnElement="MessageFlow_1f1qv3q">
-        <di:waypoint x="335" y="210" />
-        <di:waypoint x="335" y="150" />
+        <di:waypoint x="339" y="210" />
+        <di:waypoint x="339" y="150" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="343" y="183" width="73" height="14" />
+          <dc:Bounds x="347" y="183" width="73" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1iufs1m_di" bpmnElement="SequenceFlow_1iufs1m">
@@ -368,6 +364,10 @@
         <di:waypoint x="989" y="510" />
         <di:waypoint x="230" y="510" />
         <di:waypoint x="230" y="632" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0xamz0l_di" bpmnElement="SequenceFlow_0xamz0l">
+        <di:waypoint x="251" y="250" />
+        <di:waypoint x="289" y="250" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

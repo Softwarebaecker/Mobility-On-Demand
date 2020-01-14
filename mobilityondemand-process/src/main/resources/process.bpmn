@@ -88,7 +88,7 @@
     </bpmn:endEvent>
     <bpmn:endEvent id="EndEvent_02pbgyo" name="Trip Finished">
       <bpmn:incoming>SequenceFlow_0yclayf</bpmn:incoming>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_1kb2mkr" messageRef="Message_1tnjbsk" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1kb2mkr" messageRef="Message_1tnjbsk" camunda:class="edu.thi.mobilityondemand.servicetask.SendTripFinished" />
     </bpmn:endEvent>
     <bpmn:callActivity id="Task_0pv3dkf" name="Performing Trip" calledElement="Performe_Trip">
       <bpmn:extensionElements>

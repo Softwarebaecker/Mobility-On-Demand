@@ -21,11 +21,13 @@ public class RatingService implements RatingServiceLocal {
 
     public void createRating(DelegateExecution execution) {
         Long customerId = (Long) execution.getVariable("customerId");
+        Long tripId = (Long) execution.getVariable("tripId");
         int numberOfStars = (int) execution.getVariable("numberOfStars");
         String comment = (String) execution.getVariable("comment");
 
         Rating rating = new Rating();
         rating.setCustomerId(customerId);
+        rating.setTripId(tripId);
         rating.setNumberOfStars(numberOfStars);
         rating.setComment(comment);
         rating.setSubmitTime(new Date());
