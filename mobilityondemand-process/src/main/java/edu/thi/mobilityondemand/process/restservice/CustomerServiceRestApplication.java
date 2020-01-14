@@ -1,3 +1,7 @@
+/**
+ * @auther Daniel Schels
+ */
+
 package edu.thi.mobilityondemand.process.restservice;
 
 import javax.ws.rs.ApplicationPath;

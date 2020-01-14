@@ -1,3 +1,6 @@
+/**
+ * @auther Daniel Schels
+ */
 package edu.thi.mobilityondemand.process.restservice.exceptions;
 
 public class BadRequestException extends Throwable {

@@ -1,5 +1,5 @@
-/*
- * Daniel Schels
+/**
+ * @auther Daniel Schels
  */
 
 package edu.thi.mobilityondemand.process.message;

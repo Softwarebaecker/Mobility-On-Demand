@@ -1,3 +1,7 @@
+/**
+ * @auther Sandro Käppner
+ */
+
 package edu.thi.mobilityondemand.process.queue;
 
 import org.apache.activemq.ActiveMQConnection;

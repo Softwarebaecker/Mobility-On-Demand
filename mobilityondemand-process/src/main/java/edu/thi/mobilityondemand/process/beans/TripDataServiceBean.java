@@ -1,3 +1,7 @@
+/**
+ * @author Nil Kuchenbäcker
+ */
+
 package edu.thi.mobilityondemand.process.beans;
 
 import edu.thi.mobilityondemand.process.jpa.TripData;

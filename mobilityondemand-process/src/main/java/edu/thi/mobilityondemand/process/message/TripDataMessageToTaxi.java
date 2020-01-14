@@ -1,3 +1,7 @@
+/**
+ * @author Nil Kuchenbäcker
+ */
+
 package edu.thi.mobilityondemand.process.message;
 
 import javax.xml.bind.annotation.XmlRootElement;

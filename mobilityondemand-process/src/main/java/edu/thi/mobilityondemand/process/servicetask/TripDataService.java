@@ -1,3 +1,7 @@
+/**
+ * @author Nil Kuchenbäcker
+ */
+
 package edu.thi.mobilityondemand.process.servicetask;
 
 import edu.thi.mobilityondemand.process.beans.TripDataServiceBean;

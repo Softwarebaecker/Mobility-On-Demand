@@ -1,3 +1,7 @@
+/**
+ * @auther Daniel Schels
+ */
+
 package edu.thi.mobilityondemand.process.jpa;
 
 import java.io.Serializable;

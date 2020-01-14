@@ -1,3 +1,7 @@
+/**
+ * @author Nil Kuchenbäcker
+ */
+
 package edu.thi.mobilityondemand.process.jpa;
 
 import java.io.Serializable;

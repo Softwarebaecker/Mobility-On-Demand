@@ -1,4 +1,6 @@
-// Sandro Käppner
+/**
+ * @auther Sandro Käppner
+ */
 
 package edu.thi.mobilityondemand.process.jpa;
 
