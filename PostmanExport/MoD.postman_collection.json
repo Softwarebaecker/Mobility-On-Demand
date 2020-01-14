@@ -1,0 +1,398 @@
+{
+	"info": {
+		"_postman_id": "6598c548-c504-48cb-81ab-6eb2409b2358",
+		"name": "MoD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Payment - activeMQ",
+			"item": [
+				{
+					"name": "activeQM queue - asProperties",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							},
+							{
+								"key": "purposeH",
+								"value": "spako",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "transaction",
+									"type": "text"
+								},
+								{
+									"key": "datetime",
+									"value": "2020-01-10T09:26:57-02:00",
+									"type": "text"
+								},
+								{
+									"key": "value",
+									"value": "11.92",
+									"type": "text"
+								},
+								{
+									"key": "invoiceid",
+									"value": "MOD_3",
+									"type": "text"
+								},
+								{
+									"key": "body",
+									"value": "-",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "javascript"
+								}
+							}
+						},
+						"url": {
+							"raw": "admin:admin@localhost:8161/api/message/IncomingBankTransaction?type=queue",
+							"host": [
+								"localhost"
+							],
+							"auth": {
+								"user": "admin",
+								"password": "admin"
+							},
+							"port": "8161",
+							"path": [
+								"api",
+								"message",
+								"IncomingBankTransaction"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "queue"
+								}
+							]
+						},
+						"description": "https://docs.camunda.org/manual/7.4/reference/rest/process-definition/"
+					},
+					"response": []
+				},
+				{
+					"name": "(deprecated) activeQM queue - asXMLBody",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/javascript",
+								"type": "text"
+							},
+							{
+								"key": "purposeH",
+								"value": "spako",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"transaction\",\n    \"datetime\": \"2020-01-10T09:26:57-02:00\",\n    \"value\": 37.23,\n    \"purpose\": \"MOD_3\"\n}",
+							"options": {
+								"raw": {
+									"language": "javascript"
+								}
+							}
+						},
+						"url": {
+							"raw": "admin:admin@localhost:8161/api/message/IncomingBankTransaction?type=queue",
+							"host": [
+								"localhost"
+							],
+							"auth": {
+								"user": "admin",
+								"password": "admin"
+							},
+							"port": "8161",
+							"path": [
+								"api",
+								"message",
+								"IncomingBankTransaction"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "queue"
+								}
+							]
+						},
+						"description": "https://docs.camunda.org/manual/7.4/reference/rest/process-definition/"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "CustomerREST",
+			"item": [
+				{
+					"name": "all customers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "purposeH",
+								"type": "text",
+								"value": "spako"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [],
+							"options": {
+								"raw": {
+									"language": "javascript"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/process/resources/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"process",
+								"resources",
+								"customers"
+							]
+						},
+						"description": "https://docs.camunda.org/manual/7.4/reference/rest/process-definition/"
+					},
+					"response": []
+				},
+				{
+					"name": "create customer (Flo Flöte)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "purposeH",
+								"type": "text",
+								"value": "spako"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"Flo\",\n    \"lastname\": \"Flöte\",\n    \"email\": \"flo@demo.org\",\n    \"yearOfBirth\": 1977,\n    \"adress\" : \"Markstrasse 1, Altmannstein\",\n    \"discountGroup\" : \"vip\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/process/resources/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"process",
+								"resources",
+								"customers"
+							]
+						},
+						"description": "https://docs.camunda.org/manual/7.4/reference/rest/process-definition/"
+					},
+					"response": []
+				},
+				{
+					"name": "create customer (Marc Macher)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "purposeH",
+								"type": "text",
+								"value": "spako"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"Marc\",\n    \"lastname\": \"Macher\",\n    \"email\": \"ma@demo.org\",\n    \"yearOfBirth\": 1989,\n    \"adress\" : \"Esplanade 10, 85049 Ingolstadt\",\n    \"discountGroup\" : \"student\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/process/resources/customers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"process",
+								"resources",
+								"customers"
+							]
+						},
+						"description": "https://docs.camunda.org/manual/7.4/reference/rest/process-definition/"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Taxi Messages",
+			"item": [
+				{
+					"name": "sendMessageCustimerEntry",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"messageName\" : \"taxi_starts\",\r\n  \"correlationKeys\" : {\r\n    \"tripDataId\" : {\"value\" : {{tripid}}, \"type\": \"Long\"}\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/engine-rest/message",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"engine-rest",
+								"message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sendMessageCustimerFinished",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"messageName\" : \"taxi_finished\",\r\n  \"correlationKeys\" : {\r\n    \"tripDataId\" : {\"value\" : {{tripid}}, \"type\": \"Long\"}\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/engine-rest/message",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"engine-rest",
+								"message"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "new Order incoming (=creates new MOD Process)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"variables\": {\n\t\t\"customerId\" : {\n\t\t\t\"value\" : 3,\n\t\t\t\"type\": \"Long\"\n\t\t},\n\t\t\"startingpoint\" : {\n\t\t\t\"value\" : \"Ingolstadt\",\n\t\t\t\"type\": \"String\"\n\t\t},\n\t\t\"endpoint\" : {\n\t\t\t\"value\" : \"Berlin\",\n\t\t\t\"type\": \"String\"\n\t\t},\n\t\t\"startDate\" : {\n\t\t\t\"value\" : \"2020-01-11T23:43:00.165+0100\",\n\t\t\t\"type\": \"Date\"\n\t\t}\n\t}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/engine-rest/process-definition/key/Mobility_On_Demand/start",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"process-definition",
+						"key",
+						"Mobility_On_Demand",
+						"start"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
