@@ -3,7 +3,7 @@
  */
 
 
-package edu.thi.mobilityondemand.servicetask;
+package edu.thi.mobilityondemand.process.servicetask;
 
 
 import edu.thi.mobilityondemand.process.message.InvoiceMessage;
@@ -11,13 +11,11 @@ import edu.thi.mobilityondemand.process.queue.MessageQueue;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 
-import javax.jms.Message;
 import javax.jms.TextMessage;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
 import java.io.StringWriter;
-import java.util.Date;
 
 public class SendInvoiceToCustomer implements JavaDelegate {
     @Override

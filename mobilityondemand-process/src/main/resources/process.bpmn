@@ -59,11 +59,11 @@
         <bpmn:targetRef>DataStoreReference_0gzwpwx</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:serviceTask>
-    <bpmn:sendTask id="Task_1v65ro1" name="Notify Customer" camunda:class="edu.thi.mobilityondemand.servicetask.SendConfirmationToCustomer">
+    <bpmn:sendTask id="Task_1v65ro1" name="Notify Customer" camunda:class="edu.thi.mobilityondemand.process.servicetask.SendConfirmationToCustomer">
       <bpmn:incoming>SequenceFlow_0l5ocea</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_119sp5l</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:sendTask id="Task_119g0uu" name="Send Cancellation" camunda:class="edu.thi.mobilityondemand.servicetask.SendCancellationToCustomer">
+    <bpmn:sendTask id="Task_119g0uu" name="Send Cancellation" camunda:class="edu.thi.mobilityondemand.process.servicetask.SendCancellationToCustomer">
       <bpmn:incoming>SequenceFlow_0o8s8b4</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0vbuxc9</bpmn:outgoing>
     </bpmn:sendTask>
@@ -71,7 +71,7 @@
       <bpmn:outgoing>SequenceFlow_06zwlts</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_1xqh2cl" />
     </bpmn:startEvent>
-    <bpmn:serviceTask id="ServiceTask_15rcueg" name="Calculate route" camunda:class="edu.thi.mobilityondemand.servicetask.CalculateRoute">
+    <bpmn:serviceTask id="ServiceTask_15rcueg" name="Calculate route" camunda:class="edu.thi.mobilityondemand.process.servicetask.CalculateRoute">
       <bpmn:incoming>SequenceFlow_05p8fx1</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0l5ocea</bpmn:outgoing>
       <bpmn:property id="Property_1dkm0ds" name="__targetRef_placeholder" />
@@ -88,7 +88,7 @@
     </bpmn:endEvent>
     <bpmn:endEvent id="EndEvent_02pbgyo" name="Trip Finished">
       <bpmn:incoming>SequenceFlow_0yclayf</bpmn:incoming>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_1kb2mkr" messageRef="Message_1tnjbsk" camunda:class="edu.thi.mobilityondemand.servicetask.SendTripFinished" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1kb2mkr" messageRef="Message_1tnjbsk" camunda:class="edu.thi.mobilityondemand.process.servicetask.SendTripFinished" />
     </bpmn:endEvent>
     <bpmn:callActivity id="Task_0pv3dkf" name="Performing Trip" calledElement="Performe_Trip">
       <bpmn:extensionElements>

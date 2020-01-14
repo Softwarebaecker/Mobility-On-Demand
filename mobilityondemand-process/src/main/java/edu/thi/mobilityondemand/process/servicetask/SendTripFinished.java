@@ -1,6 +1,6 @@
 // Sandro Käppner
 
-package edu.thi.mobilityondemand.servicetask;
+package edu.thi.mobilityondemand.process.servicetask;
 
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;

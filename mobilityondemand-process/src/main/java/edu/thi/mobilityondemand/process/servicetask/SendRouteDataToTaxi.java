@@ -1,4 +1,4 @@
-package edu.thi.mobilityondemand.servicetask;
+package edu.thi.mobilityondemand.process.servicetask;
 
 import edu.thi.mobilityondemand.process.message.TripDataMessage;
 import edu.thi.mobilityondemand.process.message.TripDataMessageToTaxi;

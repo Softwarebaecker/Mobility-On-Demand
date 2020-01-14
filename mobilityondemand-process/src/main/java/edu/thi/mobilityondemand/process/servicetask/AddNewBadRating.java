@@ -1,6 +1,6 @@
 // Sandro Käppner
 
-package edu.thi.mobilityondemand.servicetask;
+package edu.thi.mobilityondemand.process.servicetask;
 
 import edu.thi.mobilityondemand.process.beans.RatingServiceBean;
 import edu.thi.mobilityondemand.process.jpa.Rating;
@@ -41,7 +41,7 @@ public class AddNewBadRating implements JavaDelegate, AddNewBadRatingLocal {
     }
 
     private void removeTooOldRatings() {
-        LocalDateTime tooOldLocalDate = LocalDateTime.now().minusSeconds(24);
+        LocalDateTime tooOldLocalDate = LocalDateTime.now().minusHours(24);
         Date tooOldDate = Date.from(tooOldLocalDate.atZone(ZoneId.systemDefault()).toInstant());
         badRatings.removeIf(rating -> rating.getSubmitTime().before(tooOldDate));
     }

@@ -75,7 +75,7 @@
       <bpmn:messageEventDefinition id="MessageEventDefinition_0vuo7ed" messageRef="Message_0tvtuog" />
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0f0gz01" sourceRef="UserTask_0mgvgn7" targetRef="ExclusiveGateway_15fgdhn" />
-    <bpmn:sendTask id="UserTask_0mgvgn7" name="Send to rating aggregator" camunda:class="edu.thi.mobilityondemand.servicetask.SendRatingToAggregator">
+    <bpmn:sendTask id="UserTask_0mgvgn7" name="Send to rating aggregator" camunda:class="edu.thi.mobilityondemand.process.servicetask.SendRatingToAggregator">
       <bpmn:incoming>SequenceFlow_1xuxwhx</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0f0gz01</bpmn:outgoing>
       <bpmn:property id="Property_1n11gpu" name="__targetRef_placeholder" />
@@ -87,7 +87,7 @@
     <bpmn:dataObjectReference id="DataObjectReference_0eva02z" name="Rating ID" dataObjectRef="DataObject_0eafisy" />
     <bpmn:dataObject id="DataObject_0eafisy" />
     <bpmn:sequenceFlow id="SequenceFlow_0xamz0l" sourceRef="startRating" targetRef="SendTask_1mgc4cy" />
-    <bpmn:sendTask id="SendTask_1mgc4cy" name="Send rating request" camunda:class="edu.thi.mobilityondemand.servicetask.SendRatingRequest">
+    <bpmn:sendTask id="SendTask_1mgc4cy" name="Send rating request" camunda:class="edu.thi.mobilityondemand.process.servicetask.SendRatingRequest">
       <bpmn:incoming>SequenceFlow_0xamz0l</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_11u0lr9</bpmn:outgoing>
     </bpmn:sendTask>

@@ -1,6 +1,6 @@
 // Sandro Käppner
 
-package edu.thi.mobilityondemand.servicetask;
+package edu.thi.mobilityondemand.process.servicetask;
 
 import edu.thi.mobilityondemand.process.beans.RatingServiceBean;
 import edu.thi.mobilityondemand.process.jpa.Rating;
