@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1rw2s84" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.5">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1rw2s84" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.4.1">
   <bpmn:collaboration id="Collaboration_03e96t9">
     <bpmn:extensionElements>
       <camunda:properties>
@@ -96,7 +96,7 @@
     </bpmn:callActivity>
     <bpmn:dataObjectReference id="DataObjectReference_15w39s9" name="Trip data" dataObjectRef="DataObject_1wcz5gk" />
     <bpmn:dataObject id="DataObject_1wcz5gk" />
-    <bpmn:callActivity id="Task_0uuqleu" name="Payment" calledElement="process_payment">
+    <bpmn:callActivity id="Task_0uuqleu" name="Payment processing" calledElement="process_payment">
       <bpmn:extensionElements>
         <camunda:in variables="all" />
       </bpmn:extensionElements>
