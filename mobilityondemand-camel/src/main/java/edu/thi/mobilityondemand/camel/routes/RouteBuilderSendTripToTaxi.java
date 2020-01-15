@@ -8,9 +8,7 @@ public class RouteBuilderSendTripToTaxi extends RouteBuilder {
     @Override
     public void configure() throws Exception {
         Endpoint source = endpoint("jms:queue:toTaxi");
-        Endpoint destination = endpoint("file:./CamundaToTaxi");
 
-        //JacksonXMLDataFormat xmlFormater = new JacksonXMLDataFormat();
         JacksonDataFormat json = new JacksonDataFormat();
         json.setPrettyPrint(true);
 
@@ -18,7 +16,8 @@ public class RouteBuilderSendTripToTaxi extends RouteBuilder {
                 .unmarshal().jacksonxml()     //convert from xml to Java Object
                 .marshal(json)
                 .log("new Taxi message")
-                .to(destination);
+                .setHeader("tripId",jsonpath("$.tripId", String.class))
+                .to("file:./CamundaToTaxi?fileName=TripData_${date:now:yyyy-MM-dd_HH-mm-ss-SS}_ID_${header.tripId}");
 
     }
 }
