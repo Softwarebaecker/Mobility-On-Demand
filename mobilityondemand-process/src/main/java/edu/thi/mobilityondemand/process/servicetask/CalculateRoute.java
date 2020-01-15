@@ -4,13 +4,14 @@
 
 package edu.thi.mobilityondemand.process.servicetask;
 
+import edu.thi.mobilityondemand.process.queue.MessageQueue;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.geonames.Toponym;
-import org.geonames.ToponymSearchCriteria;
-import org.geonames.ToponymSearchResult;
-import org.geonames.WebService;
+import org.json.JSONObject;
+
+
+import javax.jms.*;
 
 
 public class CalculateRoute implements JavaDelegate {
@@ -18,9 +19,16 @@ public class CalculateRoute implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception {
         String startingposition = (String) delegateExecution.getVariable("startingpoint");
         String endposition = (String) delegateExecution.getVariable("endpoint");
+        Long tripDataId = (Long) delegateExecution.getVariable("tripDataId");
 
-        GeoPosition geoStartingposition = GeoPosition.getPosition(startingposition);
-        GeoPosition geoEndposition = GeoPosition.getPosition(endposition);
+        GeoPosition geoStartingposition = GeoPosition.getPosition(startingposition, tripDataId);
+        GeoPosition geoEndposition = GeoPosition.getPosition(endposition, tripDataId);
+        if(geoStartingposition == null || geoEndposition == null)
+        {
+            throw new BpmnError("NO_ROUTE_FOUND");
+        }
+
+
         double distance = GeoPosition.distFrom(geoStartingposition, geoEndposition);
 
         if(distance > 1000) {
@@ -36,52 +44,65 @@ public class CalculateRoute implements JavaDelegate {
         public double latitude;
         public double longitude;
 
-        public static GeoPosition getPosition(String cityName) {
-
+        public static GeoPosition getPosition(String cityName, Long tripDataId) {
             GeoPosition position = new GeoPosition();
-            /**
-             * mostly copied from https://www.geonames.org/source-code/
-             */
-            WebService.setUserName("MonD");
-            ToponymSearchCriteria searchCriteria = new ToponymSearchCriteria();
-            searchCriteria.setQ(cityName);
             try {
-                ToponymSearchResult searchResult = WebService.search(searchCriteria);
+                MessageQueue mq = new MessageQueue();
+                Session session = mq.createSession();
+                // temporary destination for receive the message
+                Destination tempDest = session.createTemporaryQueue();
+                Destination destination = session.createQueue("cityToPositionRequest");
+                MessageProducer producer = session.createProducer(destination);
 
+                //create Message
+                Message message = session.createMessage();
+                message.setLongProperty("tripId", tripDataId);
+                message.setStringProperty("location", cityName);
+                message.setJMSCorrelationID(tripDataId.toString());
+                message.setJMSReplyTo(tempDest);
 
-                // get first Position (it is only for dynamic)
-                for (Toponym toponym : searchResult.getToponyms()) {
-                    position.latitude = toponym.getLatitude();
-                    position.longitude = toponym.getLongitude();
-                    System.out.println(toponym.getName() + " " + toponym.getCountryName());
-                    break;
-                    //TODO: remove loop
+                producer.send(message);
+
+                //receive Message
+                MessageConsumer consumer = session.createConsumer(tempDest);
+                Message receiveMessage = consumer.receive();
+                session.close();
+
+                if(receiveMessage instanceof TextMessage) {
+                    String body = ((TextMessage) receiveMessage).getText();
+                    JSONObject jObject = new JSONObject(body);
+                    position.latitude =  jObject.getDouble("latitude");
+                    position.longitude =  jObject.getDouble("longitude");
                 }
+                else {
+                    return null;
+                }
+
+
             }
-            catch (Exception exeption) {
-                System.out.println("Exeption for Postion " + cityName);
-                exeption.printStackTrace();
-                position.latitude = 0;
-                position.longitude = 0;
-            };
+            catch (Exception exception)
+            {
+                return null;
+            }
 
             return position;
+
         }
 
         /**
          * Give back the distance of two GeoPositions
          * Copied from https://stackoverflow.com/questions/837872/calculate-distance-in-meters-when-you-know-longitude-and-latitude-in-java
          *      adapted to Class GeoPosition
-         * @param positinA position A
+         * @param positionA position A
          * @param positionB position B
          * @return distance in kilometers
          */
-        public static double distFrom(GeoPosition positinA, GeoPosition positionB) {
+        public static double distFrom(GeoPosition positionA, GeoPosition positionB) {
             double earthRadius = 6371000; //meters
-            double dLat = Math.toRadians(positionB.latitude - positinA.latitude);
-            double dLng = Math.toRadians(positionB.longitude - positinA.longitude);
+            double dLat = Math.toRadians(positionB.latitude - positionA.latitude);
+            double dLng = Math.toRadians(positionB.longitude - positionA.longitude);
             double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                    Math.cos(Math.toRadians(positinA.latitude)) * Math.cos(Math.toRadians(positionB.latitude)) *
+                    Math.cos(Math.toRadians(positionA.latitude)) * Math.cos(Math.toRadians(positionB.latitude)) *
                             Math.sin(dLng/2) * Math.sin(dLng/2);
             double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
             double dist = (earthRadius * c);
@@ -89,6 +110,7 @@ public class CalculateRoute implements JavaDelegate {
 
             return dist;
         }
+
     }
 
 
