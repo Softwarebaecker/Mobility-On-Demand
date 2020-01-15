@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1rw2s84" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.4.1">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1rw2s84" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.5">
   <bpmn:collaboration id="Collaboration_03e96t9">
     <bpmn:extensionElements>
       <camunda:properties>
@@ -25,8 +25,8 @@
         <bpmn:flowNodeRef>Task_1n234m5</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0fq07gy" name="Route Guidance">
-        <bpmn:flowNodeRef>ServiceTask_15rcueg</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Task_0pv3dkf</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ServiceTask_15rcueg</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>BoundaryEvent_1wh27dx</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0w7mkl1" name="Finance">
@@ -41,7 +41,7 @@
       </bpmn:lane>
     </bpmn:laneSet>
     <bpmn:dataStoreReference id="DataStoreReference_0gzwpwx" name="Trip Data DB" />
-    <bpmn:serviceTask id="Task_1sxkvas" name="Store Order in DB" camunda:expression="${tripDataService.createTrip(execution)}">
+    <bpmn:serviceTask id="Task_1sxkvas" name="Store Trip" camunda:expression="${tripDataService.createTrip(execution)}">
       <bpmn:incoming>SequenceFlow_06zwlts</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_05p8fx1</bpmn:outgoing>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_1oqvnht">
@@ -51,7 +51,7 @@
         <bpmn:targetRef>DataStoreReference_0gzwpwx</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_1n234m5" name="Mark Order Cancelled" camunda:expression="${tripDataService.abortTrip(execution)}">
+    <bpmn:serviceTask id="Task_1n234m5" name="Mark Trip Cancelled" camunda:expression="${tripDataService.abortTrip(execution)}">
       <bpmn:incoming>SequenceFlow_1x24jj6</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0o8s8b4</bpmn:outgoing>
       <bpmn:property id="Property_1jnlyzz" name="__targetRef_placeholder" />
@@ -71,18 +71,6 @@
       <bpmn:outgoing>SequenceFlow_06zwlts</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_1xqh2cl" />
     </bpmn:startEvent>
-    <bpmn:serviceTask id="ServiceTask_15rcueg" name="Calculate route" camunda:class="edu.thi.mobilityondemand.process.servicetask.CalculateRoute">
-      <bpmn:incoming>SequenceFlow_05p8fx1</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0l5ocea</bpmn:outgoing>
-      <bpmn:property id="Property_1dkm0ds" name="__targetRef_placeholder" />
-      <bpmn:dataInputAssociation id="DataInputAssociation_0m5g755">
-        <bpmn:sourceRef>DataObjectReference_15w39s9</bpmn:sourceRef>
-        <bpmn:targetRef>Property_1dkm0ds</bpmn:targetRef>
-      </bpmn:dataInputAssociation>
-      <bpmn:dataOutputAssociation id="DataOutputAssociation_1pomk0x">
-        <bpmn:targetRef>DataObjectReference_15w39s9</bpmn:targetRef>
-      </bpmn:dataOutputAssociation>
-    </bpmn:serviceTask>
     <bpmn:endEvent id="EndEvent_0bntot5" name="Trip aborted">
       <bpmn:incoming>SequenceFlow_0vbuxc9</bpmn:incoming>
     </bpmn:endEvent>
@@ -102,6 +90,9 @@
         <bpmn:sourceRef>DataObjectReference_15w39s9</bpmn:sourceRef>
         <bpmn:targetRef>Property_1i1fmo9</bpmn:targetRef>
       </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_107h0be">
+        <bpmn:targetRef>DataStoreReference_0gzwpwx</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
     </bpmn:callActivity>
     <bpmn:dataObjectReference id="DataObjectReference_15w39s9" name="Trip data" dataObjectRef="DataObject_1wcz5gk" />
     <bpmn:dataObject id="DataObject_1wcz5gk" />
@@ -116,11 +107,10 @@
         <bpmn:sourceRef>DataObjectReference_15w39s9</bpmn:sourceRef>
         <bpmn:targetRef>Property_13fw6bh</bpmn:targetRef>
       </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_13xaq4i">
+        <bpmn:targetRef>DataStoreReference_0gzwpwx</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
     </bpmn:callActivity>
-    <bpmn:boundaryEvent id="BoundaryEvent_1wh27dx" name="Route not found" attachedToRef="ServiceTask_15rcueg">
-      <bpmn:outgoing>SequenceFlow_1x24jj6</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_0verpsh" />
-    </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1x24jj6" sourceRef="BoundaryEvent_1wh27dx" targetRef="Task_1n234m5" />
     <bpmn:sequenceFlow id="SequenceFlow_0l5ocea" sourceRef="ServiceTask_15rcueg" targetRef="Task_1v65ro1" />
     <bpmn:sequenceFlow id="SequenceFlow_05p8fx1" sourceRef="Task_1sxkvas" targetRef="ServiceTask_15rcueg" />
@@ -130,6 +120,22 @@
     <bpmn:sequenceFlow id="SequenceFlow_0yclayf" sourceRef="Task_0uuqleu" targetRef="EndEvent_02pbgyo" />
     <bpmn:sequenceFlow id="SequenceFlow_0o8s8b4" sourceRef="Task_1n234m5" targetRef="Task_119g0uu" />
     <bpmn:sequenceFlow id="SequenceFlow_119sp5l" sourceRef="Task_1v65ro1" targetRef="Task_0pv3dkf" />
+    <bpmn:boundaryEvent id="BoundaryEvent_1wh27dx" name="Route not found" attachedToRef="ServiceTask_15rcueg">
+      <bpmn:outgoing>SequenceFlow_1x24jj6</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0verpsh" />
+    </bpmn:boundaryEvent>
+    <bpmn:serviceTask id="ServiceTask_15rcueg" name="Calculate route" camunda:class="edu.thi.mobilityondemand.process.servicetask.CalculateRoute">
+      <bpmn:incoming>SequenceFlow_05p8fx1</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0l5ocea</bpmn:outgoing>
+      <bpmn:property id="Property_1dkm0ds" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_0m5g755">
+        <bpmn:sourceRef>DataObjectReference_15w39s9</bpmn:sourceRef>
+        <bpmn:targetRef>Property_1dkm0ds</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1pomk0x">
+        <bpmn:targetRef>DataObjectReference_15w39s9</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:serviceTask>
   </bpmn:process>
   <bpmn:message id="Message_1tnjbsk" name="trip_finished" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -310,8 +316,18 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_1i2glpn_di" bpmnElement="DataOutputAssociation_1i2glpn">
         <di:waypoint x="775" y="511" />
-        <di:waypoint x="775" y="915" />
-        <di:waypoint x="630" y="915" />
+        <di:waypoint x="775" y="910" />
+        <di:waypoint x="630" y="910" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_13xaq4i_di" bpmnElement="DataOutputAssociation_13xaq4i">
+        <di:waypoint x="1115" y="625" />
+        <di:waypoint x="1115" y="910" />
+        <di:waypoint x="630" y="910" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_107h0be_di" bpmnElement="DataOutputAssociation_107h0be">
+        <di:waypoint x="965" y="786" />
+        <di:waypoint x="965" y="910" />
+        <di:waypoint x="630" y="910" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
