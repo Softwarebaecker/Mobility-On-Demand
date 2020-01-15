@@ -18,17 +18,8 @@ public class RouteBuilderWeatherToCamunda extends RouteBuilder {
          */
         from(source)
             .setHeader(Exchange.HTTP_METHOD, simple("POST"))
-//            .setHeader(Exchange.CONTENT_TYPE, constant("application/json"))
-//            .log("RawEvent: ${body}")
-//            .setBody(String("{\"messageName\" : \"weather_alert\"}"))
-            .process(new Processor() {
-                @Override
-                public void process(Exchange exchange) throws Exception {
-                    String body = "{ \"name\" : \"weather_alert\" }";
-                    exchange.getOut().setHeader(Exchange.CONTENT_TYPE, "application/json");
-                    exchange.getOut().setBody(body);
-                }
-            })
+            .setHeader(Exchange.CONTENT_TYPE, simple("application/json"))
+            .setBody(simple("{ \"name\" : \"weather_alert\" }"))
             .log("new Weather Alert")
             .to(destination);
     }
