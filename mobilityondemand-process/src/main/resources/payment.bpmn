@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1go6lxw" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1go6lxw" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.5">
   <bpmn:collaboration id="Collaboration_1eltm52">
     <bpmn:participant id="Participant_1ht1lbv" name="Payment" processRef="process_payment" />
     <bpmn:participant id="Participant_0inpe42" name="Customer" />
@@ -108,7 +108,7 @@
       <bpmn:extensionElements>
         <camunda:executionListener expression="${execution.setVariable(&#34;discountGroup&#34;, customer_obj.getDiscountGroup())}" event="end" />
       </bpmn:extensionElements>
-      <bpmn:incoming>SequenceFlow_1lq4s0y</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0q0yakf</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0vd9xzh</bpmn:outgoing>
       <bpmn:property id="Property_171pdib" name="__targetRef_placeholder" />
       <bpmn:dataInputAssociation id="DataInputAssociation_10yn8ww">
@@ -141,12 +141,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_0eobkm5" sourceRef="BusinessRuleTask_1ibxdtu" targetRef="ServiceTask_1jrpiya" />
     <bpmn:sequenceFlow id="SequenceFlow_0s398h3" sourceRef="ServiceTask_1jrpiya" targetRef="Task_1w6r59w" />
     <bpmn:sequenceFlow id="SequenceFlow_0vd9xzh" sourceRef="ServiceTask_0yz7kln" targetRef="BusinessRuleTask_1ibxdtu" />
-    <bpmn:sequenceFlow id="SequenceFlow_0q0yakf" sourceRef="StartEvent_07o0ec9" targetRef="Task_0i5uxwg" />
-    <bpmn:userTask id="Task_0i5uxwg">
-      <bpmn:incoming>SequenceFlow_0q0yakf</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1lq4s0y</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:sequenceFlow id="SequenceFlow_1lq4s0y" sourceRef="Task_0i5uxwg" targetRef="ServiceTask_0yz7kln" />
+    <bpmn:sequenceFlow id="SequenceFlow_0q0yakf" sourceRef="StartEvent_07o0ec9" targetRef="ServiceTask_0yz7kln" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1eltm52">
@@ -353,16 +348,7 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0q0yakf_di" bpmnElement="SequenceFlow_0q0yakf">
         <di:waypoint x="286" y="1010" />
-        <di:waypoint x="330" y="1010" />
-        <di:waypoint x="330" y="1120" />
-        <di:waypoint x="380" y="1120" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="UserTask_0uqsc0a_di" bpmnElement="Task_0i5uxwg">
-        <dc:Bounds x="380" y="1080" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_1lq4s0y_di" bpmnElement="SequenceFlow_1lq4s0y">
-        <di:waypoint x="430" y="1080" />
-        <di:waypoint x="430" y="1050" />
+        <di:waypoint x="380" y="1010" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
