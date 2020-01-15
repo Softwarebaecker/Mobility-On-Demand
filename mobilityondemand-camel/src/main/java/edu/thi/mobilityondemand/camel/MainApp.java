@@ -39,8 +39,9 @@ public class MainApp extends Main {
         addRouteBuilder(new RouteBuilderTaxiToCamunda());
         addRouteBuilder(new RouteBuilderWeatherToCamunda());
         addRouteBuilder(new RouteBuilderCamundaToInvoicePrinter());
-        addRouteBuilder(new RouteBuilderBankToCamunda());
+        addRouteBuilder(new RouteBuilderPaymentFromQueueToCamunda());
         addRouteBuilder(new RouteBuilderRatingToCamunda());
+        addRouteBuilder(new RouteBuilderPaymentFromFilesystemToQueue());
     }
 
 }
