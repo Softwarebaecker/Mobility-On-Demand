@@ -1,16 +1,10 @@
 /*
- * Daniel Schels
+ * Author: Daniel Schels
  * 
  * objectives: Camel Route
  * - converting xml to json
  */
 
-/*
- * Daniel Schels
- * 
- * objectives: Camel Route
- * - xml to json transformation
- */
 
 package edu.thi.mobilityondemand.camel.routes;
 

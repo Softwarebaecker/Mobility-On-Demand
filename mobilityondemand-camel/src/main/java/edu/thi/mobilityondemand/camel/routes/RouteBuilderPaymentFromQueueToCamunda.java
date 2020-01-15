@@ -1,5 +1,5 @@
 /*
- * Daniel Schels
+ * Author: Daniel Schels
  * 
  * objectives: Camel Route
  * - calling Camel Processors

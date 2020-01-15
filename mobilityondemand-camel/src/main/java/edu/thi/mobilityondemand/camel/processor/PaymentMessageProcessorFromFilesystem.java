@@ -1,5 +1,5 @@
 /*
- * Daniel Schels
+ * Author: Daniel Schels
  * 
  * objectives: Camel Processor 
  * - with integration of backend system with specific behaviour -> customized parser

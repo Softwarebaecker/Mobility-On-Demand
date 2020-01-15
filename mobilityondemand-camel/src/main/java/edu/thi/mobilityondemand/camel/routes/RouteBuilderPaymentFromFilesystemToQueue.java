@@ -1,5 +1,5 @@
 /*
- * Daniel Schels
+ * Author: Daniel Schels
  * 
  * objectives: Camel Route
  * - import data from file system to queue (= Simulates message of external backend system)

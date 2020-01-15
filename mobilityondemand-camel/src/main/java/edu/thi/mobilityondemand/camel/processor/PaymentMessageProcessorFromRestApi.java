@@ -1,5 +1,5 @@
 /*
- * Daniel Schels
+ * Author: Daniel Schels
  * 
  * objectives: Camel Processor 
  * - incoming messages via activeMQ REST e.g. Postman (accessing header properties)
