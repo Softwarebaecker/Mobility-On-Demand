@@ -5,21 +5,18 @@ import org.apache.camel.Processor;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import static org.apache.camel.builder.Builder.constant;
-import static org.apache.camel.builder.SimpleBuilder.simple;
-
 public class GeoNameProcessBody implements Processor {
     @Override
     public void process(Exchange exchange) throws Exception {
         String body = exchange.getIn().getBody(String.class);
-        Long tripId = Long.valueOf((String) exchange.getProperty("tripId"));
+        Long tripId = (Long) exchange.getProperty("tripId");
         String location = (String) exchange.getProperty("location");
 
         JSONObject jObject = new JSONObject(body);
         JSONArray geonames = jObject.getJSONArray("geonames");
         if (!geonames.isEmpty()) {
-            Double latitude = geonames.getJSONObject(0).getDouble("lat");
-            Double longitude = geonames.getJSONObject(0).getDouble("lng");
+            double latitude = geonames.getJSONObject(0).getDouble("lat");
+            double longitude = geonames.getJSONObject(0).getDouble("lng");
             System.out.println("tripId = " + tripId);
             System.out.println("location = " + location);
             System.out.println("latitude = " + latitude);
@@ -31,8 +28,8 @@ public class GeoNameProcessBody implements Processor {
                     + "\"latitude\":" + latitude + ","
                     + "\"longitude\":" + longitude
                     + "}";
-            exchange.getOut().setHeader(Exchange.CONTENT_TYPE, "application/json");
-            exchange.getOut().setBody(newBody);
+            exchange.getMessage().setHeader(Exchange.CONTENT_TYPE, "application/json");
+            exchange.getMessage().setBody(newBody);
 
         }
     }
