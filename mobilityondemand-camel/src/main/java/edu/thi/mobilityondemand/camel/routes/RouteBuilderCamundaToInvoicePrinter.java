@@ -1,15 +1,17 @@
 /*
- * Daniel Schels
+ * Author: Daniel Schels
+ * 
+ * objectives: Camel Route
+ * - converting xml to json
  */
+
 
 package edu.thi.mobilityondemand.camel.routes;
 
 import org.apache.camel.Endpoint;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.jackson.JacksonDataFormat;
-import org.apache.camel.component.jacksonxml.JacksonXMLDataFormat;
 
-import edu.thi.mobilityondemand.camel.processor.PrintInvoiceProcessBody;
 
 public class RouteBuilderCamundaToInvoicePrinter  extends RouteBuilder{
 
@@ -25,7 +27,6 @@ public class RouteBuilderCamundaToInvoicePrinter  extends RouteBuilder{
 		        .unmarshal().jacksonxml()     //convert from xml to Java Object
 		        .marshal(json)
         		.log("New Invoice delivered")
-                //.process(new PrintInvoiceProcessBody()) 	// optional: pdf printer?
                 .to(destination);
 
     }

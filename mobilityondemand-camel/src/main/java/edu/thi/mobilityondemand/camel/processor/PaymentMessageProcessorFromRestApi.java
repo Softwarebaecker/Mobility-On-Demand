@@ -1,9 +1,17 @@
+/*
+ * Author: Daniel Schels
+ * 
+ * objectives: Camel Processor 
+ * - incoming messages via activeMQ REST e.g. Postman (accessing header properties)
+ * - building body of Message Correlation
+ */
+
 package edu.thi.mobilityondemand.camel.processor;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 
-public class BankToCamundaProcessBody implements Processor {
+public class PaymentMessageProcessorFromRestApi implements Processor {
 
 	@Override
 	public void process(Exchange exchange) throws Exception {
@@ -24,7 +32,7 @@ public class BankToCamundaProcessBody implements Processor {
               +           	"\"type\":\"String\"" + "}" 
               +     "},"
               +     "\"processVariables\":{" 
-              +     	"\"price\":{"
+              +     	"\"transactionValue\":{"
               +             "\"value\":" + transaction_value + "," 
               +             "\"type\":\"Double\"" + "}" 
               +     "}," 

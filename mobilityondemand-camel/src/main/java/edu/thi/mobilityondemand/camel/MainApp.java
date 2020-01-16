@@ -33,13 +33,13 @@ public class MainApp extends Main {
     }
 
     private void createRouteBuilder() {
-
         addRouteBuilder(RouteBuilderCamundaToCustomer.class);
         addRouteBuilder(RouteBuilderSendTripToTaxi.class);
         addRouteBuilder(RouteBuilderTaxiToCamunda.class);
         addRouteBuilder(RouteBuilderWeatherToCamunda.class);
         addRouteBuilder(RouteBuilderCamundaToInvoicePrinter.class);
-        addRouteBuilder(RouteBuilderBankToCamunda.class);
+        addRouteBuilder(RouteBuilderPaymentFromQueueToCamunda.class);
+        addRouteBuilder(RouteBuilderPaymentFromFilesystemToQueue.class);
         addRouteBuilder(RouteBuilderRatingToCamunda.class);
         addRouteBuilder(RouteBuilderGeoName.class);
     }
