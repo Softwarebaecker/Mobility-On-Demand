@@ -4,7 +4,7 @@
     <bpmn:participant id="Participant_1ht1lbv" name="Payment processing" processRef="process_payment" />
     <bpmn:participant id="Participant_0inpe42" name="Customer" />
     <bpmn:participant id="Participant_040c45r" name="Financial Account Administration" />
-    <bpmn:participant id="Participant_03pn58p" name="Create invoice" processRef="Process_create_invoice" />
+    <bpmn:participant id="Participant_03pn58p" name="Invoice creation" processRef="Process_create_invoice" />
     <bpmn:messageFlow id="MessageFlow_0h8jhse" name="Send invoice to customer" sourceRef="Task_1nb22bb" targetRef="Participant_0inpe42" />
     <bpmn:messageFlow id="MessageFlow_02325q4" sourceRef="Participant_040c45r" targetRef="StartEvent_1bkubd0" />
   </bpmn:collaboration>
@@ -19,7 +19,7 @@
     </bpmn:startEvent>
     <bpmn:dataObjectReference id="DataObjectReference_028f2ph" name="Trip data" dataObjectRef="DataObject_0sp1q7s" />
     <bpmn:dataObject id="DataObject_0sp1q7s" />
-    <bpmn:callActivity id="Task_0z8w4cq" name="Invoice Creation" calledElement="Process_create_invoice">
+    <bpmn:callActivity id="Task_0z8w4cq" name="Invoice creation" calledElement="Process_create_invoice">
       <bpmn:extensionElements>
         <camunda:out source="Invoice" target="Invoice" />
         <camunda:in variables="all" />
