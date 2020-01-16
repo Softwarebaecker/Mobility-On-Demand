@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0q0ix8k" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0q0ix8k" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.5">
   <bpmn:collaboration id="Collaboration_0941v4m">
     <bpmn:participant id="Participant_1b1my3t" name="Rating" processRef="Rating" />
     <bpmn:participant id="Participant_1y65uua" name="Customer" />
@@ -118,6 +118,71 @@
       <bpmn:messageEventDefinition id="MessageEventDefinition_04jgz4p" messageRef="Message_0k8objb" />
     </bpmn:intermediateCatchEvent>
     <bpmn:userTask id="Task_0w9yn1l" name="Analyse bad ratings" camunda:candidateGroups="customerService">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="ratingId1" label="Rating 1 ID" type="long" defaultValue="${badRatings[0].getRatingId()}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="tripId1" label="Rating 1 Trip ID" type="long" defaultValue="${badRatings[0].getTripId()}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="customerId1" label="Rating 1 Customer ID" type="long" defaultValue="${badRatings[0].getCustomerId()}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="submitTime1" label="Rating 1 Submit Time" type="date" defaultValue="${badRatings[0].getSubmitTime()}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="numberOfStars1" label="Rating 1 Number of Stars" type="long" defaultValue="${badRatings[0].getNumberOfStars()}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="comment1" label="Rating 1 comment" type="string" defaultValue="${badRatings[0].getComment()}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="ratingId2" label="Rating 2 ID" type="long" defaultValue="${badRatings[1].getRatingId()}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="tripId2" label="Rating 2 Trip ID" type="long" defaultValue="${badRatings[1].getTripId()}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="customerId2" label="Rating 2 Customer ID" type="long" defaultValue="${badRatings[1].getCustomerId()}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="submitTime2" label="Rating 2 Submit Time" type="date" defaultValue="${badRatings[1].getSubmitTime()}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="numberOfStars2" label="Rating 2 Number of Stars" type="long" defaultValue="${badRatings[1].getNumberOfStars()}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="comment2" label="Rating 2 comment" type="string" defaultValue="${badRatings[1].getComment()}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="actionTaken" label="Action taken" type="string" />
+        </camunda:formData>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1vco6no</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0z3ijip</bpmn:outgoing>
     </bpmn:userTask>
