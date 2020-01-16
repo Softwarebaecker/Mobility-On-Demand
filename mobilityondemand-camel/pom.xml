@@ -113,6 +113,10 @@
       <artifactId>json</artifactId>
       <version>20190722</version>
     </dependency>
+    <dependency>
+        <groupId>org.apache.activemq</groupId>
+        <artifactId>activemq-all</artifactId>
+    </dependency>
 
   </dependencies>
 
