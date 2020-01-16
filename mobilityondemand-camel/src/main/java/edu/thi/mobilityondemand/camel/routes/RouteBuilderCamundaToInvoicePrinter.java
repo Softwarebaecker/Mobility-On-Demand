@@ -18,7 +18,6 @@ public class RouteBuilderCamundaToInvoicePrinter  extends RouteBuilder{
 	@Override
 	public void configure() throws Exception {
 		Endpoint source = endpoint("jms:queue:InvoicePrintingQueue");
-        Endpoint destination = endpoint("file:./InvoicesPrinted");
 
         JacksonDataFormat json = new JacksonDataFormat();
         json.setPrettyPrint(true);
@@ -27,7 +26,7 @@ public class RouteBuilderCamundaToInvoicePrinter  extends RouteBuilder{
 		        .unmarshal().jacksonxml()     //convert from xml to Java Object
 		        .marshal(json)
         		.log("New Invoice delivered")
-                .to(destination);
+                .to("file:./InvoicesPrinted?fileName=Invoice_${date:now:yyyy-MM-dd_HH-mm-ss-SS}.txt");
 
     }
 	

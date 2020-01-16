@@ -18,17 +18,17 @@ public class RouteBuilderCamundaToCustomer extends RouteBuilder {
                     .unmarshal().jacksonxml()     //convert from xml to Java Object
                     .marshal(json)
                     .log("New Trip Confirmation Message to Customer ${header.customerId}")
-                    .to("file:./CamundaToCustomersMessages?fileName=TripConfirmation_${date:now:yyyy-MM-dd_HH-mm-ss-SS}_Customer_${header.customerId}")
+                    .to("file:./CamundaToCustomersMessages?fileName=TripConfirmation_${date:now:yyyy-MM-dd_HH-mm-ss-SS}_Customer_${header.customerId}.txt")
                 .when(xpath("/cancellationMessage"))
                     .unmarshal().jacksonxml()     //convert from xml to Java Object
                     .marshal(json)
                     .log("New Cancellation Message to Customer ${header.customerId}")
-                    .to("file:./CamundaToCustomersMessages?fileName=CancellationMessage${date:now:yyyy-MM-dd_HH-mm-ss-SS}_Customer_${header.customerId}")
+                    .to("file:./CamundaToCustomersMessages?fileName=CancellationMessage${date:now:yyyy-MM-dd_HH-mm-ss-SS}_Customer_${header.customerId}.txt")
                 .when(xpath("/ratingRequestMessage"))
                     .unmarshal().jacksonxml()     //convert from xml to Java Object
                     .marshal(json)
                     .log("New Rating Request to Customer ${header.customerId}")
-                    .to("file:./CamundaToCustomersMessages?fileName=RatingRequestMessage${date:now:yyyy-MM-dd_HH-mm-ss-SS}_Customer_${header.customerId}")
+                    .to("file:./CamundaToCustomersMessages?fileName=RatingRequestMessage${date:now:yyyy-MM-dd_HH-mm-ss-SS}_Customer_${header.customerId}.txt")
                 .otherwise()
                     .log("unknown Message: ${body}");
     }
