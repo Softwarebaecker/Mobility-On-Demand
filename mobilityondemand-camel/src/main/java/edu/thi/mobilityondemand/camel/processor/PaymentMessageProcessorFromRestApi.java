@@ -32,7 +32,7 @@ public class PaymentMessageProcessorFromRestApi implements Processor {
               +           	"\"type\":\"String\"" + "}" 
               +     "},"
               +     "\"processVariables\":{" 
-              +     	"\"price\":{"
+              +     	"\"transactionValue\":{"
               +             "\"value\":" + transaction_value + "," 
               +             "\"type\":\"Double\"" + "}" 
               +     "}," 
