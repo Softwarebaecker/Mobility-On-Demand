@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1rw2s84" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.4.1">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1rw2s84" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.5">
   <bpmn:collaboration id="Collaboration_03e96t9">
     <bpmn:extensionElements>
       <camunda:properties>
@@ -56,10 +56,10 @@
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_119sp5l</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0u8qoiu</bpmn:outgoing>
-      <bpmn:property id="Property_1i1fmo9" name="__targetRef_placeholder" />
-      <bpmn:dataInputAssociation id="DataInputAssociation_18hc39o">
+      <bpmn:property id="Property_1tq6huv" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_0ssvtzy">
         <bpmn:sourceRef>DataObjectReference_15w39s9</bpmn:sourceRef>
-        <bpmn:targetRef>Property_1i1fmo9</bpmn:targetRef>
+        <bpmn:targetRef>Property_1tq6huv</bpmn:targetRef>
       </bpmn:dataInputAssociation>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_107h0be">
         <bpmn:targetRef>DataStoreReference_0gzwpwx</bpmn:targetRef>
@@ -71,10 +71,10 @@
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0u8qoiu</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0yclayf</bpmn:outgoing>
-      <bpmn:property id="Property_13fw6bh" name="__targetRef_placeholder" />
-      <bpmn:dataInputAssociation id="DataInputAssociation_0urnhqn">
+      <bpmn:property id="Property_15tzzp1" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_1gm5iqz">
         <bpmn:sourceRef>DataObjectReference_15w39s9</bpmn:sourceRef>
-        <bpmn:targetRef>Property_13fw6bh</bpmn:targetRef>
+        <bpmn:targetRef>Property_15tzzp1</bpmn:targetRef>
       </bpmn:dataInputAssociation>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_13xaq4i">
         <bpmn:targetRef>DataStoreReference_0gzwpwx</bpmn:targetRef>
@@ -100,7 +100,7 @@
       <bpmn:incoming>SequenceFlow_0o8s8b4</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0vbuxc9</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:startEvent id="StartEvent_189kevz" name="Receiving Order">
+    <bpmn:startEvent id="StartEvent_189kevz" name="Receiving Order" camunda:asyncBefore="true">
       <bpmn:outgoing>SequenceFlow_06zwlts</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_1xqh2cl" />
     </bpmn:startEvent>
@@ -320,17 +320,6 @@
         <di:waypoint x="589" y="825" />
         <di:waypoint x="591" y="545" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataInputAssociation_0urnhqn_di" bpmnElement="DataInputAssociation_0urnhqn">
-        <di:waypoint x="605" y="545" />
-        <di:waypoint x="605" y="715" />
-        <di:waypoint x="1060" y="715" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataInputAssociation_18hc39o_di" bpmnElement="DataInputAssociation_18hc39o">
-        <di:waypoint x="620" y="545" />
-        <di:waypoint x="620" y="790" />
-        <di:waypoint x="960" y="790" />
-        <di:waypoint x="960" y="836" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="CallActivity_1vg8cax_di" bpmnElement="Task_0uuqleu">
         <dc:Bounds x="1065" y="675" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -394,6 +383,17 @@
       <bpmndi:BPMNEdge id="SequenceFlow_0vykmlp_di" bpmnElement="SequenceFlow_0vykmlp">
         <di:waypoint x="1320" y="630" />
         <di:waypoint x="1347" y="630" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_1gm5iqz_di" bpmnElement="DataInputAssociation_1gm5iqz">
+        <di:waypoint x="605" y="545" />
+        <di:waypoint x="605" y="710" />
+        <di:waypoint x="1065" y="710" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_0ssvtzy_di" bpmnElement="DataInputAssociation_0ssvtzy">
+        <di:waypoint x="605" y="545" />
+        <di:waypoint x="605" y="710" />
+        <di:waypoint x="950" y="710" />
+        <di:waypoint x="950" y="836" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
