@@ -135,11 +135,6 @@
               <camunda:constraint name="readonly" />
             </camunda:validation>
           </camunda:formField>
-          <camunda:formField id="submitTime1" label="Rating 1 Submit Time" type="date" defaultValue="${badRatings[0].getSubmitTime()}">
-            <camunda:validation>
-              <camunda:constraint name="readonly" />
-            </camunda:validation>
-          </camunda:formField>
           <camunda:formField id="numberOfStars1" label="Rating 1 Number of Stars" type="long" defaultValue="${badRatings[0].getNumberOfStars()}">
             <camunda:validation>
               <camunda:constraint name="readonly" />
@@ -161,11 +156,6 @@
             </camunda:validation>
           </camunda:formField>
           <camunda:formField id="customerId2" label="Rating 2 Customer ID" type="long" defaultValue="${badRatings[1].getCustomerId()}">
-            <camunda:validation>
-              <camunda:constraint name="readonly" />
-            </camunda:validation>
-          </camunda:formField>
-          <camunda:formField id="submitTime2" label="Rating 2 Submit Time" type="date" defaultValue="${badRatings[1].getSubmitTime()}">
             <camunda:validation>
               <camunda:constraint name="readonly" />
             </camunda:validation>
