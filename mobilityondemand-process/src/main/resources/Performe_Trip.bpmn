@@ -85,7 +85,7 @@
       <bpmn:sequenceFlow id="SequenceFlow_1s0lh2k" sourceRef="SendTask_0uajjmk" targetRef="EndEvent_046geg9" />
       <bpmn:sequenceFlow id="SequenceFlow_0wgljn7" sourceRef="StartEvent_1v2lt4r" targetRef="ServiceTask_08cqn85" />
       <bpmn:sequenceFlow id="SequenceFlow_1qomf7k" sourceRef="ServiceTask_08cqn85" targetRef="SendTask_0uajjmk" />
-      <bpmn:userTask id="ServiceTask_08cqn85" name="Insert route">
+      <bpmn:userTask id="ServiceTask_08cqn85" name="Insert route" camunda:candidateGroups="routeGuidance">
         <bpmn:extensionElements>
           <camunda:formData>
             <camunda:formField id="startingpoint" label="Start Point" type="string" defaultValue="${startingpoint}">
