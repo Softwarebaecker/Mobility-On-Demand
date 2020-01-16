@@ -11,6 +11,7 @@ package edu.thi.mobilityondemand.camel.routes;
 import org.apache.camel.Endpoint;
 import org.apache.camel.builder.RouteBuilder;
 
+import edu.thi.mobilityondemand.camel.processor.PaymentMessageProcessorCorrelation;
 import edu.thi.mobilityondemand.camel.processor.PaymentMessageProcessorFromFilesystem;
 import edu.thi.mobilityondemand.camel.processor.PaymentMessageProcessorFromRestApi;
 
@@ -30,12 +31,15 @@ public class RouteBuilderPaymentFromQueueToCamunda extends RouteBuilder {
 				.when(header("CamelFileName").isNotNull())
 					.log("Received via Backend integration (File System)")
 					.process(new PaymentMessageProcessorFromFilesystem())
-					.to(destination) 
+				.endChoice()
 				.otherwise()
 					.log("Received via REST Frontend (Postman)")
 					.process(new PaymentMessageProcessorFromRestApi())
-				    .to(destination)
-					;
+				.endChoice()
+			.end()
+		   		.process(new PaymentMessageProcessorCorrelation())
+		   		.to(destination)
+		   ;
 
     }
 }
