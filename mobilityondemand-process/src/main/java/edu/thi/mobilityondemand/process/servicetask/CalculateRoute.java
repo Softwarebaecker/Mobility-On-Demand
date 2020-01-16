@@ -71,7 +71,6 @@ public class CalculateRoute implements JavaDelegate {
                 System.out.println("New Message: " + receiveMessage.toString());
                 if(receiveMessage instanceof TextMessage) {
                     String body = ((TextMessage) receiveMessage).getText();
-                    System.out.println("body = " + body);
                     GeoDataMessage responseData = GeoDataMessage.fromString(body);
                     position.latitude =  responseData.getLatitude();
                     position.longitude =  responseData.getLongitude();
