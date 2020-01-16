@@ -1,3 +1,7 @@
+/**
+ * @author Nil Kuchenbäcker
+ */
+
 package edu.thi.mobilityondemand.camel.routes;
 
 import org.apache.camel.Endpoint;

@@ -4,11 +4,11 @@
 
 package edu.thi.mobilityondemand.process.servicetask;
 
+import edu.thi.mobilityondemand.process.message.GeoDataMessage;
 import edu.thi.mobilityondemand.process.queue.MessageQueue;
 import org.camunda.bpm.engine.delegate.BpmnError;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
-import org.json.JSONObject;
 
 
 import javax.jms.*;
@@ -68,13 +68,15 @@ public class CalculateRoute implements JavaDelegate {
                 Message receiveMessage = consumer.receive();
                 session.close();
 
+                System.out.println("New Message: " + receiveMessage.toString());
                 if(receiveMessage instanceof TextMessage) {
                     String body = ((TextMessage) receiveMessage).getText();
-                    JSONObject jObject = new JSONObject(body);
-                    position.latitude =  jObject.getDouble("latitude");
-                    position.longitude =  jObject.getDouble("longitude");
+                    GeoDataMessage responseData = GeoDataMessage.fromString(body);
+                    position.latitude =  responseData.getLatitude();
+                    position.longitude =  responseData.getLongitude();
                 }
                 else {
+                    System.out.println("Catcher: Calculate Route no Text Message");
                     return null;
                 }
 
@@ -82,6 +84,8 @@ public class CalculateRoute implements JavaDelegate {
             }
             catch (Exception exception)
             {
+                System.out.println("Catcher: Calculate Route");
+                exception.printStackTrace();
                 return null;
             }
 

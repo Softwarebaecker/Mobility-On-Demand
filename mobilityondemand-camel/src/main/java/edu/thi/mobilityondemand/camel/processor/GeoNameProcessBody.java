@@ -1,3 +1,7 @@
+/**
+ * @author: Nil Kuchenbäcker
+ */
+
 package edu.thi.mobilityondemand.camel.processor;
 
 import org.apache.camel.Exchange;
