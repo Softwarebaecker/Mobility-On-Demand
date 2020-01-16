@@ -3,7 +3,6 @@
  * 
  * objectives: Camel Processor 
  * - with integration of backend system with specific behaviour -> customized parser
- * - building body of Message Correlation
  */
 
 package edu.thi.mobilityondemand.camel.processor;
@@ -37,24 +36,9 @@ public class PaymentMessageProcessorFromFilesystem implements Processor {
 		else
 			System.out.println("Payment from _filesystem_ could not be parsed -  invoiceid and/or value missing");
 		
-		exchange.getOut().setHeader(Exchange.HTTP_METHOD, "POST");
-		exchange.getOut().setHeader(Exchange.CONTENT_TYPE, "application/json");
-		exchange.getOut().setBody(
-			   "{" 
-              +   	"\"messageName\":\"IncomingBankTransaction\","
-	          +	  	"\"correlationKeys\":{" 
-              +       	"\"invoiceid\":{"
-              +          	"\"value\": \"" + transaction_invoiceid + "\"," 
-              +           	"\"type\":\"String\"" + "}" 
-              +     "},"
-              +     "\"processVariables\":{" 
-              +     	"\"transactionValue\":{"
-              +             "\"value\":" + transaction_value + "," 
-              +             "\"type\":\"Double\"" + "}" 
-              +     "}," 
-              +     "\"resultEnabled\":true"
-              + "}"
-              );
+
+		exchange.setProperty("transaction_invoiceid", transaction_invoiceid);
+		exchange.setProperty("transaction_value", transaction_value);
 
 	}
 }
