@@ -6,19 +6,19 @@ package edu.thi.mobilityondemand.process.jpa;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@NamedQuery(name = TripData.searchCustomerTrips,
-        query = "SELECT t FROM TripData t WHERE t.customerid=?1")
+@NamedQueries({
+    @NamedQuery(name = TripData.searchCustomerTrips,
+        query = "SELECT t FROM TripData t WHERE t.customerid=?1"),
+    @NamedQuery(name = TripData.findAllTrips,
+        query = "SELECT t FROM TripData t")
+})
 @Table(name = "TripData")
 public class TripData implements Serializable {
     public final static String searchCustomerTrips = "TripData.searchCustomerTrips";
+    public final static String findAllTrips = "TripData.findAllTrips";
 
     private static final long serialVersionUID = 1L;
 

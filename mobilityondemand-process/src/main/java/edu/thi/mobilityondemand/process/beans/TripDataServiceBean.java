@@ -29,6 +29,13 @@ public class TripDataServiceBean implements TripDataServiceBeanRemote, TripDataS
         return this.em.find(TripData.class, id);
     }
 
+    public List<TripData> findAllTrips() {
+        List<TripData> trips = null;
+        TypedQuery<TripData> query = em.createNamedQuery(TripData.findAllTrips, TripData.class);
+        trips = query.getResultList();
+        return trips;
+    }
+
     public List<TripData> searchCustomerTrips(Long customerid) {
         List<TripData> trips = null;
         TypedQuery<TripData> query = em.createNamedQuery(TripData.searchCustomerTrips, TripData.class);
