@@ -1,5 +1,5 @@
 /**
- * auto generated 
+ * @author Daniel Schels
  */
 
 package edu.thi.mobilityondemand.process.beans;
