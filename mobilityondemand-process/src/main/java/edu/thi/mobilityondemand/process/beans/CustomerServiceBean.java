@@ -1,4 +1,6 @@
 /**
+ * @author Daniel Schels
+ * 
  * Based on IIS Script WS2019/20 (by Volker Stiehl)
  */
 
@@ -15,9 +17,6 @@ import javax.persistence.TypedQuery;
 
 import edu.thi.mobilityondemand.process.jpa.Customer;
 
-/**
- * Session Bean implementation class CustomerServiceBean
- */
 @Stateless
 @Named
 @LocalBean

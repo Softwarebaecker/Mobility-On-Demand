@@ -1,4 +1,6 @@
 /**
+ * @author Daniel Schels
+ * 
  * Based on IIS Script WS2019/20 (by Volker Stiehl)
  */
 
