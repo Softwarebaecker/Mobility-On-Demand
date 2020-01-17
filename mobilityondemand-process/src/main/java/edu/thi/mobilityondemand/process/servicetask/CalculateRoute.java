@@ -66,7 +66,6 @@ public class CalculateRoute implements JavaDelegate {
                 Message receiveMessage = consumer.receive();
                 session.close();
 
-                System.out.println("New Message: " + receiveMessage.toString());
                 if (receiveMessage instanceof TextMessage) {
                     String body = ((TextMessage) receiveMessage).getText();
                     GeoDataMessage responseData = GeoDataMessage.fromString(body);

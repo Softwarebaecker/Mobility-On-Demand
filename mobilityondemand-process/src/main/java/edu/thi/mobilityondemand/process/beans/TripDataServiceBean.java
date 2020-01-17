@@ -43,4 +43,8 @@ public class TripDataServiceBean implements TripDataServiceBeanRemote, TripDataS
         trips = query.getResultList();
         return trips;
     }
+
+    public void update(TripData tripData) {
+        em.merge(tripData);
+    }
 }
