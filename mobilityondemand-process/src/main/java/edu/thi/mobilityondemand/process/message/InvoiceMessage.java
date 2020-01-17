@@ -16,12 +16,12 @@ public class InvoiceMessage implements Serializable {
     private String product;
     private String departure;
     private String destination;
-    private Double distance;
-    private Double amount;
+    private Double distanceKilometres;
+    private Double price;
     private String comment;
     private Date date;
     private String postalAdress;
-    private int discount;
+    private int discountPercent;
 
     public InvoiceMessage() {
         //Default Constructor
@@ -65,22 +65,6 @@ public class InvoiceMessage implements Serializable {
         this.destination = destination;
     }
 
-    public Double getDistance() {
-        return distance;
-    }
-
-    public void setDistance(Double distance) {
-        this.distance = distance;
-    }
-
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
-
     public String getComment() {
         return comment;
     }
@@ -97,19 +81,10 @@ public class InvoiceMessage implements Serializable {
         this.date = date;
     }
 
-    public int getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(int discount) {
-        this.discount = discount;
-    }
-
     public String getPostalAdress() {
         return postalAdress;
     }
 
-    // default Setter necessary for XML conversion
     public void setPostalAdress(String postalAdress) {
         this.postalAdress = postalAdress;
     }
@@ -117,5 +92,29 @@ public class InvoiceMessage implements Serializable {
     public void setPostalAdress(String firstname, String lastname, String adress) {
         this.postalAdress = firstname + " " + lastname + ", " + adress;
     }
+
+	public Double getDistanceKilometres() {
+		return distanceKilometres;
+	}
+
+	public void setDistanceKilometres(Double distanceKilometres) {
+		this.distanceKilometres = distanceKilometres;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public int getDiscountPercent() {
+		return discountPercent;
+	}
+
+	public void setDiscountPercent(int discountPercent) {
+		this.discountPercent = discountPercent;
+	}
 
 }

@@ -16,26 +16,27 @@ public class CalculateBill implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) throws Exception {
 
-        // hardcoded bill parameters
-        Double pricePerKilometre = 1.20;     // TODO Camunda Variable
-        Long basicTravelFee = 5L;            // TODO Camunda Variable
+        // Parameters can be adjusted in BPM Model
+        Double pricePerKilometre = (Double) execution.getVariable("pricePerKilometre");
+        Double basicTravelFee = (Double) execution.getVariable("pricePerKilometre");
 
-        // get trip details from execution
         Customer c = (Customer) execution.getVariable("customer_obj");
 
         Double distance = (Double) execution.getVariable("kilometers");
+        distance = Math.round(distance * 100.0) / 100.0;
         int discountPercent = (int) execution.getVariable("discountPercent");
         Long tripid = (Long) execution.getVariable("tripDataId");
-        Double amount = (basicTravelFee + (distance * pricePerKilometre)) * discountPercent / 100.;
+        Double amount = (basicTravelFee + (distance * pricePerKilometre)) * (1.0 - discountPercent / 100.);
+        amount = Math.round(amount * 100.0) / 100.0;
 
         InvoiceMessage invoice = new InvoiceMessage(tripid);
         invoice.setPostalAdress(c.getFirstname(), c.getLastname(), c.getAdress());
-        invoice.setDiscount(discountPercent);
-        invoice.setAmount(amount);
+        invoice.setDiscountPercent(discountPercent);
+        invoice.setPrice(amount);
         invoice.setDeparture((String) execution.getVariable("startingpoint"));
         invoice.setDestination((String) execution.getVariable("endpoint"));
         invoice.setDate((Date) execution.getVariable("startDate"));
-        invoice.setDistance(distance);
+        invoice.setDistanceKilometres(distance);
 
         execution.setVariable("Invoice", invoice);
 
