@@ -53,7 +53,7 @@
     <bpmn:receiveTask id="Task_0cmmbl0" name="Wait for invoice settlement" messageRef="Message_1afcpis">
       <bpmn:extensionElements>
         <camunda:executionListener expression="${execution.setVariable(&#34;invoiceid&#34;, execution.getVariable(&#34;Invoice&#34;).getInvoiceId())}" event="start" />
-        <camunda:executionListener expression="${execution.setVariable(&#34;price&#34;, execution.getVariable(&#34;Invoice&#34;).getAmount())}" event="start" />
+        <camunda:executionListener expression="${execution.setVariable(&#34;price&#34;, execution.getVariable(&#34;Invoice&#34;).getPrice())}" event="start" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0maxmym</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0rjezkt</bpmn:outgoing>
@@ -120,6 +120,10 @@
       <bpmn:outgoing>SequenceFlow_0q0yakf</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:serviceTask id="ServiceTask_1jrpiya" name="Compose invoice" camunda:class="edu.thi.mobilityondemand.process.servicetask.CalculateBill">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${execution.setVariable(&#34;pricePerKilometre&#34;, 1.90)}" event="start" />
+        <camunda:executionListener expression="${execution.setVariable(&#34;basicTravelFee&#34;, 15.80)}" event="start" />
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0eobkm5</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0s398h3</bpmn:outgoing>
       <bpmn:property id="Property_0ppcobn" name="__targetRef_placeholder" />
@@ -174,7 +178,7 @@
     </bpmn:businessRuleTask>
     <bpmn:serviceTask id="Task_1w6r59w" name="Enrich trip data with price" camunda:expression="${tripDataService.setPrice(execution)}">
       <bpmn:extensionElements>
-        <camunda:executionListener expression="${execution.setVariableLocal(&#34;price&#34;, execution.getVariable(&#34;Invoice&#34;).getAmount())}" event="start" />
+        <camunda:executionListener expression="${execution.setVariableLocal(&#34;price&#34;, execution.getVariable(&#34;Invoice&#34;).getPrice())}" event="start" />
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0s398h3</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_11ckx0p</bpmn:outgoing>
