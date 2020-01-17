@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "52fecd25-75c6-4bba-9290-3a18fa76d1bd",
+		"_postman_id": "94b405ba-d4d4-49a0-9bcd-d28eae939b50",
 		"name": "MoD",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -38,13 +38,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{customerREST}}/process/resources/customers",
+							"raw": "{{customerREST}}/process/mod/customers",
 							"host": [
 								"{{customerREST}}"
 							],
 							"path": [
 								"process",
-								"resources",
+								"mod",
 								"customers"
 							]
 						},
@@ -79,13 +79,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{customerREST}}/process/resources/customers",
+							"raw": "{{customerREST}}/process/mod/customers",
 							"host": [
 								"{{customerREST}}"
 							],
 							"path": [
 								"process",
-								"resources",
+								"mod",
 								"customers"
 							]
 						},
@@ -120,14 +120,159 @@
 							}
 						},
 						"url": {
-							"raw": "{{customerREST}}/process/resources/customers",
+							"raw": "{{customerREST}}/process/mod/customers",
 							"host": [
 								"{{customerREST}}"
 							],
 							"path": [
 								"process",
-								"resources",
+								"mod",
 								"customers"
+							]
+						},
+						"description": "https://docs.camunda.org/manual/7.4/reference/rest/process-definition/"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "TripDataREST",
+			"item": [
+				{
+					"name": "trip from customer",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "purposeH",
+								"type": "text",
+								"value": "spako"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [],
+							"options": {
+								"raw": {
+									"language": "javascript"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{customerREST}}/process/mod/trips?customerId={{customerId}}",
+							"host": [
+								"{{customerREST}}"
+							],
+							"path": [
+								"process",
+								"mod",
+								"trips"
+							],
+							"query": [
+								{
+									"key": "customerId",
+									"value": "{{customerId}}"
+								}
+							]
+						},
+						"description": "https://docs.camunda.org/manual/7.4/reference/rest/process-definition/"
+					},
+					"response": []
+				},
+				{
+					"name": "all trip",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "purposeH",
+								"type": "text",
+								"value": "spako"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [],
+							"options": {
+								"raw": {
+									"language": "javascript"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{customerREST}}/process/mod/trips",
+							"host": [
+								"{{customerREST}}"
+							],
+							"path": [
+								"process",
+								"mod",
+								"trips"
+							]
+						},
+						"description": "https://docs.camunda.org/manual/7.4/reference/rest/process-definition/"
+					},
+					"response": []
+				},
+				{
+					"name": "specific trip",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "purposeH",
+								"type": "text",
+								"value": "spako"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [],
+							"options": {
+								"raw": {
+									"language": "javascript"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{customerREST}}/process/mod/trips/{{tripId}}",
+							"host": [
+								"{{customerREST}}"
+							],
+							"path": [
+								"process",
+								"mod",
+								"trips",
+								"{{tripId}}"
 							]
 						},
 						"description": "https://docs.camunda.org/manual/7.4/reference/rest/process-definition/"
@@ -749,31 +894,31 @@
 	],
 	"variable": [
 		{
-			"id": "2f4f427d-4a53-48c5-a0cf-8acd33179957",
+			"id": "90bdbe7a-eeb2-4492-a60a-65cfa8cb8270",
 			"key": "camunda",
 			"value": "localhost:8080/engine-rest",
 			"type": "string"
 		},
 		{
-			"id": "9aee95d1-1a74-46e9-ae90-3f1f73b42b90",
+			"id": "baf03320-a05f-463b-b764-d6f1f952ba58",
 			"key": "activemq",
 			"value": "admin:admin@localhost:8161/api",
 			"type": "string"
 		},
 		{
-			"id": "42700dd3-67ac-432d-b9ea-12e3f0f9bd1b",
+			"id": "15548ac1-4673-4be5-8393-77d7f762c163",
 			"key": "tripId",
-			"value": "3",
+			"value": "1",
 			"type": "string"
 		},
 		{
-			"id": "ca8a302c-9700-4563-b978-709ffc7d0b11",
+			"id": "4ae30c18-6081-4411-982d-d970d0e9a846",
 			"key": "customerId",
 			"value": "2",
 			"type": "string"
 		},
 		{
-			"id": "05537b10-5a29-4c85-9ce2-173ade1042cf",
+			"id": "e5a9b17b-3445-4a08-863d-56840b9df979",
 			"key": "customerREST",
 			"value": "http://localhost:8080",
 			"type": "string"
