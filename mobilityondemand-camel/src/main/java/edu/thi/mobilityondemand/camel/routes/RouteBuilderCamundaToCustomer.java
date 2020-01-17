@@ -17,18 +17,24 @@ public class RouteBuilderCamundaToCustomer extends RouteBuilder {
         json.setPrettyPrint(true);
 
         from(source)
-                .setHeader("customerId", xpath("/*/customerId/text()", String.class))
-                .choice().when(xpath("/tripDataMessageToCustomer"))
+                .choice()
+                .when().jsonpath("invoiceId", true )
+                    .log("New Invoice to Customer")
+                    .to("file:./CamundaToCustomersMessages?fileName=Invoice_${date:now:yyyy-MM-dd_HH-mm-ss-SS}.txt")
+                .when(xpath("/tripDataMessageToCustomer"))
+                    .setHeader("customerId", xpath("/*/customerId/text()", String.class))
                     .unmarshal().jacksonxml()     //convert from xml to Java Object
                     .marshal(json)
                     .log("New Trip Confirmation Message to Customer ${header.customerId}")
                     .to("file:./CamundaToCustomersMessages?fileName=TripConfirmation_${date:now:yyyy-MM-dd_HH-mm-ss-SS}_Customer_${header.customerId}.txt")
                 .when(xpath("/cancellationMessage"))
+                    .setHeader("customerId", xpath("/*/customerId/text()", String.class))
                     .unmarshal().jacksonxml()     //convert from xml to Java Object
                     .marshal(json)
                     .log("New Cancellation Message to Customer ${header.customerId}")
                     .to("file:./CamundaToCustomersMessages?fileName=CancellationMessage${date:now:yyyy-MM-dd_HH-mm-ss-SS}_Customer_${header.customerId}.txt")
                 .when(xpath("/ratingRequestMessage"))
+                    .setHeader("customerId", xpath("/*/customerId/text()", String.class))
                     .unmarshal().jacksonxml()     //convert from xml to Java Object
                     .marshal(json)
                     .log("New Rating Request to Customer ${header.customerId}")
