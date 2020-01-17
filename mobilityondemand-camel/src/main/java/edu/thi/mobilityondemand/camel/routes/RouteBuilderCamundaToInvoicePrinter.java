@@ -26,8 +26,8 @@ public class RouteBuilderCamundaToInvoicePrinter extends RouteBuilder {
                 .unmarshal().jacksonxml()     //convert from xml to Java Object
                 .marshal(json)
                 .log("New Invoice delivered")
-                .to("file:./InvoicesPrinted?fileName=Invoice_${date:now:yyyy-MM-dd_HH-mm-ss-SS}.txt");
-
+                .multicast()
+                .to("file:./InvoicesPrinted?fileName=Invoice_${date:now:yyyy-MM-dd_HH-mm-ss-SS}.txt", "jms:queue:toCustomer");
     }
 
 }
