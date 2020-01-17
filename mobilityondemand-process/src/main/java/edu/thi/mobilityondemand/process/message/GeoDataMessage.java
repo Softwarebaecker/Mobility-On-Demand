@@ -1,5 +1,5 @@
 /**
- * @author: Nil Kuchenbäcker
+ * @author Nil Kuchenbäcker
  */
 
 package edu.thi.mobilityondemand.process.message;
@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
-@XmlRootElement(name= "LinkedHashMap")
+@XmlRootElement(name = "LinkedHashMap")
 public class GeoDataMessage implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -32,6 +32,7 @@ public class GeoDataMessage implements Serializable {
     public Double getLatitude() {
         return latitude;
     }
+
     @XmlElement(name = "latitude")
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
@@ -53,6 +54,7 @@ public class GeoDataMessage implements Serializable {
     public String getLocation() {
         return Location;
     }
+
     @XmlElement(name = "Location")
     public void setLocation(String location) {
         Location = location;

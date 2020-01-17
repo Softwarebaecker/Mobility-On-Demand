@@ -6,6 +6,368 @@
 	},
 	"item": [
 		{
+			"name": "CustomerREST",
+			"item": [
+				{
+					"name": "all customers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "purposeH",
+								"type": "text",
+								"value": "spako"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [],
+							"options": {
+								"raw": {
+									"language": "javascript"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{customerREST}}/process/resources/customers",
+							"host": [
+								"{{customerREST}}"
+							],
+							"path": [
+								"process",
+								"resources",
+								"customers"
+							]
+						},
+						"description": "https://docs.camunda.org/manual/7.4/reference/rest/process-definition/"
+					},
+					"response": []
+				},
+				{
+					"name": "create customer (Flo Flöte)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "purposeH",
+								"type": "text",
+								"value": "spako"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"Flo\",\n    \"lastname\": \"Flöte\",\n    \"email\": \"flo@demo.org\",\n    \"yearOfBirth\": 1977,\n    \"adress\" : \"Markstrasse 1, Altmannstein\",\n    \"discountGroup\" : \"vip\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{customerREST}}/process/resources/customers",
+							"host": [
+								"{{customerREST}}"
+							],
+							"path": [
+								"process",
+								"resources",
+								"customers"
+							]
+						},
+						"description": "https://docs.camunda.org/manual/7.4/reference/rest/process-definition/"
+					},
+					"response": []
+				},
+				{
+					"name": "create customer (Marc Macher)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "purposeH",
+								"type": "text",
+								"value": "spako"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstname\": \"Marc\",\n    \"lastname\": \"Macher\",\n    \"email\": \"ma@demo.org\",\n    \"yearOfBirth\": 1989,\n    \"adress\" : \"Esplanade 10, 85049 Ingolstadt\",\n    \"discountGroup\" : \"student\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{customerREST}}/process/resources/customers",
+							"host": [
+								"{{customerREST}}"
+							],
+							"path": [
+								"process",
+								"resources",
+								"customers"
+							]
+						},
+						"description": "https://docs.camunda.org/manual/7.4/reference/rest/process-definition/"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "incoming Order (= create new process)",
+			"item": [
+				{
+					"name": "new Order incoming (=creates new MOD Process)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"variables\": {\n\t\t\"customerId\" : {\n\t\t\t\"value\" : {{customerId}},\n\t\t\t\"type\": \"Long\"\n\t\t},\n\t\t\"startingpoint\" : {\n\t\t\t\"value\" : \"Ingolstadt\",\n\t\t\t\"type\": \"String\"\n\t\t},\n\t\t\"endpoint\" : {\n\t\t\t\"value\" : \"Berlin\",\n\t\t\t\"type\": \"String\"\n\t\t},\n\t\t\"startDate\" : {\n\t\t\t\"value\" : \"2020-01-11T23:43:00.165+0100\",\n\t\t\t\"type\": \"Date\"\n\t\t}\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{camunda}}/process-definition/key/Mobility_On_Demand/start",
+							"host": [
+								"{{camunda}}"
+							],
+							"path": [
+								"process-definition",
+								"key",
+								"Mobility_On_Demand",
+								"start"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createProcessWIthError",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"variables\": {\n\t\t\"customerId\" : {\n\t\t\t\"value\" : {{customerId}},\n\t\t\t\"type\": \"Long\"\n\t\t},\n\t\t\"startingpoint\" : {\n\t\t\t\"value\" : \"Los Angeles\",\n\t\t\t\"type\": \"String\"\n\t\t},\n\t\t\"endpoint\" : {\n\t\t\t\"value\" : \"München\",\n\t\t\t\"type\": \"String\"\n\t\t},\n\t\t\"startDate\" : {\n\t\t\t\"value\" : \"2020-01-11T23:43:00.165+0100\",\n\t\t\t\"type\": \"Date\"\n\t\t}\n\t}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{camunda}}/process-definition/key/Mobility_On_Demand/start",
+							"host": [
+								"{{camunda}}"
+							],
+							"path": [
+								"process-definition",
+								"key",
+								"Mobility_On_Demand",
+								"start"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Taxi Messages",
+			"item": [
+				{
+					"name": "sendMessageCustimerEntry",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"messageName\" : \"taxi_starts\",\r\n  \"correlationKeys\" : {\r\n    \"tripDataId\" : {\"value\" : {{tripId}}, \"type\": \"Long\"}\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{camunda}}/message",
+							"host": [
+								"{{camunda}}"
+							],
+							"path": [
+								"message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sendMessageCustomerFinished",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"messageName\" : \"taxi_finished\",\r\n  \"correlationKeys\" : {\r\n    \"tripDataId\" : {\"value\" : {{tripId}}, \"type\": \"Long\"}\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{camunda}}/message",
+							"host": [
+								"{{camunda}}"
+							],
+							"path": [
+								"message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sendMessageCustomerEntry - Camel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"messageName\" : \"taxi_starts\",\r\n  \"correlationKeys\" : {\r\n    \"tripDataId\" : {\"value\" : {{tripId}}, \"type\": \"Long\"}\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{activemq}}/message/fromTaxi?type=queue",
+							"host": [
+								"{{activemq}}"
+							],
+							"path": [
+								"message",
+								"fromTaxi"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "queue"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sendMessageCustomerFinished activeMQ",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"messageName\" : \"taxi_finished\",\r\n  \"correlationKeys\" : {\r\n    \"tripDataId\" : {\"value\" : {{tripId}}, \"type\": \"Long\"}\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{activemq}}/message/fromTaxi?type=queue",
+							"host": [
+								"{{activemq}}"
+							],
+							"path": [
+								"message",
+								"fromTaxi"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "queue"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
 			"name": "Payment - activeMQ",
 			"item": [
 				{
@@ -142,329 +504,7 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "CustomerREST",
-			"item": [
-				{
-					"name": "all customers",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/x-www-form-urlencoded"
-							},
-							{
-								"key": "purposeH",
-								"type": "text",
-								"value": "spako"
-							}
-						],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [],
-							"options": {
-								"raw": {
-									"language": "javascript"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{customerREST}}/process/resources/customers",
-							"host": [
-								"{{customerREST}}"
-							],
-							"path": [
-								"process",
-								"resources",
-								"customers"
-							]
-						},
-						"description": "https://docs.camunda.org/manual/7.4/reference/rest/process-definition/"
-					},
-					"response": []
-				},
-				{
-					"name": "create customer (Flo Flöte)",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							},
-							{
-								"key": "purposeH",
-								"type": "text",
-								"value": "spako"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"firstname\": \"Flo\",\n    \"lastname\": \"Flöte\",\n    \"email\": \"flo@demo.org\",\n    \"yearOfBirth\": 1977,\n    \"adress\" : \"Markstrasse 1, Altmannstein\",\n    \"discountGroup\" : \"vip\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{customerREST}}/process/resources/customers",
-							"host": [
-								"{{customerREST}}"
-							],
-							"path": [
-								"process",
-								"resources",
-								"customers"
-							]
-						},
-						"description": "https://docs.camunda.org/manual/7.4/reference/rest/process-definition/"
-					},
-					"response": []
-				},
-				{
-					"name": "create customer (Marc Macher)",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							},
-							{
-								"key": "purposeH",
-								"type": "text",
-								"value": "spako"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"firstname\": \"Marc\",\n    \"lastname\": \"Macher\",\n    \"email\": \"ma@demo.org\",\n    \"yearOfBirth\": 1989,\n    \"adress\" : \"Esplanade 10, 85049 Ingolstadt\",\n    \"discountGroup\" : \"student\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{customerREST}}/process/resources/customers",
-							"host": [
-								"{{customerREST}}"
-							],
-							"path": [
-								"process",
-								"resources",
-								"customers"
-							]
-						},
-						"description": "https://docs.camunda.org/manual/7.4/reference/rest/process-definition/"
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "Taxi Messages",
-			"item": [
-				{
-					"name": "sendMessageCustimerEntry",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"messageName\" : \"taxi_starts\",\r\n  \"correlationKeys\" : {\r\n    \"tripDataId\" : {\"value\" : {{tripId}}, \"type\": \"Long\"}\r\n  }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{camunda}}/message",
-							"host": [
-								"{{camunda}}"
-							],
-							"path": [
-								"message"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "sendMessageCustomerFinished",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"messageName\" : \"taxi_finished\",\r\n  \"correlationKeys\" : {\r\n    \"tripDataId\" : {\"value\" : {{tripId}}, \"type\": \"Long\"}\r\n  }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{camunda}}/message",
-							"host": [
-								"{{camunda}}"
-							],
-							"path": [
-								"message"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "sendMessageCustomerEntry - Camel",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"messageName\" : \"taxi_starts\",\r\n  \"correlationKeys\" : {\r\n    \"tripDataId\" : {\"value\" : {{tripId}}, \"type\": \"Long\"}\r\n  }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{activemq}}/message/fromTaxi?type=queue",
-							"host": [
-								"{{activemq}}"
-							],
-							"path": [
-								"message",
-								"fromTaxi"
-							],
-							"query": [
-								{
-									"key": "type",
-									"value": "queue"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "incoming Order (= create new process)",
-			"item": [
-				{
-					"name": "new Order incoming (=creates new MOD Process)",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"variables\": {\n\t\t\"customerId\" : {\n\t\t\t\"value\" : {{customerId}},\n\t\t\t\"type\": \"Long\"\n\t\t},\n\t\t\"startingpoint\" : {\n\t\t\t\"value\" : \"Ingolstadt\",\n\t\t\t\"type\": \"String\"\n\t\t},\n\t\t\"endpoint\" : {\n\t\t\t\"value\" : \"Berlin\",\n\t\t\t\"type\": \"String\"\n\t\t},\n\t\t\"startDate\" : {\n\t\t\t\"value\" : \"2020-01-11T23:43:00.165+0100\",\n\t\t\t\"type\": \"Date\"\n\t\t}\n\t}\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{camunda}}/process-definition/key/Mobility_On_Demand/start",
-							"host": [
-								"{{camunda}}"
-							],
-							"path": [
-								"process-definition",
-								"key",
-								"Mobility_On_Demand",
-								"start"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "createProcessWIthError",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"variables\": {\n\t\t\"customerId\" : {\n\t\t\t\"value\" : 10,\n\t\t\t\"type\": \"Long\"\n\t\t},\n\t\t\"startingpoint\" : {\n\t\t\t\"value\" : \"Los Angeles\",\n\t\t\t\"type\": \"String\"\n\t\t},\n\t\t\"endpoint\" : {\n\t\t\t\"value\" : \"Muenchen\",\n\t\t\t\"type\": \"String\"\n\t\t},\n\t\t\"startDate\" : {\n\t\t\t\"value\" : \"2020-01-11T23:43:00.165+0100\",\n\t\t\t\"type\": \"Date\"\n\t\t}\n\t}\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{camunda}}/process-definition/key/Mobility_On_Demand/start",
-							"host": [
-								"{{camunda}}"
-							],
-							"path": [
-								"process-definition",
-								"key",
-								"Mobility_On_Demand",
-								"start"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "Rationg",
+			"name": "Rating",
 			"item": [
 				{
 					"name": "sendMessageNewRating",
@@ -506,25 +546,47 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/x-www-form-urlencoded"
-							},
-							{
-								"key": "Authorization",
-								"value": "Basic YWRtaW46YWRtaW4="
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "customerId",
+									"value": "{{customerId}}",
+									"type": "text"
+								},
+								{
+									"key": "tripId",
+									"value": "{{tripId}}",
+									"type": "text"
+								},
+								{
+									"key": "numberOfStars",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "comment",
+									"value": "Super Geil!",
+									"type": "text"
+								},
+								{
+									"key": "body",
+									"value": "-",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
-							"raw": "admin:admin@localhost:8161/api/message/fromCustomer?type=queue",
+							"raw": "{{activemq}}/message/fromCustomer?type=queue",
 							"host": [
-								"localhost"
+								"{{activemq}}"
 							],
-							"auth": {
-								"user": "admin",
-								"password": "admin"
-							},
-							"port": "8161",
 							"path": [
-								"api",
 								"message",
 								"fromCustomer"
 							],
@@ -590,7 +652,7 @@
 					"formdata": []
 				},
 				"url": {
-					"raw": "api.geonames.org/search?username=mond&name_equals=Muenchen&maxRows=1",
+					"raw": "api.geonames.org/search?username=mond&name_equals=Ingolstadt&maxRows=1",
 					"host": [
 						"api",
 						"geonames",
@@ -606,7 +668,7 @@
 						},
 						{
 							"key": "name_equals",
-							"value": "Muenchen"
+							"value": "Ingolstadt"
 						},
 						{
 							"key": "maxRows",
@@ -625,21 +687,12 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
+						"value": "application/x-www-form-urlencoded",
 						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"totalResultsCount\": 10\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "admin:admin@localhost:8161/api/message/cityToPositionRequest?type=queue&location=Ingolstadt&tripId=1",
+					"raw": "admin:admin@localhost:8161/api/message/cityToPositionRequest?type=queue&location=Ingolstadt&tripId=2",
 					"host": [
 						"localhost"
 					],
@@ -664,7 +717,7 @@
 						},
 						{
 							"key": "tripId",
-							"value": "1"
+							"value": "2"
 						}
 					]
 				}
@@ -696,31 +749,31 @@
 	],
 	"variable": [
 		{
-			"id": "d04c774c-8cfc-4d88-b9f3-4e906d1d7cea",
+			"id": "2f4f427d-4a53-48c5-a0cf-8acd33179957",
 			"key": "camunda",
 			"value": "localhost:8080/engine-rest",
 			"type": "string"
 		},
 		{
-			"id": "031e2259-9e47-4919-b6e5-ad5fe894bc49",
+			"id": "9aee95d1-1a74-46e9-ae90-3f1f73b42b90",
 			"key": "activemq",
 			"value": "admin:admin@localhost:8161/api",
 			"type": "string"
 		},
 		{
-			"id": "b699ec8c-3290-44e1-b821-3e96a3159391",
+			"id": "42700dd3-67ac-432d-b9ea-12e3f0f9bd1b",
 			"key": "tripId",
 			"value": "3",
 			"type": "string"
 		},
 		{
-			"id": "a9a346e7-9a03-4707-9607-e3301c7b9e04",
+			"id": "ca8a302c-9700-4563-b978-709ffc7d0b11",
 			"key": "customerId",
 			"value": "2",
 			"type": "string"
 		},
 		{
-			"id": "9ec5ec21-adb9-42f1-b8cb-7192d91f13d6",
+			"id": "05537b10-5a29-4c85-9ce2-173ade1042cf",
 			"key": "customerREST",
 			"value": "http://localhost:8080",
 			"type": "string"

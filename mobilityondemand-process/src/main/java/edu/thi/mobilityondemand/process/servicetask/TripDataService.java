@@ -18,7 +18,7 @@ import java.util.List;
 @Stateless
 @LocalBean
 @Named
-public class TripDataService implements  TripDataServiceLocal{
+public class TripDataService implements TripDataServiceLocal {
     @Inject
     TripDataServiceBean tripDataService;
 
@@ -37,6 +37,7 @@ public class TripDataService implements  TripDataServiceLocal{
         tripDataService.create(tripData);
         execution.setVariable("tripDataId", tripData.getTripid());
     }
+
     public void read(DelegateExecution execution) {
         Long tripDataId = (Long) execution.getVariable("tripDataId");
         TripData tripData = tripDataService.read(tripDataId);
@@ -49,7 +50,7 @@ public class TripDataService implements  TripDataServiceLocal{
         tripData.setAborted(true);
     }
 
-    public  void search(DelegateExecution execution) {
+    public void search(DelegateExecution execution) {
         Long customerId = (Long) execution.getVariable("customerId");
         List<TripData> tripDataList = tripDataService.searchCustomerTrips(customerId);
         execution.setVariable("tripDataList", tripDataList);
@@ -69,19 +70,23 @@ public class TripDataService implements  TripDataServiceLocal{
         execution.setVariable("tripData", tripData);
     }
 
-    // Daniel S
+    /**
+     * @author Daniel Schels
+     */
     public void setPrice(DelegateExecution execution) {
-    	Double price = (Double) execution.getVariable("price");
-     	Long tripDataId = (Long) execution.getVariable("tripDataId");
-     	TripData tripData = tripDataService.read(tripDataId);
-     	tripData.setPrice(price);
-     	execution.setVariable("tripData", tripData);
+        Double price = (Double) execution.getVariable("price");
+        Long tripDataId = (Long) execution.getVariable("tripDataId");
+        TripData tripData = tripDataService.read(tripDataId);
+        tripData.setPrice(price);
+        execution.setVariable("tripData", tripData);
     }
 
-    // Daniel S
+    /**
+     * @author Daniel Schels
+     */
     public void markTripPayed(DelegateExecution execution) {
-     	Long tripDataId = (Long) execution.getVariable("tripDataId");
-    	TripData tripData = tripDataService.read(tripDataId);
+        Long tripDataId = (Long) execution.getVariable("tripDataId");
+        TripData tripData = tripDataService.read(tripDataId);
         tripData.setPayed(true);
 
     }

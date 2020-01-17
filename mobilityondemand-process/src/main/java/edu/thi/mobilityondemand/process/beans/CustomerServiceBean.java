@@ -23,41 +23,41 @@ import edu.thi.mobilityondemand.process.jpa.Customer;
 @LocalBean
 public class CustomerServiceBean implements CustomerServiceBeanRemote, CustomerServiceBeanLocal {
 
-	@PersistenceContext
-	EntityManager em;
+    @PersistenceContext
+    EntityManager em;
 
-	public Customer create(Customer customer) {
-		em.persist(customer);
-		return customer;
-	}
+    public Customer create(Customer customer) {
+        em.persist(customer);
+        return customer;
+    }
 
-	public Customer read(Long id) {
-		return this.em.find(Customer.class, id);
-	}
-	
-	public String getDicountGroup(Long id) {
-		return this.read(id).getDiscountGroup();
-	}
+    public Customer read(Long id) {
+        return this.em.find(Customer.class, id);
+    }
 
-	public Customer[] search(String email) {
-		List<Customer> customers = null;
-		String searchEmail = (email == null || email == "") ? "%" : "%" + email + "%";
+    public String getDicountGroup(Long id) {
+        return this.read(id).getDiscountGroup();
+    }
 
-		TypedQuery<Customer> query = em.createNamedQuery(Customer.searchCustomer, Customer.class);
-		query.setParameter(1, searchEmail);
-		customers = query.getResultList();
-		Customer[] customerArray = new Customer[customers.size()];
-		customerArray = customers.toArray(customerArray);
-		return customerArray;
-	}
+    public Customer[] search(String email) {
+        List<Customer> customers = null;
+        String searchEmail = (email == null || email == "") ? "%" : "%" + email + "%";
 
-	public void delete(Long id) {
-		Customer customer = read(id);
-		if (customer != null)
-			this.em.remove(customer);
-	}
+        TypedQuery<Customer> query = em.createNamedQuery(Customer.searchCustomer, Customer.class);
+        query.setParameter(1, searchEmail);
+        customers = query.getResultList();
+        Customer[] customerArray = new Customer[customers.size()];
+        customerArray = customers.toArray(customerArray);
+        return customerArray;
+    }
 
-	public void update(Customer customer) {
-		this.em.merge(customer);
-	}
+    public void delete(Long id) {
+        Customer customer = read(id);
+        if (customer != null)
+            this.em.remove(customer);
+    }
+
+    public void update(Customer customer) {
+        this.em.merge(customer);
+    }
 }

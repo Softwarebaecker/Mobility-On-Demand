@@ -1,9 +1,13 @@
+/**
+ * @author Sandro Käppner
+ */
+
 package edu.thi.mobilityondemand.weatherobserver.event;
 
 import java.util.Date;
 
 public class WeatherEvent {
-    public enum WeatherType { SUNNY, CLOUDY, RAINY, STORMY}
+    public enum WeatherType {SUNNY, CLOUDY, RAINY, STORMY}
 
     private final WeatherType weather;
     private final String location;

@@ -1,3 +1,7 @@
+/**
+ * @author Sandro Käppner
+ */
+
 package edu.thi.mobilityondemand.weatherobserver.subscriber;
 
 import edu.thi.mobilityondemand.weatherobserver.event.WeatherEvent;
@@ -12,17 +16,17 @@ public class StormyWeatherEventSubscriber {
     public String getStatement() {
         String stormyWeatherEventExpression =
                 "select * " +
-                "from WeatherEvent " +
-                "match_recognize (" +
-                "   partition by location" +
-                "   measures A[2] as weatherevent" +
-                "   pattern (A{3})" +
-                "   define" +
-                "       A as A.weather.toString() = 'STORMY')";
+                        "from WeatherEvent " +
+                        "match_recognize (" +
+                        "   partition by location" +
+                        "   measures A[2] as weatherevent" +
+                        "   pattern (A{3})" +
+                        "   define" +
+                        "       A as A.weather.toString() = 'STORMY')";
         return stormyWeatherEventExpression;
     }
 
-    public void update(Map<String, WeatherEvent> map)  {
+    public void update(Map<String, WeatherEvent> map) {
         WeatherEvent event = map.get("weatherevent");
         System.out.println("===============");
         System.out.println(event);

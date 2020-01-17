@@ -1,5 +1,5 @@
 /**
- * @auther Sandro Käppner
+ * @author Sandro Käppner
  */
 
 package edu.thi.mobilityondemand.process.message;
@@ -15,5 +15,6 @@ public class TripDataMessageToCustomer extends TripDataMessage {
         super.setText("Hereby we confirm your booked trip! Please find the details below: ");
     }
 
-    public TripDataMessageToCustomer() {}
+    public TripDataMessageToCustomer() {
+    }
 }

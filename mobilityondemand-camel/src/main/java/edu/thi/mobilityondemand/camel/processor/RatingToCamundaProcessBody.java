@@ -1,4 +1,6 @@
-//Sandro Käppner
+/**
+ * @author Sandro Käppner
+ */
 
 package edu.thi.mobilityondemand.camel.processor;
 
@@ -13,20 +15,20 @@ public class RatingToCamundaProcessBody implements Processor {
         String numberOfStars = (String) exchange.getIn().getHeader("numberOfStars");
         String comment = (String) exchange.getIn().getHeader("comment");
 
-        exchange.getOut().setHeader(Exchange.HTTP_METHOD, "POST");
-        exchange.getOut().setHeader(Exchange.CONTENT_TYPE, "application/json");
-        exchange.getOut().setBody(
-            "{"
-            +   "\"messageName\" : \"new_rating\","
-            +   "\"correlationKeys\" : {"
-            +       "\"customerId\" : {\"value\" : " + customerId + ", \"type\" : \"Long\"},"
-            +       "\"tripId\" : {\"value\" : " + tripId + ", \"type\" : \"Long\"}"
-            +   "},"
-            +   "\"processVariables\" : {"
-            +       "\"numberOfStars\" : {\"value\" : " + numberOfStars + ", \"type\" : \"Integer\"},"
-            +       "\"comment\" : {\"value\" : \"" + comment + "\", \"type\" : \"String\"}"
-            +   "}"
-            + "}"
+        exchange.getMessage().setHeader(Exchange.HTTP_METHOD, "POST");
+        exchange.getMessage().setHeader(Exchange.CONTENT_TYPE, "application/json");
+        exchange.getMessage().setBody(
+                "{"
+                + "\"messageName\" : \"new_rating\","
+                + "\"correlationKeys\" : {"
+                + "\"customerId\" : {\"value\" : " + customerId + ", \"type\" : \"Long\"},"
+                + "\"tripId\" : {\"value\" : " + tripId + ", \"type\" : \"Long\"}"
+                + "},"
+                + "\"processVariables\" : {"
+                + "\"numberOfStars\" : {\"value\" : " + numberOfStars + ", \"type\" : \"Integer\"},"
+                + "\"comment\" : {\"value\" : \"" + comment + "\", \"type\" : \"String\"}"
+                + "}"
+                + "}"
         );
     }
 }
