@@ -1,5 +1,5 @@
 /**
- * @auther Daniel Schels
+ * Based on IIS Script WS2019/20 (by Volker Stiehl)
  */
 
 package edu.thi.mobilityondemand.process.restservice;
