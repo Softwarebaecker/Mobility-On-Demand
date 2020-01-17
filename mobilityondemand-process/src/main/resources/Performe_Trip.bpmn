@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0rkmrlq" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.5">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_0rkmrlq" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
   <bpmn:collaboration id="Collaboration_005yfjx">
     <bpmn:participant id="Participant_0p9737v" name="Performe Trip" processRef="Performe_Trip" />
     <bpmn:participant id="Participant_0p8obin" name="Taxi System" />
     <bpmn:participant id="Participant_0e0gdme" name="Customer" />
     <bpmn:messageFlow id="MessageFlow_1gr8u5s" name="Route data" sourceRef="Task_0pl7kic" targetRef="Participant_0p8obin" />
-    <bpmn:messageFlow id="MessageFlow_1ypw9lt" name="Acnollage Enter" sourceRef="Participant_0p8obin" targetRef="IntermediateThrowEvent_1m5irgr" />
-    <bpmn:messageFlow id="MessageFlow_1qopfpi" name="Acnollage Exit" sourceRef="Participant_0p8obin" targetRef="IntermediateThrowEvent_0catw8n" />
+    <bpmn:messageFlow id="MessageFlow_1ypw9lt" name="Acknowledge Entry" sourceRef="Participant_0p8obin" targetRef="IntermediateThrowEvent_1m5irgr" />
+    <bpmn:messageFlow id="MessageFlow_1qopfpi" name="Acknowledge Exit" sourceRef="Participant_0p8obin" targetRef="IntermediateThrowEvent_0catw8n" />
     <bpmn:messageFlow id="MessageFlow_0b6ia7s" name="Route data" sourceRef="SendTask_168tz83" targetRef="Participant_0p8obin" />
     <bpmn:messageFlow id="MessageFlow_1ruztf5" name="New Trip data" sourceRef="Participant_0e0gdme" targetRef="StartEvent_0mi2djn" />
     <bpmn:messageFlow id="MessageFlow_05kbb3k" name="Route data" sourceRef="SendTask_0uajjmk" targetRef="Participant_0p8obin" />
   </bpmn:collaboration>
   <bpmn:process id="Performe_Trip" name="Performe Trip" isExecutable="true" camunda:isStartableInTasklist="false">
     <bpmn:dataStoreReference id="DataStoreReference_0vlhvyr" name="Trip Data DB" />
-    <bpmn:subProcess id="ReconfigerTrip_19how13" name="Reconfiger Trip" triggeredByEvent="true">
+    <bpmn:subProcess id="ReconfigerTrip_19how13" name="Reconfigure Trip" triggeredByEvent="true">
       <bpmn:endEvent id="EndEvent_14h1zjy" name="Accepted">
         <bpmn:incoming>SequenceFlow_1ieezty</bpmn:incoming>
       </bpmn:endEvent>
-      <bpmn:sendTask id="SendTask_168tz83" name="Send Route Data to Taxi" camunda:class="edu.thi.mobilityondemand.process.servicetask.SendRouteDataToTaxi">
+      <bpmn:sendTask id="SendTask_168tz83" name="Send Route Data" camunda:class="edu.thi.mobilityondemand.process.servicetask.SendRouteDataToTaxi">
         <bpmn:incoming>SequenceFlow_0h1ewbb</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_1ieezty</bpmn:outgoing>
         <bpmn:property id="Property_029aw2u" name="__targetRef_placeholder" />
@@ -26,7 +26,7 @@
           <bpmn:targetRef>Property_029aw2u</bpmn:targetRef>
         </bpmn:dataInputAssociation>
       </bpmn:sendTask>
-      <bpmn:serviceTask id="ServiceTask_1v3e6jp" name="Store Order in DB" camunda:class="${tripDataService.updateTrip(execution)}">
+      <bpmn:serviceTask id="ServiceTask_1v3e6jp" name="Update Order" camunda:class="${tripDataService.update(execution)}">
         <bpmn:incoming>SequenceFlow_00olrli</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_0h1ewbb</bpmn:outgoing>
         <bpmn:property id="Property_0hwyrh8" name="__targetRef_placeholder" />
@@ -59,7 +59,7 @@
       </bpmn:boundaryEvent>
       <bpmn:startEvent id="StartEvent_0mi2djn" name="Customer reconfigures Trip" isInterrupting="false">
         <bpmn:outgoing>SequenceFlow_1d1ewjc</bpmn:outgoing>
-        <bpmn:dataOutputAssociation id="DataOutputAssociation_0hbwoyt">
+        <bpmn:dataOutputAssociation id="DataOutputAssociation_1dh4vt1">
           <bpmn:targetRef>DataObjectReference_1ai00zm</bpmn:targetRef>
         </bpmn:dataOutputAssociation>
         <bpmn:messageEventDefinition id="MessageEventDefinition_1bepwlz" messageRef="Message_1z0bvf0" />
@@ -77,7 +77,7 @@
       <bpmn:endEvent id="EndEvent_046geg9">
         <bpmn:incoming>SequenceFlow_1s0lh2k</bpmn:incoming>
       </bpmn:endEvent>
-      <bpmn:sendTask id="SendTask_0uajjmk" name="Send Route Data to Taxi" camunda:class="edu.thi.mobilityondemand.process.servicetask.SendRouteDataToTaxi">
+      <bpmn:sendTask id="SendTask_0uajjmk" name="Send Route Data" camunda:class="edu.thi.mobilityondemand.process.servicetask.SendRouteDataToTaxi">
         <bpmn:incoming>SequenceFlow_1qomf7k</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_1s0lh2k</bpmn:outgoing>
         <bpmn:property id="Property_02w0dtr" name="__targetRef_placeholder" />
@@ -119,7 +119,7 @@
         <bpmn:signalEventDefinition id="SignalEventDefinition_00m7bk5" signalRef="Signal_0savath" />
       </bpmn:startEvent>
     </bpmn:subProcess>
-    <bpmn:sendTask id="Task_0pl7kic" name="Send Route Data to Taxi" camunda:class="edu.thi.mobilityondemand.process.servicetask.SendRouteDataToTaxi">
+    <bpmn:sendTask id="Task_0pl7kic" name="Send Route Data" camunda:class="edu.thi.mobilityondemand.process.servicetask.SendRouteDataToTaxi">
       <bpmn:incoming>SequenceFlow_0i5arlo</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0nlh9rh</bpmn:outgoing>
       <bpmn:property id="Property_172fzv3" name="__targetRef_placeholder" />
@@ -143,10 +143,11 @@
     <bpmn:intermediateCatchEvent id="IntermediateThrowEvent_1m5irgr" name="Customer is in taxi">
       <bpmn:incoming>SequenceFlow_0nlh9rh</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_14ljyc2</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1nu9qwb">
+        <bpmn:targetRef>DataObjectReference_1swyzjo</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
       <bpmn:messageEventDefinition id="MessageEventDefinition_0kun3k5" messageRef="Message_0s19zb9" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:dataObjectReference id="DataObjectReference_1swyzjo" name="Trip data" dataObjectRef="DataObject_1arxiq3" />
-    <bpmn:dataObject id="DataObject_1arxiq3" />
     <bpmn:intermediateCatchEvent id="IntermediateThrowEvent_1pae07v" name="Wait until the taxi has to go">
       <bpmn:incoming>SequenceFlow_1ahv268</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0i5arlo</bpmn:outgoing>
@@ -159,6 +160,8 @@
       <bpmn:outgoing>SequenceFlow_1ahv268</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0i5arlo" sourceRef="IntermediateThrowEvent_1pae07v" targetRef="Task_0pl7kic" />
+    <bpmn:dataObjectReference id="DataObjectReference_1swyzjo" name="Trip data" dataObjectRef="DataObject_1arxiq3" />
+    <bpmn:dataObject id="DataObject_1arxiq3" />
   </bpmn:process>
   <bpmn:message id="Message_0s19zb9" name="taxi_starts" />
   <bpmn:message id="Message_0rzmb00" name="taxi_finished" />
@@ -212,7 +215,7 @@
         <di:waypoint x="628" y="703" />
         <di:waypoint x="628" y="355" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="544" y="673" width="78" height="14" />
+          <dc:Bounds x="637" y="666" width="65" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_14ljyc2_di" bpmnElement="SequenceFlow_14ljyc2">
@@ -229,7 +232,7 @@
         <di:waypoint x="714" y="703" />
         <di:waypoint x="714" y="355" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="635" y="673" width="70" height="14" />
+          <dc:Bounds x="720" y="673" width="87" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0kzkney_di" bpmnElement="SequenceFlow_0kzkney">
@@ -301,9 +304,9 @@
         <dc:Bounds x="427" y="515" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="DataObjectReference_1o0m3ir_di" bpmnElement="DataObjectReference_1o0m3ir">
-        <dc:Bounds x="222" y="424" width="36" height="50" />
+        <dc:Bounds x="282" y="424" width="36" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="219" y="481" width="42" height="14" />
+          <dc:Bounds x="279" y="481" width="42" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1s0lh2k_di" bpmnElement="SequenceFlow_1s0lh2k">
@@ -328,7 +331,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="DataInputAssociation_18ztzwk_di" bpmnElement="DataInputAssociation_18ztzwk">
-        <di:waypoint x="258" y="449" />
+        <di:waypoint x="318" y="449" />
         <di:waypoint x="342" y="449" />
         <di:waypoint x="342" y="515" />
       </bpmndi:BPMNEdge>
@@ -383,7 +386,7 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="DataInputAssociation_0qw56pn_di" bpmnElement="DataInputAssociation_0qw56pn">
-        <di:waypoint x="258" y="449" />
+        <di:waypoint x="318" y="449" />
         <di:waypoint x="477" y="449" />
         <di:waypoint x="477" y="515" />
       </bpmndi:BPMNEdge>
@@ -398,14 +401,13 @@
         <di:waypoint x="999" y="486" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="DataObjectReference_1swyzjo_di" bpmnElement="DataObjectReference_1swyzjo">
-        <dc:Bounds x="452" y="225" width="36" height="50" />
+        <dc:Bounds x="512" y="215" width="36" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="449" y="282" width="42" height="14" />
+          <dc:Bounds x="509" y="191" width="42" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="DataInputAssociation_16i9ld9_di" bpmnElement="DataInputAssociation_16i9ld9">
-        <di:waypoint x="488" y="250" />
-        <di:waypoint x="530" y="250" />
+        <di:waypoint x="530" y="265" />
         <di:waypoint x="530" y="297" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_0ckf622_di" bpmnElement="DataOutputAssociation_0ckf622">
@@ -413,14 +415,19 @@
         <di:waypoint x="865" y="440" />
         <di:waypoint x="840" y="440" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataOutputAssociation_0hbwoyt_di" bpmnElement="DataOutputAssociation_0hbwoyt">
-        <di:waypoint x="764" y="508" />
-        <di:waypoint x="764" y="415" />
-        <di:waypoint x="802" y="415" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0i5arlo_di" bpmnElement="SequenceFlow_0i5arlo">
         <di:waypoint x="314" y="337" />
         <di:waypoint x="480" y="337" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1nu9qwb_di" bpmnElement="DataOutputAssociation_1nu9qwb">
+        <di:waypoint x="628" y="319" />
+        <di:waypoint x="628" y="240" />
+        <di:waypoint x="548" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_1dh4vt1_di" bpmnElement="DataOutputAssociation_1dh4vt1">
+        <di:waypoint x="764" y="508" />
+        <di:waypoint x="764" y="420" />
+        <di:waypoint x="802" y="420" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

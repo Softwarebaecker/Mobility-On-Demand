@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1rw2s84" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.3.5">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1rw2s84" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.5.0">
   <bpmn:collaboration id="Collaboration_03e96t9">
     <bpmn:extensionElements>
       <camunda:properties>
@@ -56,13 +56,16 @@
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_119sp5l</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0u8qoiu</bpmn:outgoing>
-      <bpmn:property id="Property_1tq6huv" name="__targetRef_placeholder" />
-      <bpmn:dataInputAssociation id="DataInputAssociation_0ssvtzy">
-        <bpmn:sourceRef>DataObjectReference_15w39s9</bpmn:sourceRef>
-        <bpmn:targetRef>Property_1tq6huv</bpmn:targetRef>
+      <bpmn:property id="Property_1ihyxnt" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_1xlsbx9">
+        <bpmn:sourceRef>DataObjectReference_0emjhbg</bpmn:sourceRef>
+        <bpmn:targetRef>Property_1ihyxnt</bpmn:targetRef>
       </bpmn:dataInputAssociation>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_107h0be">
         <bpmn:targetRef>DataStoreReference_0gzwpwx</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_0uji6ji">
+        <bpmn:targetRef>DataObjectReference_0emjhbg</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:callActivity>
     <bpmn:callActivity id="Task_0uuqleu" name="Payment processing" calledElement="process_payment">
@@ -71,10 +74,10 @@
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0u8qoiu</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0yclayf</bpmn:outgoing>
-      <bpmn:property id="Property_15tzzp1" name="__targetRef_placeholder" />
-      <bpmn:dataInputAssociation id="DataInputAssociation_1gm5iqz">
-        <bpmn:sourceRef>DataObjectReference_15w39s9</bpmn:sourceRef>
-        <bpmn:targetRef>Property_15tzzp1</bpmn:targetRef>
+      <bpmn:property id="Property_0gduh8r" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_10vctas">
+        <bpmn:sourceRef>DataObjectReference_0emjhbg</bpmn:sourceRef>
+        <bpmn:targetRef>Property_0gduh8r</bpmn:targetRef>
       </bpmn:dataInputAssociation>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_13xaq4i">
         <bpmn:targetRef>DataStoreReference_0gzwpwx</bpmn:targetRef>
@@ -95,30 +98,40 @@
     <bpmn:sendTask id="Task_1v65ro1" name="Notify Customer" camunda:class="edu.thi.mobilityondemand.process.servicetask.SendConfirmationToCustomer">
       <bpmn:incoming>SequenceFlow_0l5ocea</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_119sp5l</bpmn:outgoing>
+      <bpmn:property id="Property_1of5iov" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_02fo1d7">
+        <bpmn:sourceRef>DataObjectReference_15w39s9</bpmn:sourceRef>
+        <bpmn:targetRef>Property_1of5iov</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
     </bpmn:sendTask>
     <bpmn:sendTask id="Task_119g0uu" name="Send Cancellation" camunda:class="edu.thi.mobilityondemand.process.servicetask.SendCancellationToCustomer">
       <bpmn:incoming>SequenceFlow_0o8s8b4</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0vbuxc9</bpmn:outgoing>
+      <bpmn:property id="Property_0ratmqc" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_1q5kz7p">
+        <bpmn:sourceRef>DataObjectReference_15w39s9</bpmn:sourceRef>
+        <bpmn:targetRef>Property_0ratmqc</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
     </bpmn:sendTask>
     <bpmn:startEvent id="StartEvent_189kevz" name="Receiving Order" camunda:asyncBefore="true">
       <bpmn:outgoing>SequenceFlow_06zwlts</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_05jb17t">
+        <bpmn:targetRef>DataObjectReference_03lek3c</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
       <bpmn:messageEventDefinition messageRef="Message_1xqh2cl" />
     </bpmn:startEvent>
     <bpmn:serviceTask id="Task_1sxkvas" name="Store Trip" camunda:expression="${tripDataService.createTrip(execution)}">
       <bpmn:incoming>SequenceFlow_06zwlts</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_05p8fx1</bpmn:outgoing>
+      <bpmn:property id="Property_026quaw" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_0jfheag">
+        <bpmn:sourceRef>DataObjectReference_03lek3c</bpmn:sourceRef>
+        <bpmn:targetRef>Property_026quaw</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_1oqvnht">
         <bpmn:targetRef>DataObjectReference_15w39s9</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
       <bpmn:dataOutputAssociation id="DataOutputAssociation_0pdjvfe">
-        <bpmn:targetRef>DataStoreReference_0gzwpwx</bpmn:targetRef>
-      </bpmn:dataOutputAssociation>
-    </bpmn:serviceTask>
-    <bpmn:serviceTask id="Task_1n234m5" name="Mark Trip Cancelled" camunda:expression="${tripDataService.abortTrip(execution)}">
-      <bpmn:incoming>SequenceFlow_1x24jj6</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0o8s8b4</bpmn:outgoing>
-      <bpmn:property id="Property_1jnlyzz" name="__targetRef_placeholder" />
-      <bpmn:dataOutputAssociation id="DataOutputAssociation_1i2glpn">
         <bpmn:targetRef>DataStoreReference_0gzwpwx</bpmn:targetRef>
       </bpmn:dataOutputAssociation>
     </bpmn:serviceTask>
@@ -164,6 +177,22 @@
     <bpmn:endEvent id="EndEvent_0bntot5" name="Trip aborted">
       <bpmn:incoming>SequenceFlow_0vbuxc9</bpmn:incoming>
     </bpmn:endEvent>
+    <bpmn:dataObjectReference id="DataObjectReference_03lek3c" name="Order" dataObjectRef="DataObject_0lp1s02" />
+    <bpmn:dataObject id="DataObject_0lp1s02" />
+    <bpmn:serviceTask id="Task_1n234m5" name="Mark Trip Cancelled" camunda:expression="${tripDataService.abortTrip(execution)}">
+      <bpmn:incoming>SequenceFlow_1x24jj6</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0o8s8b4</bpmn:outgoing>
+      <bpmn:property id="Property_1jnlyzz" name="__targetRef_placeholder" />
+      <bpmn:dataInputAssociation id="DataInputAssociation_1ixt66a">
+        <bpmn:sourceRef>DataObjectReference_15w39s9</bpmn:sourceRef>
+        <bpmn:targetRef>Property_1jnlyzz</bpmn:targetRef>
+      </bpmn:dataInputAssociation>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_1i2glpn">
+        <bpmn:targetRef>DataStoreReference_0gzwpwx</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:serviceTask>
+    <bpmn:dataObjectReference id="DataObjectReference_0emjhbg" name="Trip data" dataObjectRef="DataObject_03qwuuk" />
+    <bpmn:dataObject id="DataObject_03qwuuk" />
   </bpmn:process>
   <bpmn:message id="Message_1tnjbsk" name="trip_finished" />
   <bpmn:escalation id="Escalation_0szj7kk" escalationCode="1111" />
@@ -232,11 +261,11 @@
         <di:waypoint x="915" y="876" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ServiceTask_049g512_di" bpmnElement="Task_1n234m5">
-        <dc:Bounds x="725" y="480" width="100" height="80" />
+        <dc:Bounds x="725" y="493" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0o8s8b4_di" bpmnElement="SequenceFlow_0o8s8b4">
-        <di:waypoint x="825" y="520" />
-        <di:waypoint x="845" y="520" />
+        <di:waypoint x="825" y="533" />
+        <di:waypoint x="845" y="533" />
         <di:waypoint x="845" y="300" />
         <di:waypoint x="915" y="300" />
       </bpmndi:BPMNEdge>
@@ -290,8 +319,8 @@
       <bpmndi:BPMNEdge id="SequenceFlow_1x24jj6_di" bpmnElement="SequenceFlow_1x24jj6">
         <di:waypoint x="673" y="905" />
         <di:waypoint x="695" y="905" />
-        <di:waypoint x="695" y="520" />
-        <di:waypoint x="725" y="520" />
+        <di:waypoint x="695" y="533" />
+        <di:waypoint x="725" y="533" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_1tjuqj6_di" bpmnElement="EndEvent_0bntot5">
         <dc:Bounds x="1347" y="282" width="36" height="36" />
@@ -317,8 +346,8 @@
         <di:waypoint x="590" y="825" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_1pomk0x_di" bpmnElement="DataOutputAssociation_1pomk0x">
-        <di:waypoint x="589" y="825" />
-        <di:waypoint x="591" y="545" />
+        <di:waypoint x="605" y="825" />
+        <di:waypoint x="605" y="545" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="CallActivity_1vg8cax_di" bpmnElement="Task_0uuqleu">
         <dc:Bounds x="1065" y="675" width="100" height="80" />
@@ -335,7 +364,7 @@
         <di:waypoint x="580" y="1035" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_1i2glpn_di" bpmnElement="DataOutputAssociation_1i2glpn">
-        <di:waypoint x="775" y="560" />
+        <di:waypoint x="775" y="573" />
         <di:waypoint x="775" y="1040" />
         <di:waypoint x="630" y="1040" />
       </bpmndi:BPMNEdge>
@@ -384,16 +413,55 @@
         <di:waypoint x="1320" y="630" />
         <di:waypoint x="1347" y="630" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataInputAssociation_1gm5iqz_di" bpmnElement="DataInputAssociation_1gm5iqz">
-        <di:waypoint x="605" y="545" />
-        <di:waypoint x="605" y="710" />
-        <di:waypoint x="1065" y="710" />
+      <bpmndi:BPMNShape id="DataObjectReference_03lek3c_di" bpmnElement="DataObjectReference_03lek3c">
+        <dc:Bounds x="382" y="245" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="385" y="302" width="30" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_05jb17t_di" bpmnElement="DataOutputAssociation_05jb17t">
+        <di:waypoint x="301" y="322" />
+        <di:waypoint x="382" y="276" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="DataInputAssociation_0ssvtzy_di" bpmnElement="DataInputAssociation_0ssvtzy">
-        <di:waypoint x="605" y="545" />
-        <di:waypoint x="605" y="710" />
-        <di:waypoint x="950" y="710" />
-        <di:waypoint x="950" y="836" />
+      <bpmndi:BPMNEdge id="DataInputAssociation_0jfheag_di" bpmnElement="DataInputAssociation_0jfheag">
+        <di:waypoint x="418" y="270" />
+        <di:waypoint x="455" y="270" />
+        <di:waypoint x="455" y="450" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_02fo1d7_di" bpmnElement="DataInputAssociation_02fo1d7">
+        <di:waypoint x="623" y="520" />
+        <di:waypoint x="650" y="520" />
+        <di:waypoint x="650" y="350" />
+        <di:waypoint x="695" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_1ixt66a_di" bpmnElement="DataInputAssociation_1ixt66a">
+        <di:waypoint x="623" y="520" />
+        <di:waypoint x="725" y="520" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_1q5kz7p_di" bpmnElement="DataInputAssociation_1q5kz7p">
+        <di:waypoint x="623" y="520" />
+        <di:waypoint x="650" y="520" />
+        <di:waypoint x="650" y="270" />
+        <di:waypoint x="915" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="DataObjectReference_0emjhbg_di" bpmnElement="DataObjectReference_0emjhbg">
+        <dc:Bounds x="947" y="495" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="945" y="471" width="42" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="DataInputAssociation_1xlsbx9_di" bpmnElement="DataInputAssociation_1xlsbx9">
+        <di:waypoint x="965" y="545" />
+        <di:waypoint x="965" y="836" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataOutputAssociation_0uji6ji_di" bpmnElement="DataOutputAssociation_0uji6ji">
+        <di:waypoint x="951" y="836" />
+        <di:waypoint x="949" y="545" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="DataInputAssociation_10vctas_di" bpmnElement="DataInputAssociation_10vctas">
+        <di:waypoint x="965" y="545" />
+        <di:waypoint x="965" y="720" />
+        <di:waypoint x="1065" y="720" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
