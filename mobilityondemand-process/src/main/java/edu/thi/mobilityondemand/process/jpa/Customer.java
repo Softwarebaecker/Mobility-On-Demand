@@ -1,5 +1,6 @@
 /**
- * @auther Daniel Schels
+ * Based on IIS Script WS2019/20 (by Volker Stiehl)
+ * Adjustments with project specific customer properties ( @author Daniel Schels ) 
  */
 
 package edu.thi.mobilityondemand.process.jpa;

@@ -1,5 +1,7 @@
 /**
- * @auther Daniel Schels
+ * @author Daniel Schels
+ * 
+ * Based on IIS Script WS2019/20 (by Volker Stiehl)
  */
 
 package edu.thi.mobilityondemand.process.restservice;
@@ -25,12 +27,6 @@ import edu.thi.mobilityondemand.process.jpa.Customer;
 import edu.thi.mobilityondemand.process.restservice.exceptions.BadRequestException;
 import edu.thi.mobilityondemand.process.beans.CustomerServiceBean;
 
-/**
- * Wrapper-Klasse um EJB CustomerServiceBean.
- * CustomerServiceRest stellt die externe REST-Schnittstelle zur Verfügung.
- * Diese REST-Services arbeiten mit einer Stateless Session EJB. Container übernimmt Threadverwaltung
- * --> kein Problem mit dem nicht threadsafen EntityManager, der im CustomerServiceBean verwendet wird!
- */
 @Path("customers")
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class CustomerServiceRest {
@@ -39,7 +35,6 @@ public class CustomerServiceRest {
     
     /*
      * Lesen eines Kunden anhand seiner ID
-     * Beispielaufruf aus Postman: GET auf http://localhost:8080/iis-customerhandling-war/resources/customers/1
      */
     @GET
     @Path("{id}")
@@ -49,7 +44,6 @@ public class CustomerServiceRest {
     
     /*
      * Suche nach Kunden
-     * Beispielaufruf aus Postman: GET auf http://localhost:8080/iis-customerhandling-war/resources/customers?email=demo
      */
     @GET
     public Customer[] search(@QueryParam("email") String email) {
@@ -60,14 +54,16 @@ public class CustomerServiceRest {
      * Anlegen eines neuen Kunden - akzeptiert wird JSON
      * Siehe auch Java Magazin-Artikel von Adam Bien 2/2017, S. 28
      * Erläuterungen zu UriInfo im Buch "Java EE 7" von Dirk Weil (2. Auflage), S. 299
-     * Beispielaufruf aus Postman: POST auf http://localhost:8080/iis-customerhandling-war/resources/customers
+     * Beispielaufruf aus Postman: POST auf {{host}}/resources/customers
      * Beispieldaten im Body: 
-     * {
-     *    "firstname": "Hans",
-     *    "lastname": "Wurst",
-     *    "email": "hans.wurst@demo.org",
-     *    "yearOfBirth": 1999
-     * }
+	 *	{
+	*	    "firstname": "Marc",
+	*	    "lastname": "Macher",
+	*	    "email": "ma@demo.org",
+	*	    "yearOfBirth": 1989,
+	*	    "adress" : "Esplanade 10, 85049 Ingolstadt",
+	*	    "discountGroup" : "student"
+	*	}
      */
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
