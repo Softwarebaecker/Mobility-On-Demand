@@ -84,6 +84,9 @@
       </bpmn:dataOutputAssociation>
     </bpmn:callActivity>
     <bpmn:serviceTask id="ServiceTask_15rcueg" name="Calculate route" camunda:class="edu.thi.mobilityondemand.process.servicetask.CalculateRoute">
+      <bpmn:extensionElements>
+        <camunda:executionListener expression="${tripDataService.update(execution)}" event="end" />
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_05p8fx1</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0l5ocea</bpmn:outgoing>
       <bpmn:property id="Property_1dkm0ds" name="__targetRef_placeholder" />

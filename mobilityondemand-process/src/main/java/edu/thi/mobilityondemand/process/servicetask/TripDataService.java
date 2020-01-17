@@ -26,12 +26,13 @@ public class TripDataService implements TripDataServiceLocal {
         String startingPoint = (String) execution.getVariable("startingpoint");
         String endpoint = (String) execution.getVariable("endpoint");
         Long customerid = (Long) execution.getVariable("customerId");
-        Date date = (Date) execution.getVariable("startDate");
+        Date startDate = (Date) execution.getVariable("startDate");
 
         TripData tripData = new TripData();
         tripData.setStartingpoint(startingPoint);
         tripData.setEndpoint(endpoint);
         tripData.setCustomerid(customerid);
+        tripData.setStartDate(startDate);
         tripData.setAborted(false);
         tripData.setKilometers(Double.valueOf(0));
         tripDataService.create(tripData);
@@ -48,6 +49,7 @@ public class TripDataService implements TripDataServiceLocal {
         Long tripDataId = (Long) execution.getVariable("tripDataId");
         TripData tripData = tripDataService.read(tripDataId);
         tripData.setAborted(true);
+        tripDataService.update(tripData);
     }
 
     public void search(DelegateExecution execution) {
@@ -67,6 +69,7 @@ public class TripDataService implements TripDataServiceLocal {
         tripData.setStartingpoint(startingPoint);
         tripData.setEndpoint(endpoint);
         tripData.setKilometers(kilometers);
+        tripDataService.update(tripData);
         execution.setVariable("tripData", tripData);
     }
 
@@ -78,6 +81,7 @@ public class TripDataService implements TripDataServiceLocal {
         Long tripDataId = (Long) execution.getVariable("tripDataId");
         TripData tripData = tripDataService.read(tripDataId);
         tripData.setPrice(price);
+        tripDataService.update(tripData);
         execution.setVariable("tripData", tripData);
     }
 
@@ -88,6 +92,6 @@ public class TripDataService implements TripDataServiceLocal {
         Long tripDataId = (Long) execution.getVariable("tripDataId");
         TripData tripData = tripDataService.read(tripDataId);
         tripData.setPayed(true);
-
+        tripDataService.update(tripData);
     }
 }
