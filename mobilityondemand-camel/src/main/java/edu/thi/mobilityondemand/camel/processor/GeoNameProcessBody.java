@@ -1,5 +1,5 @@
 /**
- * @author: Nil Kuchenbäcker
+ * @author Nil Kuchenbäcker
  */
 
 package edu.thi.mobilityondemand.camel.processor;

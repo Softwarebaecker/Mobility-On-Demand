@@ -1,5 +1,5 @@
 /**
- * @auther Sandro Käppner
+ * @author Sandro Käppner
  */
 
 package edu.thi.mobilityondemand.process.servicetask;
@@ -30,7 +30,7 @@ public class AddNewBadRating implements JavaDelegate, AddNewBadRatingLocal {
     @Override
     public void execute(DelegateExecution execution) throws Exception {
         badRatings = (ArrayList<Rating>) execution.getVariable("badRatings");
-        if(badRatings == null) {
+        if (badRatings == null) {
             badRatings = new ArrayList<>();
         }
 

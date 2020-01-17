@@ -1,3 +1,7 @@
+/**
+ * @author Sandro Käppner
+ */
+
 package edu.thi.mobilityondemand.weatherobserver.controller;
 
 import com.espertech.esper.client.EPServiceProvider;

@@ -1,5 +1,5 @@
 /**
- * @auther Daniel Schels
+ * @author Daniel Schels
  */
 
 package edu.thi.mobilityondemand.process.servicetask;
@@ -19,18 +19,18 @@ import java.io.StringWriter;
 public class SendInvoiceToCustomer implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) throws Exception {
-        
-    	InvoiceMessage invoice = (InvoiceMessage) execution.getVariable("Invoice");
-    	    	
-    	JAXBContext jc = JAXBContext.newInstance(InvoiceMessage.class);
+
+        InvoiceMessage invoice = (InvoiceMessage) execution.getVariable("Invoice");
+
+        JAXBContext jc = JAXBContext.newInstance(InvoiceMessage.class);
         Marshaller marshaller = jc.createMarshaller();
         StringWriter stringWriter = new StringWriter();
         marshaller.marshal(invoice, stringWriter);
 
         MessageQueue mq = new MessageQueue();
-    	TextMessage tm = mq.createSession().createTextMessage();
-    	tm.setText(stringWriter.toString());
+        TextMessage tm = mq.createSession().createTextMessage();
+        tm.setText(stringWriter.toString());
         mq.sendMessageToQueue("InvoicePrintingQueue", tm);
-    	
+
     }
 }

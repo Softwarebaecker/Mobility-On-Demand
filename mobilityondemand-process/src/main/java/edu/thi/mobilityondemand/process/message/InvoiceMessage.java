@@ -1,5 +1,5 @@
 /**
- * @auther Daniel Schels
+ * @author Daniel Schels
  */
 
 package edu.thi.mobilityondemand.process.message;
@@ -10,112 +10,112 @@ import java.io.Serializable;
 
 @XmlRootElement(name = "Invoice")
 public class InvoiceMessage implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private String invoiceId;
-	private String product;
-	private String departure;
-	private String destination;
-	private Double distance;
-	private Double amount;
-	private String comment;
-	private Date date;
-	private String postalAdress;
-	private int discount;
-	
-	public InvoiceMessage() {
-		//Default Constructor
-	}
+    private String invoiceId;
+    private String product;
+    private String departure;
+    private String destination;
+    private Double distance;
+    private Double amount;
+    private String comment;
+    private Date date;
+    private String postalAdress;
+    private int discount;
 
-	public InvoiceMessage(Long tripid) {
-		this.invoiceId = "MOD_" + tripid.toString();
-		this.product = "Mobility on Demand";
-		this.comment = "Thanks for flying with us! See you soon.";
-	}
+    public InvoiceMessage() {
+        //Default Constructor
+    }
 
-	public String getInvoiceId() {
-		return invoiceId;
-	}
+    public InvoiceMessage(Long tripid) {
+        this.invoiceId = "MOD_" + tripid.toString();
+        this.product = "Mobility on Demand";
+        this.comment = "Thanks for flying with us! See you soon.";
+    }
 
-	public void setInvoiceId(String invoiceId) {
-		this.invoiceId = invoiceId;
-	}
+    public String getInvoiceId() {
+        return invoiceId;
+    }
 
-	public String getProduct() {
-		return product;
-	}
+    public void setInvoiceId(String invoiceId) {
+        this.invoiceId = invoiceId;
+    }
 
-	public void setProduct(String product) {
-		this.product = product;
-	}
+    public String getProduct() {
+        return product;
+    }
 
-	public String getDeparture() {
-		return departure;
-	}
+    public void setProduct(String product) {
+        this.product = product;
+    }
 
-	public void setDeparture(String departure) {
-		this.departure = departure;
-	}
+    public String getDeparture() {
+        return departure;
+    }
 
-	public String getDestination() {
-		return destination;
-	}
+    public void setDeparture(String departure) {
+        this.departure = departure;
+    }
 
-	public void setDestination(String destination) {
-		this.destination = destination;
-	}
+    public String getDestination() {
+        return destination;
+    }
 
-	public Double getDistance() {
-		return distance;
-	}
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
 
-	public void setDistance(Double distance) {
-		this.distance = distance;
-	}
+    public Double getDistance() {
+        return distance;
+    }
 
-	public Double getAmount() {
-		return amount;
-	}
+    public void setDistance(Double distance) {
+        this.distance = distance;
+    }
 
-	public void setAmount(Double amount) {
-		this.amount = amount;
-	}
+    public Double getAmount() {
+        return amount;
+    }
 
-	public String getComment() {
-		return comment;
-	}
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
 
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
+    public String getComment() {
+        return comment;
+    }
 
-	public Date getDate() {
-		return date;
-	}
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+    public Date getDate() {
+        return date;
+    }
 
-	public int getDiscount() {
-		return discount;
-	}
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
-	public void setDiscount(int discount) {
-		this.discount = discount;
-	}
+    public int getDiscount() {
+        return discount;
+    }
 
-	public String getPostalAdress() {
-		return postalAdress;
-	}
-	
-	// default Setter necessary for XML conversion
-	public void setPostalAdress(String postalAdress) {
-		this.postalAdress = postalAdress;
-	}
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
 
-	public void setPostalAdress(String firstname, String lastname, String adress) {
-		this.postalAdress = firstname + " " + lastname + ", " + adress;
-	}
+    public String getPostalAdress() {
+        return postalAdress;
+    }
+
+    // default Setter necessary for XML conversion
+    public void setPostalAdress(String postalAdress) {
+        this.postalAdress = postalAdress;
+    }
+
+    public void setPostalAdress(String firstname, String lastname, String adress) {
+        this.postalAdress = firstname + " " + lastname + ", " + adress;
+    }
 
 }

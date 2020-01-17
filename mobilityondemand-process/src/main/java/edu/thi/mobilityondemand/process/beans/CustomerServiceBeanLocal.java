@@ -1,5 +1,5 @@
 /**
- * auto generated 
+ * auto generated
  */
 
 package edu.thi.mobilityondemand.process.beans;

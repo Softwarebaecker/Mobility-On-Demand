@@ -14,8 +14,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@NamedQuery(name=TripData.searchCustomerTrips,
-              query="SELECT t FROM TripData t WHERE t.customerid=?1")
+@NamedQuery(name = TripData.searchCustomerTrips,
+        query = "SELECT t FROM TripData t WHERE t.customerid=?1")
 @Table(name = "TripData")
 public class TripData implements Serializable {
     public final static String searchCustomerTrips = "TripData.searchCustomerTrips";
@@ -86,25 +86,33 @@ public class TripData implements Serializable {
     public void setKilometers(Double kilometers) {
         this.kilometers = kilometers;
     }
-    
-    // Daniel S
+
+    /**
+     * @author Daniel Schels
+     */
     public boolean isPayed() {
-    	return payed;
+        return payed;
     }
-    
-    // Daniel S
+
+    /**
+     * @author Daniel Schels
+     */
     public void setPayed(boolean payed) {
-    	this.payed = payed;
+        this.payed = payed;
     }
-    
-    // Daniel S
+
+    /**
+     * @author Daniel Schels
+     */
     public Double getPrice() {
-    	return price;
+        return price;
     }
-    
-    // Daniel S
+
+    /**
+     * @author Daniel Schels
+     */
     public void setPrice(Double price) {
-    	this.price = price;
+        this.price = price;
     }
 }
 

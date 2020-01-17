@@ -1,4 +1,4 @@
-package edu.thi.mobilityondemand;
+package edu.thi.mobilityondemand.process;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;

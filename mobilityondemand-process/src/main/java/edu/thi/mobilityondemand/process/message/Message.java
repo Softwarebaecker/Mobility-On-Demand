@@ -1,5 +1,5 @@
 /**
- * @auther Sandro Käppner
+ * @author Sandro Käppner
  */
 
 package edu.thi.mobilityondemand.process.message;
@@ -15,7 +15,8 @@ public abstract class Message implements Serializable {
 
     private String text;
 
-    public Message() {}
+    public Message() {
+    }
 
     public String toXml() throws JAXBException {
         JAXBContext jc = JAXBContext.newInstance(this.getClass());

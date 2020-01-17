@@ -1,5 +1,5 @@
 /**
- * @auther Sandro Käppner
+ * @author Sandro Käppner
  */
 
 package edu.thi.mobilityondemand.process.jpa;
@@ -10,7 +10,7 @@ import java.util.Date;
 
 @Entity
 @NamedQuery(name = Rating.searchRating,
-            query = "SELECT r FROM Rating r WHERE r.numberOfStars=?1")
+        query = "SELECT r FROM Rating r WHERE r.numberOfStars=?1")
 @Table(name = "Rating")
 public class Rating implements Serializable {
     public final static String searchRating = "Rating.searchRating";

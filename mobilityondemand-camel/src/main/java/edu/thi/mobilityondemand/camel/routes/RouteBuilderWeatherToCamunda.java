@@ -1,12 +1,11 @@
 /**
- * @author: Nil Kuchenbäcker
+ * @author Nil Kuchenbäcker
  */
 
 package edu.thi.mobilityondemand.camel.routes;
 
 import org.apache.camel.Endpoint;
 import org.apache.camel.Exchange;
-import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 
 public class RouteBuilderWeatherToCamunda extends RouteBuilder {
@@ -21,11 +20,11 @@ public class RouteBuilderWeatherToCamunda extends RouteBuilder {
          * Taxi send direct JSON :D
          */
         from(source)
-            .setHeader(Exchange.HTTP_METHOD, simple("POST"))
-            .setHeader(Exchange.CONTENT_TYPE, simple("application/json"))
-            .setBody(simple("{ \"name\" : \"weather_alert\" }"))
-            .log("new Weather Alert")
-            .to(destination);
+                .setHeader(Exchange.HTTP_METHOD, simple("POST"))
+                .setHeader(Exchange.CONTENT_TYPE, simple("application/json"))
+                .setBody(simple("{ \"name\" : \"weather_alert\" }"))
+                .log("new Weather Alert")
+                .to(destination);
     }
 
 }
