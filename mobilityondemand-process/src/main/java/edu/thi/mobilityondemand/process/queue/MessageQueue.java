@@ -1,5 +1,5 @@
 /**
- * @auther Sandro Käppner
+ * @author Sandro Käppner
  */
 
 package edu.thi.mobilityondemand.process.queue;
@@ -36,8 +36,7 @@ public class MessageQueue {
             producer.send(message);
         } catch (JMSException e) {
             e.printStackTrace();
-        }
-        finally {
+        } finally {
             if (producer != null) producer.close();
             if (session != null) session.close();
             if (connection != null) connection.close();

@@ -17,6 +17,6 @@ public class TripDataMessageToTaxi extends TripDataMessage {
         super.setText("newRouteData");
     }
 
-    public TripDataMessageToTaxi() {}
-
+    public TripDataMessageToTaxi() {
+    }
 }

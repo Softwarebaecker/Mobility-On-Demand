@@ -1,5 +1,5 @@
 /**
- * @auther Sandro Käppner
+ * @author Sandro Käppner
  */
 
 package edu.thi.mobilityondemand.process.message;
@@ -19,7 +19,8 @@ public class RatingRequestMessage extends Message {
         super.setText("Please provide a rating for your trip.");
     }
 
-    public RatingRequestMessage() {}
+    public RatingRequestMessage() {
+    }
 
     public Long getCustomerId() {
         return customerId;

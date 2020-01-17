@@ -1,3 +1,6 @@
+/**
+ * auto generated
+ */
 package edu.thi.mobilityondemand.camel;
 
 import edu.thi.mobilityondemand.camel.routes.*;

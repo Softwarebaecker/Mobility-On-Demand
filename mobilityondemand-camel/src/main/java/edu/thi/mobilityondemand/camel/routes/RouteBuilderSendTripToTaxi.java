@@ -1,5 +1,5 @@
 /**
- * @author: Nil Kuchenbäcker
+ * @author Nil Kuchenbäcker
  */
 
 package edu.thi.mobilityondemand.camel.routes;
@@ -20,7 +20,7 @@ public class RouteBuilderSendTripToTaxi extends RouteBuilder {
                 .unmarshal().jacksonxml()     //convert from xml to Java Object
                 .marshal(json)
                 .log("new Taxi message")
-                .setHeader("tripId",jsonpath("$.tripId", String.class))
+                .setHeader("tripId", jsonpath("$.tripId", String.class))
                 .to("file:./CamundaToTaxi?fileName=TripData_${date:now:yyyy-MM-dd_HH-mm-ss-SS}_ID_${header.tripId}");
 
     }

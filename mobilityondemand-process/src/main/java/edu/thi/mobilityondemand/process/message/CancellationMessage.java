@@ -1,5 +1,5 @@
 /**
- * @auther Sandro Käppner
+ * @author Sandro Käppner
  */
 
 package edu.thi.mobilityondemand.process.message;

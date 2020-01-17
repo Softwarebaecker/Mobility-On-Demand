@@ -1,6 +1,6 @@
-/*
- * Author: Daniel Schels
- * 
+/**
+ * @author Daniel Schels
+ *
  * objectives: Camel Route
  * - calling Camel Processors
  * - Content based Routing to different Camel processors
@@ -17,29 +17,27 @@ import edu.thi.mobilityondemand.camel.processor.PaymentMessageProcessorFromRestA
 
 public class RouteBuilderPaymentFromQueueToCamunda extends RouteBuilder {
 
-	
-	@Override
-	public void configure() throws Exception {
-		restConfiguration().host("localhost:8080/engine-rest");
 
-		Endpoint source = endpoint("jms:queue:IncomingBankTransaction");
-		Endpoint destination = endpoint("http://localhost:8080/engine-rest/message");
+    @Override
+    public void configure() throws Exception {
+        restConfiguration().host("localhost:8080/engine-rest");
 
-		from(source)
-		    .log("new Bank transaction received")
-			.choice()
-				.when(header("CamelFileName").isNotNull())
+        Endpoint source = endpoint("jms:queue:IncomingBankTransaction");
+        Endpoint destination = endpoint("http://localhost:8080/engine-rest/message");
+
+        from(source)
+                .log("new Bank transaction received")
+                .choice()
+                .when(header("CamelFileName").isNotNull())
 					.log("Received via Backend integration (File System)")
 					.process(new PaymentMessageProcessorFromFilesystem())
-				.endChoice()
-				.otherwise()
+					.endChoice()
+                .otherwise()
 					.log("Received via REST Frontend (Postman)")
 					.process(new PaymentMessageProcessorFromRestApi())
-				.endChoice()
-			.end()
-		   		.process(new PaymentMessageProcessorCorrelation())
-		   		.to(destination)
-		   ;
-
+					.endChoice()
+                .end()
+                .process(new PaymentMessageProcessorCorrelation())
+                .to(destination);
     }
 }

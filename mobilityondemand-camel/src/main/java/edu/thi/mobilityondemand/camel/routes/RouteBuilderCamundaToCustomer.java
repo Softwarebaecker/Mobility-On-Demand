@@ -17,7 +17,7 @@ public class RouteBuilderCamundaToCustomer extends RouteBuilder {
         json.setPrettyPrint(true);
 
         from(source)
-                .setHeader("customerId",xpath("/*/customerId/text()", String.class))
+                .setHeader("customerId", xpath("/*/customerId/text()", String.class))
                 .choice().when(xpath("/tripDataMessageToCustomer"))
                     .unmarshal().jacksonxml()     //convert from xml to Java Object
                     .marshal(json)
