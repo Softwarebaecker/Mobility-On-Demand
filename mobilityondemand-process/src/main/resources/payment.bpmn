@@ -213,7 +213,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_11ckx0p" sourceRef="Task_1w6r59w" targetRef="EndEvent_1xuxpsv" />
   </bpmn:process>
   <bpmn:escalation id="Escalation_1mmmd2f" name="Escalation_3e2b9oi" escalationCode="1111" />
-  <bpmn:message id="Message_01vy6c8" name="IncomingBankTransaction" />
+  <bpmn:message id="Message_01vy6c8" name="incoming_bank_transition" />
   <bpmn:message id="Message_0x87y02" />
   <bpmn:escalation id="Escalation_1pjgn2t" name="Escalation_3ua35l7" escalationCode="2222" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">

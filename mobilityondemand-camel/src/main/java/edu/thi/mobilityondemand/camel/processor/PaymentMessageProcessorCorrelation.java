@@ -22,7 +22,7 @@ public class PaymentMessageProcessorCorrelation implements Processor {
         exchange.getMessage().setHeader(Exchange.CONTENT_TYPE, "application/json");
         exchange.getMessage().setBody(
                 "{"
-				+ "\"messageName\":\"IncomingBankTransaction\","
+				+ "\"messageName\":\"incoming_bank_transition\","
 				+ "\"correlationKeys\":{"
 				+ "\"invoiceid\":{"
 				+ "\"value\": \"" + transaction_invoiceid + "\","
