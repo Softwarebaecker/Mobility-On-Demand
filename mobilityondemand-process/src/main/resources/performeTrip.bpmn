@@ -26,7 +26,7 @@
           <bpmn:targetRef>Property_029aw2u</bpmn:targetRef>
         </bpmn:dataInputAssociation>
       </bpmn:sendTask>
-      <bpmn:serviceTask id="ServiceTask_1v3e6jp" name="Update Order" camunda:class="${tripDataService.update(execution)}">
+      <bpmn:serviceTask id="ServiceTask_1v3e6jp" name="Update Order" camunda:expression="${tripDataService.update(execution)}">
         <bpmn:incoming>SequenceFlow_00olrli</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_0h1ewbb</bpmn:outgoing>
         <bpmn:property id="Property_0hwyrh8" name="__targetRef_placeholder" />
