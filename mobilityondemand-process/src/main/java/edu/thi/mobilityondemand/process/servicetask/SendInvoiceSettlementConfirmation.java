@@ -1,3 +1,7 @@
+/**
+ * @author Daniel Schels
+ */
+
 package edu.thi.mobilityondemand.process.servicetask;
 
 import org.camunda.bpm.engine.RuntimeService;
