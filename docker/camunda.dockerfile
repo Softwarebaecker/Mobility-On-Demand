@@ -1,3 +1,5 @@
+# author Nil Kuchenbäcker
+
 FROM camunda/camunda-bpm-platform:wildfly-7.11.0
 
 USER root

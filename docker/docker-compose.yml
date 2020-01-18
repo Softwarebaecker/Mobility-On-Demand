@@ -1,3 +1,4 @@
+# author Nil Kuchenbäcker
 version: "3.7"
 services:
   camunda:

@@ -1,4 +1,5 @@
 #!/bin/bash
+# author Nil Kuchenbäcker
 
 # enabel job control
 set -m
